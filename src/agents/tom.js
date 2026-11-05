@@ -65,7 +65,9 @@ async function aiFacts(run, text, b, niche, key) {
 }
 
 export async function audit(run, niche, lead) {
-  const page = await fetchPage(lead.website);
+  // fictional demo sites are served by this app: read them locally, whatever PUBLIC_URL says
+  const url = lead.fictional ? `http://127.0.0.1:${settings.port}${new URL(lead.website).pathname}` : lead.website;
+  const page = await fetchPage(url);
   if (!page.ok) return { ok: false, reason: `Website didn't load (${page.status})` };
   const signals = siteSignals(page, niche);
   const psi = await pagespeed(page.finalUrl || lead.website);

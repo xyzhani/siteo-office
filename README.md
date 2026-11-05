@@ -6,15 +6,80 @@ Type one line, like `dentists in Galway`. The team finds local businesses with w
 
 ![Live clip: the 8 cats at work in the 3D office, Snow Bell walking a draft back to Knight](docs/img/office-live.gif)
 
-![The Siteo Office: 8 cat agents at work in a live 3D office, Snow Bell sending a draft back to Knight (dark theme)](docs/img/office-dark.png)
-
-<p align="center"><img src="docs/img/office-light.png" width="49%" alt="The same office in the light theme"> <img src="docs/img/mobile.png" width="22%" alt="The office on a phone with the menu open"></p>
-
-<sub>Dark and light themes, desktop and phone. Every business shown is fictional; the agents are replaying a recorded run of the real Claude agents. A longer clip: [docs/media/office-demo.mp4](docs/media/office-demo.mp4).</sub>
-
 > **Live demo:** _coming soon_ (link placeholder) · Built by Hanan ([@xyzhani](https://x.com/xyzhani)) at [Siteo](https://siteostudio.com), with Claude Code · MIT licence
 >
 > The hosted demo runs the real pipeline on fictional sample data and replays a recorded run of the real AI agents (live searches and AI calls are switched off there; PayPal **Sandbox** payments are real Sandbox calls). Run your own copy with your keys for real searches. It's on Render's free plan, so the first visit after a quiet spell can take 30–60 seconds while the office wakes up.
+
+<sub>Every business, person and address you see in these images is fictional. The agents are replaying a recorded run of the real Claude agents. A longer clip: [docs/media/office-demo.mp4](docs/media/office-demo.mp4).</sub>
+
+## What it is
+
+A small web studio in a box. You give it a kind of business and a town; eight AI agents, each a cat with one job, do the work a freelancer usually does by hand, and you stay in charge of everything that goes out. The office isn't decoration: every cat's position, every folder and every speech bubble comes from the real pipeline state.
+
+![The office mid-run: Snow Bell has just sent Knight's draft back ("Rated the best dentist in Sampleton…" isn't in the facts)](docs/img/office-dark.png)
+
+<sub>Mid-run: Snow Bell has just caught an unsupported claim and is walking the draft back to Knight.</sub>
+
+## How the cats work
+
+**Misso** finds businesses with a website → **Tom** audits each site and keeps the weakest → **Knight** builds a concept from their real facts → **Snow Bell** fact-checks every line → **Sherlock** notes what the old site misses → **Nemo** writes the email and waits for you → **Scrapper** reads the reply and sends a PayPal deposit link → **Fluffy** invoices the balance with PayPal and follows up.
+
+| Cat | Role | What it does |
+|---|---|---|
+| **Misso** | Lead Finder | Finds businesses of that type in that town that have a website (OpenStreetMap free by default; Google Places or Apify with your key). |
+| **Tom** | Site Auditor | Reads each site, runs Google PageSpeed (mobile), scores how weak it is, shortlists the weakest, extracts the real facts. |
+| **Knight** | Web Developer | Builds a one-page concept site **only from those facts**, using the niche pack's template. |
+| **Snow Bell** | Fact Checker | Checks every line against the facts and the niche rules. Sends it back to Knight (you see her walk the folder back), max 3 rounds, then it's set aside. |
+| **Sherlock** | SEO Expert | A short note on what the old site misses. |
+| **Nemo** | Email Writer | Writes the email, then **stops** in the approval inbox. Nothing is sent until a human approves. |
+| **Scrapper** | Inbox & Deposits | Reads the reply. "Yes, I want it" → a **PayPal Checkout** link for the deposit (20% by default). |
+| **Fluffy** | Invoices & Follow-ups | When PayPal confirms the deposit, creates a **PayPal Invoice** for the balance as an agent tool call, and drafts polite reminders until it's paid. |
+
+Full details: [how it works](docs/how-it-works.md).
+
+Every business gets a project page: Tom's measured issues, the facts Knight may use, Snow Bell's rounds, Sherlock's note, the emails and the payments.
+
+![Projects: the AG Grid table with the details drawer open on a concept](docs/img/projects.png)
+
+## The fact-check loop
+
+AI-written sales copy loves to invent things: "the best dentist in town", "5-star reviews", prices nobody quoted. Snow Bell checks every line twice: a strict rule check (forbidden phrases from the niche pack, and any number, email or link that isn't in the facts) and an AI check ("which fact proves this?"). Anything unsupported goes back to Knight with the reason, up to three rounds; a concept that still fails is set aside, never sent. In Siteo's own use, 71 of 199 drafts were sent back.
+
+## What the business owner gets
+
+A one-page concept of their own site, built only from details already on it, clearly marked as a concept preview.
+
+![A generated concept site for a fictional dental practice](docs/img/concept-dental.png)
+
+<p align="center"><img src="docs/img/concept-scroll.gif" width="64%" alt="Scrolling through the dental concept"> <img src="docs/img/concept-restaurant.png" width="34%" alt="A concept for a fictional restaurant"></p>
+
+<sub>Dental and restaurant packs are included; a new niche is a folder of text files and one HTML template.</sub>
+
+## Getting paid with PayPal
+
+When the owner says yes, Scrapper creates a **PayPal Orders v2** checkout for the deposit. When PayPal confirms the capture (return URL or signature-verified webhook, always re-checked against the API), there's a 💰 moment in the office and Fluffy calls `create_invoice` → `send_invoice` to bill the balance with **PayPal Invoicing v2**, then tracks it until it's paid. The Money page follows along live.
+
+![Money: deposits, invoices and the live payments table](docs/img/money.png)
+
+## The customer's side
+
+A human approves every email first:
+
+![Approvals: Nemo's emails waiting, editable, nothing sent until you click Approve](docs/img/approvals.png)
+
+The pitch the owner receives, and the deposit email after they say yes:
+
+<p align="center"><img src="docs/img/email-pitch.png" width="49%" alt="The pitch email with the concept link and what the old site misses"> <img src="docs/img/email-deposit.png" width="49%" alt="The deposit email with the PayPal link"></p>
+
+The deposit step and Fluffy's invoice for the balance (shown here in keyless demo mode; with PayPal **Sandbox** keys these are PayPal's own Checkout and invoice pages, paid with a sandbox test buyer):
+
+<p align="center"><img src="docs/img/paypal-checkout.png" width="49%" alt="The deposit checkout step"> <img src="docs/img/paypal-invoice.png" width="49%" alt="The invoice for the balance"></p>
+
+## Themes & phone
+
+Dark by default, light with one click, and it works on a phone.
+
+<p align="center"><img src="docs/img/office-light.png" width="72%" alt="The office in the light theme"> <img src="docs/img/mobile.png" width="24%" alt="The office on a phone"></p>
 
 ---
 
@@ -35,25 +100,6 @@ npm run dev               # → http://localhost:3000
 ```
 
 With an empty `.env` you get **demo mode**: fictional businesses in a made-up town, the agents **replaying a recorded run of the real Claude agents** (from `demo/recorded/`, $0, no key), and a clearly marked simulated checkout. Without a recording, the agents fall back to simple rule-based paths. Add PayPal **Sandbox** keys and the deposit and invoice become real Sandbox payments. Add a Claude key and the agents write with AI on real businesses.
-
-## The team
-
-| Cat | Role | What it does |
-|---|---|---|
-| **Misso** | Lead Finder | Finds businesses of that type in that town that have a website (OpenStreetMap free by default; Google Places or Apify with your key). |
-| **Tom** | Site Auditor | Reads each site, runs Google PageSpeed (mobile), scores how weak it is, shortlists the weakest, extracts the real facts. |
-| **Knight** | Web Developer | Builds a one-page concept site **only from those facts**, using the niche pack's template. |
-| **Snow Bell** | Fact Checker | Checks every line against the facts and the niche rules. Sends it back to Knight (you see her walk the folder back), max 3 rounds, then it's set aside. |
-| **Sherlock** | SEO Expert | A short note on what the old site misses. |
-| **Nemo** | Email Writer | Writes the email, then **stops** in the approval inbox. Nothing is sent until a human approves. |
-| **Scrapper** | Inbox & Deposits | Reads the reply. "Yes, I want it" → a **PayPal Checkout** link for the deposit (20% by default). |
-| **Fluffy** | Invoices & Follow-ups | When PayPal confirms the deposit, creates a **PayPal Invoice** for the balance as an agent tool call, and drafts polite reminders until it's paid. |
-
-Full details: [how it works](docs/how-it-works.md).
-
-| Projects (AG Grid + details drawer) | Money (PayPal deposits + invoices) | Approvals (a human approves every email) |
-|---|---|---|
-| ![Projects table with the details drawer open on a concept: facts, Snow Bell's rounds, SEO note](docs/img/projects.png) | ![Money view with deposit and invoice totals and the payments table](docs/img/money.png) | ![Approvals view with Nemo's emails waiting](docs/img/approvals.png) |
 
 ## Why it matters
 
