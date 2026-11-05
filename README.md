@@ -4,9 +4,13 @@
 
 Type one line, like `dentists in Galway`. The team finds local businesses with weak websites, builds each one a fact-checked concept site, writes the email (you approve it), reads the reply, takes a deposit with **PayPal Checkout** and invoices the balance with **PayPal Invoicing**. You watch every step happen in a cozy isometric office: cats at their desks, folders carried to the next desk, speech bubbles, a draft sent back for fixes, and a 💰 moment when PayPal confirms the money.
 
-![The Siteo Office: 8 cat agents working in a 3D office](docs/img/office.png)
+![The Siteo Office: 8 cat agents at work in a live 3D office, Snow Bell sending a draft back to Knight (dark theme)](docs/img/office-dark.png)
 
-> **Live demo:** _coming soon_ (link placeholder) · **Built by [Siteo](https://siteostudio.com)** · MIT licence
+<p align="center"><img src="docs/img/office-light.png" width="49%" alt="The same office in the light theme"> <img src="docs/img/mobile.png" width="22%" alt="The office on a phone with the menu open"></p>
+
+<sub>Dark and light themes, desktop and phone. Every business shown is fictional; the agents are replaying a recorded run of the real Claude agents.</sub>
+
+> **Live demo:** _coming soon_ (link placeholder) · Built by Hanan ([@xyzhani](https://x.com/xyzhani)) at [Siteo](https://siteostudio.com), with Claude Code · MIT licence
 >
 > The hosted demo runs the real pipeline on fictional sample data and replays a recorded run of the real AI agents (live searches and AI calls are switched off there; PayPal **Sandbox** payments are real Sandbox calls). Run your own copy with your keys for real searches. It's on Render's free plan, so the first visit after a quiet spell can take 30–60 seconds while the office wakes up.
 
@@ -45,7 +49,9 @@ With an empty `.env` you get **demo mode**: fictional businesses in a made-up to
 
 Full details: [how it works](docs/how-it-works.md).
 
-![Pipeline tab: audit scores, Snow Bell's fact-check rounds and Sherlock's notes](docs/img/pipeline.png)
+| Projects (AG Grid + details drawer) | Money (PayPal deposits + invoices) | Approvals (a human approves every email) |
+|---|---|---|
+| ![Projects table with the details drawer open on a concept: facts, Snow Bell's rounds, SEO note](docs/img/projects.png) | ![Money view with deposit and invoice totals and the payments table](docs/img/money.png) | ![Approvals view with Nemo's emails waiting](docs/img/approvals.png) |
 
 ## Why it matters
 
@@ -114,6 +120,6 @@ Every setting is listed in [`.env.example`](.env.example) and [deployment](docs/
 
 ## Credits
 
-Built by **[Siteo](https://siteostudio.com)**, the studio that runs these cats for real. Concept pages show a small "Built with Siteo Office" credit by default; you can switch it off in `studio.config.json` (we'd love it if you kept it).
+Built by Hanan ([@xyzhani](https://x.com/xyzhani)) at [Siteo](https://siteostudio.com), with Claude Code. Siteo is the studio that runs these cats for real. Concept pages show a small "Built with Siteo Office" credit by default; you can switch it off in `studio.config.json` (we'd love it if you kept it).
 
 MIT licence. The demo businesses, people and town are fictional.
