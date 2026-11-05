@@ -167,5 +167,6 @@ server.listen(settings.port, () => {
   console.log(`\n🐾 Siteo Office is open: http://localhost:${settings.port}`);
   console.log(`   mode: ${demoMode ? "DEMO (fictional businesses, no AI key needed)" : "LIVE"} · payments: ${paypalReady ? "PayPal " + settings.paypal.env : "simulated"} · email: ${publicStatus().email}\n`);
 });
+if (!demoMode && !settings.adminToken && (process.env.RENDER || settings.publicUrl)) console.warn("⚠️  Live mode on a public URL without ADMIN_TOKEN: anyone could start runs. Set ADMIN_TOKEN.");
 // background: watch unpaid invoices and draft follow-ups (every minute)
 setInterval(() => pipeline.sweepInvoices().catch(() => {}), 60000).unref();

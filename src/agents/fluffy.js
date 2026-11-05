@@ -47,7 +47,8 @@ export async function invoiceBalance(run, lead) {
   const studio = loadStudio();
   const balance = +(studio.conceptPrice - (studio.conceptPrice * studio.depositPercent) / 100).toFixed(2);
   const facts = { recipient_name: lead.name, recipient_email: lead.facts?.email, item_name: `Website build: ${lead.name} (balance)`, item_description: `Balance after the ${studio.depositPercent}% deposit (PayPal capture ${lead.deposit?.captureId || "confirmed"}).`, amount: balance, currency_code: studio.currency, note: `Thank you for your deposit. This invoice is the remaining balance for your new website.` };
-  const tk = await toolkitHandlers();
+  // the official toolkit's tools take their own input shapes, so only the AI (which reads their schemas) drives them
+  const tk = llm.available() ? await toolkitHandlers() : null;
   const tools = tk?.tools || TOOLS, handlers = tk?.handlers || ourHandlers(lead);
   let calls;
   if (llm.available()) {

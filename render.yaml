@@ -1,3 +1,5 @@
+# Public demo by default (DEMO_MODE=true: fictional data, no AI spend). Before adding real keys,
+# also add an ADMIN_TOKEN env var so only you can start runs and approve emails.
 # One-click "Deploy to Render" blueprint. Render asks for the secret values (sync: false) when you deploy.
 services:
   - type: web
@@ -20,8 +22,6 @@ services:
         value: osm
       - key: MAX_AI_USD_PER_RUN
         value: "2"
-      - key: ADMIN_TOKEN
-        generateValue: true
       - key: PAYPAL_CLIENT_ID
         sync: false
       - key: PAYPAL_CLIENT_SECRET
