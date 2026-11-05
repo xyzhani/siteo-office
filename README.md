@@ -4,11 +4,13 @@
 
 Type one line, like `dentists in Galway`. The team finds local businesses with weak websites, builds each one a fact-checked concept site, writes the email (you approve it), reads the reply, takes a deposit with **PayPal Checkout** and invoices the balance with **PayPal Invoicing**. You watch every step happen in a cozy isometric office: cats at their desks, folders carried to the next desk, speech bubbles, a draft sent back for fixes, and a 💰 moment when PayPal confirms the money.
 
+![Live clip: the 8 cats at work in the 3D office, Snow Bell walking a draft back to Knight](docs/img/office-live.gif)
+
 ![The Siteo Office: 8 cat agents at work in a live 3D office, Snow Bell sending a draft back to Knight (dark theme)](docs/img/office-dark.png)
 
 <p align="center"><img src="docs/img/office-light.png" width="49%" alt="The same office in the light theme"> <img src="docs/img/mobile.png" width="22%" alt="The office on a phone with the menu open"></p>
 
-<sub>Dark and light themes, desktop and phone. Every business shown is fictional; the agents are replaying a recorded run of the real Claude agents.</sub>
+<sub>Dark and light themes, desktop and phone. Every business shown is fictional; the agents are replaying a recorded run of the real Claude agents. A longer clip: [docs/media/office-demo.mp4](docs/media/office-demo.mp4).</sub>
 
 > **Live demo:** _coming soon_ (link placeholder) · Built by Hanan ([@xyzhani](https://x.com/xyzhani)) at [Siteo](https://siteostudio.com), with Claude Code · MIT licence
 >
