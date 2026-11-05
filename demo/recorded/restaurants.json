@@ -1,0 +1,561 @@
+{
+ "recordedAt": "2026-11-05T09:48:46.121Z",
+ "calls": {
+  "restaurants/tom/copper-kettle-bistro": {
+   "facts": {
+    "name": "The Copper Kettle Bistro",
+    "owner": "Ines Varga",
+    "phone": "+00 555 0201",
+    "email": "book@copper-kettle.example",
+    "address": "7 Market Square",
+    "town": "Sampleton",
+    "hours": [
+     "Wed–Sun 12:00–22:00"
+    ],
+    "services": [
+     "Seasonal lunch menu",
+     "Sunday roast",
+     "Private dining room for 20"
+    ],
+    "since": "2009",
+    "extras": [
+     "Dog-friendly terrace"
+    ]
+   }
+  },
+  "restaurants/tom/saltmarsh-fish-kitchen": {
+   "facts": {
+    "name": "Saltmarsh Fish Kitchen",
+    "owner": "Callum Reid",
+    "phone": "+00 555 0202",
+    "email": "hello@saltmarsh-kitchen.example",
+    "address": "3 Pier Road, Sampleton",
+    "town": "Sampleton",
+    "hours": [
+     "Tue–Sat 17:00–22:30"
+    ],
+    "services": [
+     "Fish of the day",
+     "Takeaway fish and chips",
+     "Kids' menu"
+    ],
+    "since": "2015",
+    "extras": null
+   }
+  },
+  "restaurants/tom/nonna-rosetta-trattoria": {
+   "facts": {
+    "name": "Nonna Rosetta Trattoria",
+    "owner": "Rosa Bellini",
+    "phone": "+00 555 0203",
+    "email": "ciao@nonna-rosetta.example",
+    "address": "45 High Street",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Sun 12:00–23:00"
+    ],
+    "services": [
+     "Fresh pasta made daily",
+     "Wood-fired pizza",
+     "Gluten-free options"
+    ],
+    "since": "1996",
+    "extras": [
+     "Family run."
+    ]
+   }
+  },
+  "restaurants/tom/greenleaf-cafe": {
+   "facts": {
+    "name": "Greenleaf Café",
+    "owner": null,
+    "phone": "+00 555 0204",
+    "email": "hi@greenleaf-cafe.example",
+    "address": "9 Park Lane",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Sat 8:00–16:00"
+    ],
+    "services": [
+     "Breakfast",
+     "Vegan bowls",
+     "Coffee"
+    ],
+    "since": null,
+    "extras": []
+   }
+  },
+  "restaurants/tom/ember-oak-grill": {
+   "facts": {
+    "name": "Ember & Oak Grill",
+    "owner": "Marco Duval",
+    "phone": "+00 555 0205",
+    "email": "reservations@ember-oak.example",
+    "address": "60 Bridge Street",
+    "town": "Sampleton",
+    "hours": [
+     "Thu–Sun 17:00–23:00"
+    ],
+    "services": [
+     "Steaks from the grill",
+     "Vegetarian grill plates",
+     "Weekend brunch"
+    ],
+    "since": "2012",
+    "extras": null
+   }
+  },
+  "restaurants/knight/nonna-rosetta-trattoria/1": {
+   "headline": "Nonna Rosetta Trattoria",
+   "subheadline": "Fresh pasta, wood-fired pizza and gluten-free options in Sampleton.",
+   "about": "Nonna Rosetta Trattoria is a family-run restaurant at 45 High Street, Sampleton. Rosa Bellini has run it since 1996. We are open Mon–Sun 12:00–23:00.",
+   "services": [
+    {
+     "name": "Fresh pasta made daily",
+     "description": ""
+    },
+    {
+     "name": "Wood-fired pizza",
+     "description": ""
+    },
+    {
+     "name": "Gluten-free options",
+     "description": ""
+    }
+   ],
+   "cta": "Reserve a table"
+  },
+  "restaurants/snowbell/nonna-rosetta-trattoria/1": {
+   "issues": [
+    {
+     "line": "The best food in Sampleton, loved by 10,000 happy diners.",
+     "problem": "Uses the forbidden words \"best\", \"loved by\" and \"happy diners\". The 10,000 figure is invented, and the line makes an unsupported superlative claim."
+    },
+    {
+     "line": "Reserve a table",
+     "problem": "The facts do not say the restaurant takes reservations or bookings, so this implies a service that is not listed."
+    }
+   ]
+  },
+  "restaurants/knight/nonna-rosetta-trattoria/2": {
+   "headline": "Nonna Rosetta Trattoria",
+   "subheadline": "Fresh pasta, wood-fired pizza and gluten-free options in Sampleton.",
+   "about": "Nonna Rosetta Trattoria is a family-run restaurant at 45 High Street, Sampleton. Rosa Bellini has run it since 1996. We are open Mon–Sun 12:00–23:00.",
+   "services": [
+    {
+     "name": "Fresh pasta made daily",
+     "description": ""
+    },
+    {
+     "name": "Wood-fired pizza",
+     "description": ""
+    },
+    {
+     "name": "Gluten-free options",
+     "description": ""
+    }
+   ],
+   "cta": "Call +00 555 0203"
+  },
+  "restaurants/snowbell/nonna-rosetta-trattoria/2": {
+   "issues": []
+  },
+  "restaurants/sherlock/nonna-rosetta-trattoria": {
+   "points": [
+    "The site isn't set up for phones, so people searching for a table on their phone have to pinch and zoom to read your menu and hours.",
+    "The phone number can't be tapped to call, so hungry customers have to remember or copy it instead of ringing you in one touch.",
+    "There's no online booking or reservation link, so anyone who wants to book outside opening hours has no easy way to do it.",
+    "The page title and Google description are missing or generic, so your listing in search results doesn't tell people who you are or why they should pick Nonna Rosetta."
+   ]
+  },
+  "restaurants/sender/first-email/nonna-rosetta-trattoria": {
+   "subject": "A new website idea for Nonna Rosetta Trattoria",
+   "body": "Hi Rosa Bellini,\n\nI had a look at the Nonna Rosetta Trattoria website and made a free concept of a fresh, phone-friendly version, using only what's already on your site:\n\n{concept_url}\n\nWhat the current site is missing:\n• The site isn't set up for phones, so people searching for a table on their phone have to pinch and zoom to read your menu and hours.\n• The phone number can't be tapped to call, so hungry customers have to remember or copy it instead of ringing you in one touch.\n• There's no online booking or reservation link, so anyone who wants to book outside opening hours has no easy way to do it.\n• The page title and Google description are missing or generic, so your listing in search results doesn't tell people who you are or why they should pick Nonna Rosetta.\n\nIf you'd like it, we can build the real one for $500. No pressure at all; just reply with what you think.\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/knight/copper-kettle-bistro/1": {
+   "headline": "The Copper Kettle Bistro",
+   "subheadline": "Seasonal lunch menu, Sunday roast and private dining in Sampleton.",
+   "about": "The Copper Kettle Bistro has been at 7 Market Square in Sampleton since 2009. It is run by Ines Varga. We are open Wed–Sun 12:00–22:00. Our terrace is dog-friendly.",
+   "services": [
+    {
+     "name": "Seasonal lunch menu",
+     "description": ""
+    },
+    {
+     "name": "Sunday roast",
+     "description": ""
+    },
+    {
+     "name": "Private dining room for 20",
+     "description": ""
+    }
+   ],
+   "cta": "Reserve a table"
+  },
+  "restaurants/snowbell/copper-kettle-bistro/1": {
+   "issues": []
+  },
+  "restaurants/sherlock/copper-kettle-bistro": {
+   "points": [
+    "Your site isn't set up for phones, so customers may have to pinch and zoom to read your menu or hours, and many will give up and look elsewhere.",
+    "Your phone number isn't tappable, so someone ready to book a table has to remember or copy it instead of calling with one touch.",
+    "The page title is generic or missing, so in Google results and browser tabs your bistro's name doesn't clearly stand out.",
+    "There's no short description for Google, so search results may show a random snippet of text instead of a clear invitation to visit."
+   ]
+  },
+  "restaurants/sender/first-email/copper-kettle-bistro": {
+   "subject": "A new website idea for The Copper Kettle Bistro",
+   "body": "Hi Ines Varga,\n\nI had a look at The Copper Kettle Bistro website and made a free concept of a fresh, phone-friendly version, using only what's already on your site:\n\n{concept_url}\n\nWhat the current site is missing:\n• Your site isn't set up for phones, so customers may have to pinch and zoom to read your menu or hours, and many will give up and look elsewhere.\n• Your phone number isn't tappable, so someone ready to book a table has to remember or copy it instead of calling with one touch.\n• The page title is generic or missing, so in Google results and browser tabs your bistro's name doesn't clearly stand out.\n• There's no short description for Google, so search results may show a random snippet of text instead of a clear invitation to visit.\n\nIf you'd like it, we can build the real one for $500. No pressure at all; just reply with what you think.\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/knight/saltmarsh-fish-kitchen/1": {
+   "headline": "Saltmarsh Fish Kitchen",
+   "subheadline": "Fish of the day, takeaway fish and chips and a kids' menu in Sampleton.",
+   "about": "Saltmarsh Fish Kitchen is on 3 Pier Road in Sampleton. Callum Reid has run it since 2015. We are open Tue–Sat 17:00–22:30. Call us on +00 555 0202 or email hello@saltmarsh-kitchen.example.",
+   "services": [
+    {
+     "name": "Fish of the day",
+     "description": ""
+    },
+    {
+     "name": "Takeaway fish and chips",
+     "description": ""
+    },
+    {
+     "name": "Kids' menu",
+     "description": ""
+    }
+   ],
+   "cta": "Reserve a table"
+  },
+  "restaurants/snowbell/saltmarsh-fish-kitchen/1": {
+   "issues": [
+    {
+     "line": "Reserve a table",
+     "problem": "The facts do not say the restaurant takes reservations or bookings, so this CTA implies a service that is not listed."
+    }
+   ]
+  },
+  "restaurants/knight/saltmarsh-fish-kitchen/2": {
+   "headline": "Saltmarsh Fish Kitchen",
+   "subheadline": "Fish of the day, takeaway fish and chips and a kids' menu in Sampleton.",
+   "about": "Saltmarsh Fish Kitchen is on 3 Pier Road in Sampleton. Callum Reid has run it since 2015. We are open Tue–Sat 17:00–22:30. Email hello@saltmarsh-kitchen.example or call us on +00 555 0202.",
+   "services": [
+    {
+     "name": "Fish of the day",
+     "description": ""
+    },
+    {
+     "name": "Takeaway fish and chips",
+     "description": ""
+    },
+    {
+     "name": "Kids' menu",
+     "description": ""
+    }
+   ],
+   "cta": "Call +00 555 0202"
+  },
+  "restaurants/snowbell/saltmarsh-fish-kitchen/2": {
+   "issues": []
+  },
+  "restaurants/sherlock/saltmarsh-fish-kitchen": {
+   "points": [
+    "The site isn't set up for phones, so pages can look tiny or need pinching and zooming. Most people checking a restaurant are on their phone, so they may give up and look elsewhere.",
+    "The phone number isn't tappable, so someone on a phone has to remember or copy it before they can call. Making it a one-tap call removes that extra step.",
+    "There's no online booking or reservation link, so customers who want a table have to find another way to ask. A clear booking button makes it easy to say yes.",
+    "The site's design and code are dated and it hasn't been updated since 2017. That can make the place look closed or out of touch, even when it's busy and thriving."
+   ]
+  },
+  "restaurants/sender/first-email/saltmarsh-fish-kitchen": {
+   "subject": "A new website idea for Saltmarsh Fish Kitchen",
+   "body": "Hi Callum Reid,\n\nI had a look at the Saltmarsh Fish Kitchen website and made a free concept of a fresh, phone-friendly version, using only what's already on your site:\n\n{concept_url}\n\nWhat the current site is missing:\n• The site isn't set up for phones, so pages can look tiny or need pinching and zooming. Most people checking a restaurant are on their phone, so they may give up and look elsewhere.\n• The phone number isn't tappable, so someone on a phone has to remember or copy it before they can call. Making it a one-tap call removes that extra step.\n• There's no online booking or reservation link, so customers who want a table have to find another way to ask. A clear booking button makes it easy to say yes.\n• The site's design and code are dated and it hasn't been updated since 2017. That can make the place look closed or out of touch, even when it's busy and thriving.\n\nIf you'd like it, we can build the real one for $500. No pressure at all; just reply with what you think.\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/scrapper/nonna-rosetta-trattoria/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "intent": "question",
+   "summary": "Nonna Rosetta Trattoria likes the concept and asks about the cost and how long the build takes, but has not yet said they want to go ahead."
+  },
+  "restaurants/inbox/reply-to-a-question/nonna-rosetta-trattoria": {
+   "subject": "Re: the Nonna Rosetta Trattoria concept",
+   "body": "Hi Rosa Bellini,\n\nThanks for the reply, glad you like it. The full website is $500, with a 20% deposit ($100) to start. Here's the concept again: {concept_url}\n\nOn timing, I'd rather confirm that properly than guess, so I'll get back to you with a clear answer.\n\nHappy to answer anything else.\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/scrapper/nonna-rosetta-trattoria/yes-i-want-it-let-s-go-ahead": {
+   "intent": "interested",
+   "summary": "Nonna Rosetta Trattoria wants the website and asked to go ahead, so a PayPal deposit link can be sent for approval."
+  },
+  "restaurants/inbox/deposit-email/nonna-rosetta-trattoria": {
+   "subject": "Next step for the Nonna Rosetta Trattoria website",
+   "body": "Hi Rosa Bellini,\n\nBrilliant, glad you like it. To get going we take a 20% deposit ($100) through PayPal:\n\n{checkout_url}\n\nOnce it's in, we'll send the invoice for the balance ($400) and start building.\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/fluffy/nonna-rosetta-trattoria": {
+   "text": "I created the balance invoice and sent it to Nonna Rosetta Trattoria (ciao@nonna-rosetta.example).\n\n- **Invoice ID:** SIM-INV-BEA6C557C01F (number SIM-0004)\n- **Amount:** 400 USD\n- **Status:** Sent\n- **Customer view:** http://localhost:3981/sim/invoice/SIM-INV-BEA6C557C01F\n\nI didn't do anything else.",
+   "calls": [
+    {
+     "tool": "create_invoice",
+     "input": {
+      "recipient_name": "Nonna Rosetta Trattoria",
+      "recipient_email": "ciao@nonna-rosetta.example",
+      "item_name": "Website build: Nonna Rosetta Trattoria (balance)",
+      "item_description": "Balance after the 20% deposit.",
+      "amount": 400,
+      "currency_code": "USD",
+      "note": "Thank you for your deposit. This invoice is the remaining balance for your new website."
+     }
+    },
+    {
+     "tool": "send_invoice",
+     "input": {
+      "invoice_id": "{{id0}}"
+     }
+    }
+   ]
+  },
+  "restaurants/followup/follow-up/nonna-rosetta-trattoria/1": {
+   "subject": "Quick reminder: invoice {invoice_number}",
+   "body": "Hi Rosa Bellini,\n\nJust a friendly nudge that the balance for your new website ($400) is still open. You can pay it with PayPal here:\n\n{invoice_url}\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/scrapper/saltmarsh-fish-kitchen/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "intent": "question",
+   "summary": "The owner likes the concept and asks about the price and build time, but has not yet said they want to go ahead."
+  },
+  "restaurants/inbox/reply-to-a-question/saltmarsh-fish-kitchen": {
+   "subject": "Re: the Saltmarsh Fish Kitchen concept",
+   "body": "Hi Callum Reid,\n\nThanks for the reply, glad you like it. The full website is $500, with a 20% deposit ($100) to start and the $400 balance after. Here's the concept again: {concept_url}\n\nOn timing, I don't want to guess in an email. Tell me what you'd like on the site and I'll come back with a clear date.\n\nHappy to answer anything else.\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/scrapper/saltmarsh-fish-kitchen/yes-i-want-it-let-s-go-ahead": {
+   "intent": "interested",
+   "summary": "Saltmarsh Fish Kitchen said yes and wants to go ahead with the website, so they're ready for the deposit link."
+  },
+  "restaurants/inbox/deposit-email/saltmarsh-fish-kitchen": {
+   "subject": "Next step for the Saltmarsh Fish Kitchen website",
+   "body": "Hi Callum Reid,\n\nBrilliant, glad you like it. To get going we take a 20% deposit ($100) through PayPal:\n\n{checkout_url}\n\nOnce it's in, we'll send the invoice for the balance ($400) and start building.\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/fluffy/saltmarsh-fish-kitchen": {
+   "text": "I created the balance invoice and sent it to Saltmarsh Fish Kitchen (hello@saltmarsh-kitchen.example).\n\n- **Invoice:** SIM-0005 (ID: SIM-INV-AE63714CB5A6)\n- **Amount:** 400 USD\n- **Status:** Sent\n- **Customer view:** http://localhost:3981/sim/invoice/SIM-INV-AE63714CB5A6\n\nI did nothing else.",
+   "calls": [
+    {
+     "tool": "create_invoice",
+     "input": {
+      "recipient_name": "Saltmarsh Fish Kitchen",
+      "recipient_email": "hello@saltmarsh-kitchen.example",
+      "item_name": "Website build: Saltmarsh Fish Kitchen (balance)",
+      "item_description": "Balance after the 20% deposit.",
+      "amount": 400,
+      "currency_code": "USD",
+      "note": "Thank you for your deposit. This invoice is the remaining balance for your new website."
+     }
+    },
+    {
+     "tool": "send_invoice",
+     "input": {
+      "invoice_id": "{{id0}}"
+     }
+    }
+   ]
+  },
+  "restaurants/followup/follow-up/saltmarsh-fish-kitchen/1": {
+   "subject": "Quick reminder: invoice {invoice_number}",
+   "body": "Hi Callum Reid,\n\nJust a friendly nudge that the balance for your new website ($400) is still open. You can pay it with PayPal here:\n\n{invoice_url}\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/scrapper/copper-kettle-bistro/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "intent": "question",
+   "summary": "The Copper Kettle Bistro likes the concept and asks about the price and build time, but hasn't said yes yet."
+  },
+  "restaurants/inbox/reply-to-a-question/copper-kettle-bistro": {
+   "subject": "Re: The Copper Kettle Bistro concept",
+   "body": "Hi Ines Varga,\n\nThanks for the reply, glad you like it. The full website is $500, with a 20% deposit ($100) to start and the remaining $400 after. Here's the concept again: {concept_url}\n\nOn timing, I don't want to give you a number I can't stand behind, so I'll confirm a clear timeline before you pay anything.\n\nHappy to answer anything else.\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/scrapper/copper-kettle-bistro/yes-i-want-it-let-s-go-ahead": {
+   "intent": "interested",
+   "summary": "The Copper Kettle Bistro wants the website and has told us to go ahead, so the next step is a draft email with the PayPal deposit link for approval."
+  },
+  "restaurants/inbox/deposit-email/copper-kettle-bistro": {
+   "subject": "Next step for the The Copper Kettle Bistro website",
+   "body": "Hi Ines Varga,\n\nBrilliant, glad you like it. To get going we take a 20% deposit ($100) through PayPal:\n\n{checkout_url}\n\nOnce it's in, we'll send the invoice for the balance ($400) and start building.\n\nAlex\nYour Studio · example.com"
+  },
+  "restaurants/fluffy/copper-kettle-bistro": {
+   "text": "I created the balance invoice and sent it to The Copper Kettle Bistro (book@copper-kettle.example).\n\n- **Invoice:** SIM-0006 (ID SIM-INV-7BB10A5170F5)\n- **Amount:** 400 USD\n- **Status:** Sent\n- **Customer view:** http://localhost:3981/sim/invoice/SIM-INV-7BB10A5170F5\n\nI did nothing else.",
+   "calls": [
+    {
+     "tool": "create_invoice",
+     "input": {
+      "recipient_name": "The Copper Kettle Bistro",
+      "recipient_email": "book@copper-kettle.example",
+      "item_name": "Website build: The Copper Kettle Bistro (balance)",
+      "item_description": "Balance after the 20% deposit.",
+      "amount": 400,
+      "currency_code": "USD",
+      "note": "Thank you for your deposit. This invoice is the remaining balance for your new website."
+     }
+    },
+    {
+     "tool": "send_invoice",
+     "input": {
+      "invoice_id": "{{id0}}"
+     }
+    }
+   ]
+  },
+  "restaurants/followup/follow-up/copper-kettle-bistro/1": {
+   "subject": "Quick reminder: invoice {invoice_number}",
+   "body": "Hi Ines Varga,\n\nJust a friendly nudge that the balance for your new website ($400) is still open. You can pay it with PayPal here:\n\n{invoice_url}\n\nAlex\nYour Studio · example.com"
+  }
+ },
+ "usage": {
+  "restaurants/tom/copper-kettle-bistro": {
+   "input": 783,
+   "output": 171
+  },
+  "restaurants/tom/saltmarsh-fish-kitchen": {
+   "input": 804,
+   "output": 172
+  },
+  "restaurants/tom/nonna-rosetta-trattoria": {
+   "input": 793,
+   "output": 173
+  },
+  "restaurants/tom/greenleaf-cafe": {
+   "input": 690,
+   "output": 143
+  },
+  "restaurants/tom/ember-oak-grill": {
+   "input": 773,
+   "output": 160
+  },
+  "restaurants/knight/nonna-rosetta-trattoria/1": {
+   "input": 891,
+   "output": 209
+  },
+  "restaurants/snowbell/nonna-rosetta-trattoria/1": {
+   "input": 992,
+   "output": 504
+  },
+  "restaurants/knight/nonna-rosetta-trattoria/2": {
+   "input": 1319,
+   "output": 212
+  },
+  "restaurants/snowbell/nonna-rosetta-trattoria/2": {
+   "input": 966,
+   "output": 163
+  },
+  "restaurants/sherlock/nonna-rosetta-trattoria": {
+   "input": 354,
+   "output": 178
+  },
+  "restaurants/sender/first-email/nonna-rosetta-trattoria": {
+   "input": 1040,
+   "output": 370
+  },
+  "restaurants/knight/copper-kettle-bistro/1": {
+   "input": 889,
+   "output": 207
+  },
+  "restaurants/snowbell/copper-kettle-bistro/1": {
+   "input": 965,
+   "output": 270
+  },
+  "restaurants/sherlock/copper-kettle-bistro": {
+   "input": 341,
+   "output": 174
+  },
+  "restaurants/sender/first-email/copper-kettle-bistro": {
+   "input": 1022,
+   "output": 359
+  },
+  "restaurants/knight/saltmarsh-fish-kitchen/1": {
+   "input": 885,
+   "output": 230
+  },
+  "restaurants/snowbell/saltmarsh-fish-kitchen/1": {
+   "input": 984,
+   "output": 241
+  },
+  "restaurants/knight/saltmarsh-fish-kitchen/2": {
+   "input": 1323,
+   "output": 689
+  },
+  "restaurants/snowbell/saltmarsh-fish-kitchen/2": {
+   "input": 986,
+   "output": 176
+  },
+  "restaurants/sherlock/saltmarsh-fish-kitchen": {
+   "input": 336,
+   "output": 213
+  },
+  "restaurants/sender/first-email/saltmarsh-fish-kitchen": {
+   "input": 1107,
+   "output": 404
+  },
+  "restaurants/scrapper/nonna-rosetta-trattoria/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "input": 333,
+   "output": 64
+  },
+  "restaurants/inbox/reply-to-a-question/nonna-rosetta-trattoria": {
+   "input": 740,
+   "output": 390
+  },
+  "restaurants/scrapper/nonna-rosetta-trattoria/yes-i-want-it-let-s-go-ahead": {
+   "input": 330,
+   "output": 62
+  },
+  "restaurants/inbox/deposit-email/nonna-rosetta-trattoria": {
+   "input": 782,
+   "output": 173
+  },
+  "restaurants/fluffy/nonna-rosetta-trattoria": {
+   "input": 4060,
+   "output": 498
+  },
+  "restaurants/followup/follow-up/nonna-rosetta-trattoria/1": {
+   "input": 721,
+   "output": 140
+  },
+  "restaurants/scrapper/saltmarsh-fish-kitchen/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "input": 334,
+   "output": 48
+  },
+  "restaurants/inbox/reply-to-a-question/saltmarsh-fish-kitchen": {
+   "input": 736,
+   "output": 371
+  },
+  "restaurants/scrapper/saltmarsh-fish-kitchen/yes-i-want-it-let-s-go-ahead": {
+   "input": 331,
+   "output": 59
+  },
+  "restaurants/inbox/deposit-email/saltmarsh-fish-kitchen": {
+   "input": 777,
+   "output": 171
+  },
+  "restaurants/fluffy/saltmarsh-fish-kitchen": {
+   "input": 4080,
+   "output": 504
+  },
+  "restaurants/followup/follow-up/saltmarsh-fish-kitchen/1": {
+   "input": 718,
+   "output": 138
+  },
+  "restaurants/scrapper/copper-kettle-bistro/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "input": 331,
+   "output": 54
+  },
+  "restaurants/inbox/reply-to-a-question/copper-kettle-bistro": {
+   "input": 732,
+   "output": 542
+  },
+  "restaurants/scrapper/copper-kettle-bistro/yes-i-want-it-let-s-go-ahead": {
+   "input": 328,
+   "output": 66
+  },
+  "restaurants/inbox/deposit-email/copper-kettle-bistro": {
+   "input": 774,
+   "output": 169
+  },
+  "restaurants/fluffy/copper-kettle-bistro": {
+   "input": 4020,
+   "output": 482
+  },
+  "restaurants/followup/follow-up/copper-kettle-bistro/1": {
+   "input": 715,
+   "output": 138
+  }
+ }
+}

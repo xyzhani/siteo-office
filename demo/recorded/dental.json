@@ -1,0 +1,544 @@
+{
+ "recordedAt": "2026-11-05T09:47:04.627Z",
+ "calls": {
+  "dental/tom/pearlgate-dental": {
+   "facts": {
+    "name": "Pearlgate Dental",
+    "owner": "Dr. Mira Calloway",
+    "phone": "+00 555 0101",
+    "email": "hello@pearlgate-dental.example",
+    "address": "12 Quay Street",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Thu 9:00–17:30",
+     "Fri 9:00–14:00"
+    ],
+    "services": [
+     "Check-ups and cleaning",
+     "Fillings",
+     "Teeth whitening",
+     "Emergency appointments"
+    ],
+    "since": "2004",
+    "extras": [
+     "Wheelchair access at the side entrance."
+    ]
+   }
+  },
+  "dental/tom/brightwater-family-dentistry": {
+   "facts": {
+    "name": "Brightwater Family Dentistry",
+    "owner": "Dr. Tomas Reyna",
+    "phone": "+00 555 0102",
+    "email": "frontdesk@brightwater-dentistry.example",
+    "address": "4 Mill Lane",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Fri 8:30–18:00",
+     "Sat 9:00–13:00"
+    ],
+    "services": [
+     "Family dentistry",
+     "Children's check-ups",
+     "Crowns and bridges",
+     "Invisible aligners"
+    ],
+    "since": "2011",
+    "extras": [
+     "Free parking behind the practice."
+    ]
+   }
+  },
+  "dental/tom/lindenrow-dental-care": {
+   "facts": {
+    "name": "Lindenrow Dental Care",
+    "owner": "Dr. Hana Okafor",
+    "phone": "+00 555 0103",
+    "email": "care@lindenrow-dental.example",
+    "address": "88 Linden Row",
+    "town": "Sampleton",
+    "hours": [
+     "Tue–Sat 9:00–17:00"
+    ],
+    "services": [
+     "Gentle care for nervous patients",
+     "Hygienist visits",
+     "Root canal treatment",
+     "Dentures"
+    ],
+    "since": "1998",
+    "extras": null
+   }
+  },
+  "dental/tom/harbour-smile-studio": {
+   "facts": {
+    "name": "Harbour Smile Studio",
+    "owner": null,
+    "phone": "+00 555 0104",
+    "email": "team@harbour-smile.example",
+    "address": "1 Harbour Walk",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Fri 8:00–19:00"
+    ],
+    "services": [
+     "Implants",
+     "Whitening",
+     "Check-ups"
+    ],
+    "since": null,
+    "extras": [
+     "Book online in 60 seconds"
+    ]
+   }
+  },
+  "dental/tom/oakmere-dental-practice": {
+   "facts": {
+    "name": "Oakmere Dental Practice",
+    "owner": "Dr. Sana Pike",
+    "phone": "+00 555 0105",
+    "email": "info@oakmere-dental.example",
+    "address": "21 Oakmere Road",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Fri 9:00–17:00"
+    ],
+    "services": [
+     "General dentistry",
+     "Hygienist",
+     "Mouthguards"
+    ],
+    "since": "2008",
+    "extras": null
+   }
+  },
+  "dental/knight/pearlgate-dental/1": {
+   "headline": "Pearlgate Dental",
+   "subheadline": "Check-ups, fillings, teeth whitening and emergency appointments in Sampleton.",
+   "about": "Pearlgate Dental is a dental practice at 12 Quay Street in Sampleton. It has been run by Dr. Mira Calloway since 2004. We are open Mon–Thu 9:00–17:30 and Fri 9:00–14:00. There is wheelchair access at the side entrance.",
+   "services": [
+    {
+     "name": "Check-ups and cleaning",
+     "description": ""
+    },
+    {
+     "name": "Fillings",
+     "description": ""
+    },
+    {
+     "name": "Teeth whitening",
+     "description": ""
+    },
+    {
+     "name": "Emergency appointments",
+     "description": ""
+    }
+   ],
+   "cta": "Book an appointment"
+  },
+  "dental/snowbell/pearlgate-dental/1": {
+   "issues": [
+    {
+     "line": "Rated the best dentist in Sampleton, with 5-star reviews from every patient.",
+     "problem": "Uses the forbidden phrases \"best\", \"5-star\" and \"every patient\". It also invents a rating and reviews, and none of this is in the facts."
+    }
+   ]
+  },
+  "dental/knight/pearlgate-dental/2": {
+   "headline": "Pearlgate Dental",
+   "subheadline": "Check-ups, fillings, teeth whitening and emergency appointments in Sampleton.",
+   "about": "Pearlgate Dental is a dental practice at 12 Quay Street in Sampleton. It has been run by Dr. Mira Calloway since 2004. We are open Mon–Thu 9:00–17:30 and Fri 9:00–14:00. There is wheelchair access at the side entrance.",
+   "services": [
+    {
+     "name": "Check-ups and cleaning",
+     "description": ""
+    },
+    {
+     "name": "Fillings",
+     "description": ""
+    },
+    {
+     "name": "Teeth whitening",
+     "description": ""
+    },
+    {
+     "name": "Emergency appointments",
+     "description": ""
+    }
+   ],
+   "cta": "Book an appointment"
+  },
+  "dental/snowbell/pearlgate-dental/2": {
+   "issues": []
+  },
+  "dental/sherlock/pearlgate-dental": {
+   "points": [
+    "The site isn't set up for phones, so patients may have to pinch and zoom to read it, and many will give up and look elsewhere.",
+    "There's no phone link you can tap, so someone on a mobile has to copy or memorize the number instead of calling in one touch.",
+    "There's no online booking link, so people who want to book after hours have no easy way to do it.",
+    "The page title and Google description are generic or missing, so your listing in search results may not clearly say who you are or what you offer."
+   ]
+  },
+  "dental/sender/first-email/pearlgate-dental": {
+   "subject": "A new website idea for Pearlgate Dental",
+   "body": "Hi Dr. Mira Calloway,\n\nI looked at the Pearlgate Dental website and made you a free concept of what a modern version could look like, built only from the details already on your site:\n\n{concept_url}\n\nA few things the current site is missing:\n• The site isn't set up for phones, so patients may have to pinch and zoom to read it, and many will give up and look elsewhere.\n• There's no phone link you can tap, so someone on a mobile has to copy or memorize the number instead of calling in one touch.\n• There's no online booking link, so people who want to book after hours have no easy way to do it.\n• The page title and Google description are generic or missing, so your listing in search results may not clearly say who you are or what you offer.\n\nIf you like it, we can build the real thing for $500. No obligation at all; just reply and let me know what you think.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/knight/lindenrow-dental-care/1": {
+   "headline": "Lindenrow Dental Care",
+   "subheadline": "Gentle care for nervous patients, hygienist visits, root canal treatment and dentures in Sampleton.",
+   "about": "Lindenrow Dental Care is led by Dr. Hana Okafor. We have been caring for patients in Sampleton since 1998. You will find us at 88 Linden Row, open Tue–Sat 9:00–17:00.",
+   "services": [
+    {
+     "name": "Gentle care for nervous patients",
+     "description": ""
+    },
+    {
+     "name": "Hygienist visits",
+     "description": ""
+    },
+    {
+     "name": "Root canal treatment",
+     "description": ""
+    },
+    {
+     "name": "Dentures",
+     "description": ""
+    }
+   ],
+   "cta": "Book an appointment"
+  },
+  "dental/snowbell/lindenrow-dental-care/1": {
+   "issues": []
+  },
+  "dental/sherlock/lindenrow-dental-care": {
+   "points": [
+    "Your site isn't set up for phones, so patients may have to pinch and zoom to read it, and many will give up and look elsewhere.",
+    "The phone number can't be tapped to call, so someone on their phone has to remember or copy it before they can reach you.",
+    "There's no online booking link, so people who want to book outside office hours have no easy way to do it.",
+    "The page title and Google description are missing or generic, so your listing in search results may not tell people who you are or what you offer."
+   ]
+  },
+  "dental/sender/first-email/lindenrow-dental-care": {
+   "subject": "A new website idea for Lindenrow Dental Care",
+   "body": "Hi Dr. Hana Okafor,\n\nI looked at the Lindenrow Dental Care website and made you a free concept of what a modern version could look like, built only from the details already on your site:\n\n{concept_url}\n\nA few things the current site is missing:\n• Your site isn't set up for phones, so patients may have to pinch and zoom to read it, and many will give up and look elsewhere.\n• The phone number can't be tapped to call, so someone on their phone has to remember or copy it before they can reach you.\n• There's no online booking link, so people who want to book outside office hours have no easy way to do it.\n• The page title and Google description are missing or generic, so your listing in search results may not tell people who you are or what you offer.\n\nIf you like it, we can build the real thing for $500. No obligation at all; just reply and let me know what you think.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/knight/brightwater-family-dentistry/1": {
+   "headline": "Brightwater Family Dentistry",
+   "subheadline": "Family dentistry, children's check-ups, crowns and bridges, and invisible aligners in Sampleton.",
+   "about": "Brightwater Family Dentistry is led by Dr. Tomas Reyna at 4 Mill Lane, Sampleton. The practice has been open since 2011. We are open Mon–Fri 8:30–18:00 and Sat 9:00–13:00. There is free parking behind the practice.",
+   "services": [
+    {
+     "name": "Family dentistry",
+     "description": ""
+    },
+    {
+     "name": "Children's check-ups",
+     "description": ""
+    },
+    {
+     "name": "Crowns and bridges",
+     "description": ""
+    },
+    {
+     "name": "Invisible aligners",
+     "description": ""
+    }
+   ],
+   "cta": "Book an appointment"
+  },
+  "dental/snowbell/brightwater-family-dentistry/1": {
+   "issues": []
+  },
+  "dental/sherlock/brightwater-family-dentistry": {
+   "points": [
+    "Your site isn't set up for phones, so pages can look tiny or hard to read for patients searching on their phone.",
+    "Your phone number isn't tappable, so someone on a phone has to copy or write it down instead of calling with one touch.",
+    "There's no online booking link, so patients who want to book after hours have no easy way to do it.",
+    "The site was last updated in 2017 and uses an old layout and outdated code, which can make it look dated and harder to keep working well on newer phones and browsers."
+   ]
+  },
+  "dental/sender/first-email/brightwater-family-dentistry": {
+   "subject": "A new website idea for Brightwater Family Dentistry",
+   "body": "Hi Dr. Tomas Reyna,\n\nI looked at the Brightwater Family Dentistry website and made you a free concept of what a modern version could look like, built only from the details already on your site:\n\n{concept_url}\n\nA few things the current site is missing:\n• Your site isn't set up for phones, so pages can look tiny or hard to read for patients searching on their phone.\n• Your phone number isn't tappable, so someone on a phone has to copy or write it down instead of calling with one touch.\n• There's no online booking link, so patients who want to book after hours have no easy way to do it.\n• The site was last updated in 2017 and uses an old layout and outdated code, which can make it look dated and harder to keep working well on newer phones and browsers.\n\nIf you like it, we can build the real thing for $500. No obligation at all; just reply and let me know what you think.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/scrapper/lindenrow-dental-care/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "intent": "question",
+   "summary": "Lindenrow Dental Care likes the concept and asks about price and build time, but hasn't said yes to going ahead yet."
+  },
+  "dental/inbox/reply-to-a-question/lindenrow-dental-care": {
+   "subject": "Re: the Lindenrow Dental Care concept",
+   "body": "Hi Dr. Hana Okafor,\n\nThanks for getting back to me. Happy to answer: the full website is $500, with a 20% deposit ($100) to start and the remaining $400 after. You can look at the concept again here: {concept_url}\n\nOn timing, I'd rather give you a real date than a guess, so I'll confirm a delivery time with you before you pay anything.\n\nAnything else you'd like to know, just reply.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/scrapper/lindenrow-dental-care/yes-i-want-it-let-s-go-ahead": {
+   "intent": "interested",
+   "summary": "Lindenrow Dental Care said yes and wants to go ahead with the concept website, so a PayPal Checkout deposit link can be drafted for human approval."
+  },
+  "dental/inbox/deposit-email/lindenrow-dental-care": {
+   "subject": "Next step for the Lindenrow Dental Care website",
+   "body": "Hi Dr. Hana Okafor,\n\nGreat to hear you like it. To get started we take a 20% deposit ($100), paid securely with PayPal:\n\n{checkout_url}\n\nAs soon as it's paid we'll send the invoice for the balance ($400) and start building.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/fluffy/lindenrow-dental-care": {
+   "text": "I created the balance invoice and sent it to Lindenrow Dental Care (care@lindenrow-dental.example).\n\n- **Invoice ID:** SIM-INV-63A4261E915F (number SIM-0001)\n- **Amount:** 400 USD\n- **Status:** Sent\n- **Customer view:** http://localhost:3981/sim/invoice/SIM-INV-63A4261E915F\n\nI didn't do anything else.",
+   "calls": [
+    {
+     "tool": "create_invoice",
+     "input": {
+      "recipient_name": "Lindenrow Dental Care",
+      "recipient_email": "care@lindenrow-dental.example",
+      "item_name": "Website build: Lindenrow Dental Care (balance)",
+      "item_description": "Balance after the 20% deposit.",
+      "amount": 400,
+      "currency_code": "USD",
+      "note": "Thank you for your deposit. This invoice is the remaining balance for your new website."
+     }
+    },
+    {
+     "tool": "send_invoice",
+     "input": {
+      "invoice_id": "{{id0}}"
+     }
+    }
+   ]
+  },
+  "dental/followup/follow-up/lindenrow-dental-care/1": {
+   "subject": "Friendly reminder: invoice {invoice_number}",
+   "body": "Hi Dr. Hana Okafor,\n\nJust a gentle reminder that the balance for your new website ($400) is still open. You can pay it here with PayPal:\n\n{invoice_url}\n\nIf anything is unclear, reply and I'll help.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/scrapper/brightwater-family-dentistry/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "intent": "question",
+   "summary": "The business liked the concept site but asked about the price and how long the build takes, without yet saying they want to go ahead."
+  },
+  "dental/inbox/reply-to-a-question/brightwater-family-dentistry": {
+   "subject": "Re: the Brightwater Family Dentistry concept",
+   "body": "Hi Dr. Tomas Reyna,\n\nThanks for getting back to me, and glad you like it. The full website is $500, with a 20% deposit ($100) to start and the remaining $400 after that.\n\nOn timing, I don't want to give you a number I can't stand behind. Reply and I'll confirm a clear timeline for your site. You can look at the concept again here: {concept_url}\n\nAnything else you'd like to know, just reply.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/scrapper/brightwater-family-dentistry/yes-i-want-it-let-s-go-ahead": {
+   "intent": "interested",
+   "summary": "Brightwater Family Dentistry said yes and wants to go ahead with the website, so a PayPal Checkout deposit link draft can be prepared for human approval."
+  },
+  "dental/inbox/deposit-email/brightwater-family-dentistry": {
+   "subject": "Next step for the Brightwater Family Dentistry website",
+   "body": "Hi Dr. Tomas Reyna,\n\nGreat to hear you like it. To get started we take a 20% deposit ($100), paid securely with PayPal:\n\n{checkout_url}\n\nAs soon as it's paid we'll send the invoice for the balance ($400) and start building.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/fluffy/brightwater-family-dentistry": {
+   "text": "I created the balance invoice and sent it to Brightwater Family Dentistry at frontdesk@brightwater-dentistry.example.\n\n- **Invoice ID:** SIM-INV-F89A33277004 (number SIM-0002)\n- **Amount:** 400 USD\n- **Status:** SENT\n- **Customer view:** http://localhost:3981/sim/invoice/SIM-INV-F89A33277004\n\nI did nothing else, as you asked.",
+   "calls": [
+    {
+     "tool": "create_invoice",
+     "input": {
+      "recipient_name": "Brightwater Family Dentistry",
+      "recipient_email": "frontdesk@brightwater-dentistry.example",
+      "item_name": "Website build: Brightwater Family Dentistry (balance)",
+      "item_description": "Balance after the 20% deposit.",
+      "amount": 400,
+      "currency_code": "USD",
+      "note": "Thank you for your deposit. This invoice is the remaining balance for your new website."
+     }
+    },
+    {
+     "tool": "send_invoice",
+     "input": {
+      "invoice_id": "{{id0}}"
+     }
+    }
+   ]
+  },
+  "dental/followup/follow-up/brightwater-family-dentistry/1": {
+   "subject": "Friendly reminder: invoice {invoice_number}",
+   "body": "Hi Dr. Tomas Reyna,\n\nJust a gentle reminder that the balance for your new website ($400) is still open. You can pay it here with PayPal:\n\n{invoice_url}\n\nIf anything is unclear, reply and I'll help.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/scrapper/pearlgate-dental/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "intent": "question",
+   "summary": "Pearlgate Dental likes the concept and asks about price and timeline, but hasn't said yes to going ahead yet."
+  },
+  "dental/inbox/reply-to-a-question/pearlgate-dental": {
+   "subject": "Re: the Pearlgate Dental concept",
+   "body": "Hi Dr. Mira Calloway,\n\nThanks for getting back to me. Happy to answer: the full website is $500, with a 20% deposit ($100) to start and the remaining $400 after that.\n\nOn timing, I don't want to give you a guess I can't stand behind, so I'll confirm a clear timeline with you directly before you pay anything. You can look at the concept again here: {concept_url}\n\nAnything else you'd like to know, just reply.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/scrapper/pearlgate-dental/yes-i-want-it-let-s-go-ahead": {
+   "intent": "interested",
+   "summary": "Pearlgate Dental clearly said yes and wants to go ahead with the website, so the PayPal deposit link can be sent for human approval."
+  },
+  "dental/inbox/deposit-email/pearlgate-dental": {
+   "subject": "Next step for the Pearlgate Dental website",
+   "body": "Hi Dr. Mira Calloway,\n\nGreat to hear you like it. To get started we take a 20% deposit ($100), paid securely with PayPal:\n\n{checkout_url}\n\nAs soon as it's paid we'll send the invoice for the balance ($400) and start building.\n\nAlex\nYour Studio · example.com"
+  },
+  "dental/fluffy/pearlgate-dental": {
+   "text": "I created the invoice for the balance and sent it to Pearlgate Dental (hello@pearlgate-dental.example).\n\n- **Invoice ID:** SIM-INV-79B8B614FFB5 (number SIM-0003)\n- **Amount:** 400 USD\n- **Status:** Sent\n- **Customer view:** http://localhost:3981/sim/invoice/SIM-INV-79B8B614FFB5\n\nI didn't do anything else.",
+   "calls": [
+    {
+     "tool": "create_invoice",
+     "input": {
+      "recipient_name": "Pearlgate Dental",
+      "recipient_email": "hello@pearlgate-dental.example",
+      "item_name": "Website build: Pearlgate Dental (balance)",
+      "item_description": "Balance after the 20% deposit.",
+      "amount": 400,
+      "currency_code": "USD",
+      "note": "Thank you for your deposit. This invoice is the remaining balance for your new website."
+     }
+    },
+    {
+     "tool": "send_invoice",
+     "input": {
+      "invoice_id": "{{id0}}"
+     }
+    }
+   ]
+  },
+  "dental/followup/follow-up/pearlgate-dental/1": {
+   "subject": "Friendly reminder: invoice {invoice_number}",
+   "body": "Hi Dr. Mira Calloway,\n\nJust a gentle reminder that the balance for your new website ($400) is still open. You can pay it here with PayPal:\n\n{invoice_url}\n\nIf anything is unclear, reply and I'll help.\n\nAlex\nYour Studio · example.com"
+  }
+ },
+ "usage": {
+  "dental/tom/pearlgate-dental": {
+   "input": 784,
+   "output": 199
+  },
+  "dental/tom/brightwater-family-dentistry": {
+   "input": 810,
+   "output": 204
+  },
+  "dental/tom/lindenrow-dental-care": {
+   "input": 767,
+   "output": 172
+  },
+  "dental/tom/harbour-smile-studio": {
+   "input": 679,
+   "output": 152
+  },
+  "dental/tom/oakmere-dental-practice": {
+   "input": 762,
+   "output": 157
+  },
+  "dental/knight/pearlgate-dental/1": {
+   "input": 961,
+   "output": 243
+  },
+  "dental/snowbell/pearlgate-dental/1": {
+   "input": 1109,
+   "output": 284
+  },
+  "dental/knight/pearlgate-dental/2": {
+   "input": 1400,
+   "output": 353
+  },
+  "dental/snowbell/pearlgate-dental/2": {
+   "input": 1075,
+   "output": 170
+  },
+  "dental/sherlock/pearlgate-dental": {
+   "input": 349,
+   "output": 158
+  },
+  "dental/sender/first-email/pearlgate-dental": {
+   "input": 1004,
+   "output": 342
+  },
+  "dental/knight/lindenrow-dental-care/1": {
+   "input": 927,
+   "output": 229
+  },
+  "dental/snowbell/lindenrow-dental-care/1": {
+   "input": 1021,
+   "output": 219
+  },
+  "dental/sherlock/lindenrow-dental-care": {
+   "input": 351,
+   "output": 156
+  },
+  "dental/sender/first-email/lindenrow-dental-care": {
+   "input": 1010,
+   "output": 346
+  },
+  "dental/knight/brightwater-family-dentistry/1": {
+   "input": 966,
+   "output": 251
+  },
+  "dental/snowbell/brightwater-family-dentistry/1": {
+   "input": 1088,
+   "output": 125
+  },
+  "dental/sherlock/brightwater-family-dentistry": {
+   "input": 333,
+   "output": 164
+  },
+  "dental/sender/first-email/brightwater-family-dentistry": {
+   "input": 1027,
+   "output": 355
+  },
+  "dental/scrapper/lindenrow-dental-care/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "input": 330,
+   "output": 56
+  },
+  "dental/inbox/reply-to-a-question/lindenrow-dental-care": {
+   "input": 772,
+   "output": 349
+  },
+  "dental/scrapper/lindenrow-dental-care/yes-i-want-it-let-s-go-ahead": {
+   "input": 327,
+   "output": 69
+  },
+  "dental/inbox/deposit-email/lindenrow-dental-care": {
+   "input": 799,
+   "output": 177
+  },
+  "dental/fluffy/lindenrow-dental-care": {
+   "input": 4010,
+   "output": 479
+  },
+  "dental/followup/follow-up/lindenrow-dental-care/1": {
+   "input": 750,
+   "output": 163
+  },
+  "dental/scrapper/brightwater-family-dentistry/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "input": 331,
+   "output": 50
+  },
+  "dental/inbox/reply-to-a-question/brightwater-family-dentistry": {
+   "input": 772,
+   "output": 368
+  },
+  "dental/scrapper/brightwater-family-dentistry/yes-i-want-it-let-s-go-ahead": {
+   "input": 328,
+   "output": 69
+  },
+  "dental/inbox/deposit-email/brightwater-family-dentistry": {
+   "input": 799,
+   "output": 178
+  },
+  "dental/fluffy/brightwater-family-dentistry": {
+   "input": 4040,
+   "output": 493
+  },
+  "dental/followup/follow-up/brightwater-family-dentistry/1": {
+   "input": 751,
+   "output": 163
+  },
+  "dental/scrapper/pearlgate-dental/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "input": 328,
+   "output": 56
+  },
+  "dental/inbox/reply-to-a-question/pearlgate-dental": {
+   "input": 764,
+   "output": 376
+  },
+  "dental/scrapper/pearlgate-dental/yes-i-want-it-let-s-go-ahead": {
+   "input": 325,
+   "output": 63
+  },
+  "dental/inbox/deposit-email/pearlgate-dental": {
+   "input": 793,
+   "output": 175
+  },
+  "dental/fluffy/pearlgate-dental": {
+   "input": 4005,
+   "output": 484
+  },
+  "dental/followup/follow-up/pearlgate-dental/1": {
+   "input": 752,
+   "output": 165
+  }
+ }
+}
