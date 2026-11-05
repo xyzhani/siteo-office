@@ -182,7 +182,7 @@ tfoot td{font-weight:700;border-bottom:0}
   .side nav a.active::before{display:none}
   .main{padding:16px 16px 30px}
   h1{font-size:32px}
-  .runbar{min-width:0;max-width:none;flex-wrap:wrap}.runbar .btn{flex:1}
+  .runbar{min-width:0;max-width:none;flex-wrap:wrap}.runbar input{flex:1 1 100%}.runbar select{flex:1}.runbar .btn{flex:1.4}
   .office-wrap{height:min(64vh,96vw);min-height:300px;border-radius:22px}
   .funnel{gap:5px}.funnel div{padding:7px 6px;border-radius:12px}.funnel b{font-size:18px}.funnel span{font-size:10px;white-space:normal;line-height:1.15}.funnel div:not(:last-child):after{display:none}
   .grid2,.conn-grid{grid-template-columns:1fr}

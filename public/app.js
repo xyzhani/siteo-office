@@ -233,7 +233,7 @@ function initGrids() {
   if (!window.agGrid) { $$(".grid-box").forEach((g) => (g.innerHTML = `<p class="empty">Tables couldn't load (AG Grid CDN unreachable).</p>`)); return; }
   setTheme(document.documentElement.dataset.theme);
   const pillEl = (text, cls) => { const el = document.createElement("span"); el.className = "pill " + cls; el.textContent = text; return el; };
-  const base = { defaultColDef: { sortable: true, filter: true, floatingFilter: true, resizable: true, minWidth: 90 }, animateRows: true, enableCellChangeFlash: true, getRowId: (p) => p.data.id, rowData: [], rowHeight: 46 };
+  const base = { defaultColDef: { sortable: true, filter: true, floatingFilter: true, resizable: true, minWidth: 90, enableCellChangeFlash: true }, animateRows: true, getRowId: (p) => p.data.id, rowData: [], rowHeight: 46 };
   projectsGrid = agGrid.createGrid($("#projects-grid"), {
     ...base,
     overlayNoRowsTemplate: "<span>No projects yet. Start a run in the Office.</span>",
