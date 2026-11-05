@@ -1911,7 +1911,8 @@ const CSS = `
 .so-full small{display:block;color:#a9adbb;margin-top:2px}
 .so-lbl:hover .so-full,.so-lbl.open .so-full{display:block}
 .so-tag{display:none;padding:3px 9px;border-radius:9px;font-size:10.5px;font-weight:600;color:#fff;background:var(--c);box-shadow:0 6px 16px -6px var(--c);white-space:nowrap}
-.so-tag.on{display:block}
+.so-tag.on{display:block;max-width:240px;overflow:hidden;text-overflow:ellipsis}
+.so-root.compact .so-tag.on{max-width:150px;font-size:9.5px}
 .so-tag.wait{background:linear-gradient(135deg,#8b7bff,#ff8fb1);animation:soPulse 1.5s ease-in-out infinite}
 @keyframes soPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(139,123,255,.55)}50%{transform:scale(1.06);box-shadow:0 0 0 7px rgba(139,123,255,0)}}
 .so-root.compact .so-st{display:none}
@@ -1971,7 +1972,7 @@ export function mountOffice(container, { getState, onSelectAgent, onSelectManage
   const DEF_TARGET = new THREE.Vector3(0, 0, 0.3);
   camera.position.copy(DEF_TARGET).addScaledVector(DEF_DIR, 60);
   camera.lookAt(DEF_TARGET);
-  const defZoom = () => (CW / CH < 0.8 ? 1.35 : 1);
+  const defZoom = () => (CW / CH < 0.8 ? 1.35 : CW < 640 ? 1.2 : 1);
   const fit = () => {
     const aspect = CW / CH; let halfH = 12.2; if (halfH * aspect < 19.0) halfH = 19.0 / aspect;
     camera.left = -halfH * aspect; camera.right = halfH * aspect; camera.top = halfH; camera.bottom = -halfH; camera.updateProjectionMatrix();

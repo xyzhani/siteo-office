@@ -4,9 +4,10 @@ import { settings } from "../../config.js";
 export const name = "claude";
 export function ready() { return !!(settings.llm.anthropicKey && settings.llm.model); }
 
-export async function complete({ system, messages, maxTokens = 1500, tools, temperature = 0.3 }) {
+export async function complete({ system, messages, maxTokens = 1500, tools }) {
   if (!settings.llm.model) throw new Error("Set CLAUDE_MODEL in .env (see .env.example)");
-  const body = { model: settings.llm.model, max_tokens: maxTokens, system, messages, temperature };
+  const body = { model: settings.llm.model, max_tokens: maxTokens, system, messages };
+  if (process.env.CLAUDE_TEMPERATURE) body.temperature = Number(process.env.CLAUDE_TEMPERATURE);
   if (tools?.length) body.tools = tools;
   let res, lastErr;
   for (let attempt = 0; attempt < 3; attempt++) {

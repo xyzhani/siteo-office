@@ -80,7 +80,7 @@ textarea{min-height:150px;resize:vertical;font-size:13px;line-height:1.5}
 @keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
 @media (max-width:980px){
   .layout{grid-template-columns:1fr;height:auto;padding:10px 12px}
-  .office{height:52vh;flex:none;min-height:300px}
+  .office{height:min(62vh,92vw);flex:none;min-height:300px}
   .panel{min-height:70vh}
   .funnel{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
   .funnel div{padding:7px 6px}.funnel b{font-size:18px}.funnel span{font-size:10px;white-space:normal;line-height:1.15}

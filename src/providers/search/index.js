@@ -24,9 +24,17 @@ async function osm(niche, town, limit) {
   const pad = 0.02, bbox = `${s - pad},${w - pad},${n + pad},${e + pad}`;
   const tags = niche.search.osmTags || [];
   const q = `[out:json][timeout:25];(${tags.map((t) => { const [k, v] = t.split("="); return `nwr["${k}"="${v}"]["website"](${bbox});nwr["${k}"="${v}"]["contact:website"](${bbox});`; }).join("")});out center ${limit * 3};`;
-  const r = await fetch("https://overpass-api.de/api/interpreter", { method: "POST", headers: { "user-agent": UA, "content-type": "application/x-www-form-urlencoded" }, body: "data=" + encodeURIComponent(q), signal: AbortSignal.timeout(40000) });
-  if (!r.ok) throw new Error(`Overpass ${r.status}`);
-  const data = await r.json();
+  // public Overpass servers get busy: try OVERPASS_URL first, then a couple of mirrors
+  const mirrors = [process.env.OVERPASS_URL, "https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter", "https://overpass.private.coffee/api/interpreter"].filter(Boolean);
+  let data = null, lastErr = "";
+  for (const url of mirrors) {
+    try {
+      const r = await fetch(url, { method: "POST", headers: { "user-agent": UA, "content-type": "application/x-www-form-urlencoded" }, body: "data=" + encodeURIComponent(q), signal: AbortSignal.timeout(40000) });
+      if (r.ok) { data = await r.json(); break; }
+      lastErr = `Overpass ${r.status}`;
+    } catch (e) { lastErr = `Overpass: ${e.cause?.message || e.message}`; }
+  }
+  if (!data) throw new Error(lastErr || "Overpass unavailable");
   const out = [], seen = new Set();
   for (const el of data.elements || []) {
     const t = el.tags || {}, website = cleanUrl(t.website || t["contact:website"]);

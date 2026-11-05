@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "node --watch-path=src --watch-path=server.js server.js",
     "start": "node server.js",
-    "test": "node --test test/"
+    "test": "node --test test/demo-flow.test.js"
   },
   "optionalDependencies": {
     "nodemailer": "^6.9.16"
