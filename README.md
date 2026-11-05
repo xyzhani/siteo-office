@@ -43,6 +43,8 @@ With an empty `.env` you get **demo mode**: fictional businesses in a made-up to
 
 Full details: [how it works](docs/how-it-works.md).
 
+![Pipeline tab: audit scores, Snow Bell's fact-check rounds and Sherlock's notes](docs/img/pipeline.png)
+
 ## What you get
 
 - A live 3D office (three.js, fully procedural, no external assets) driven by the real pipeline state, mobile friendly.
