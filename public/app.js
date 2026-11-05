@@ -238,7 +238,7 @@ function initGrids() {
     ...base,
     overlayNoRowsTemplate: "<span>No projects yet. Start a run in the Office.</span>",
     columnDefs: [
-      { field: "name", headerName: "Business", flex: 2, minWidth: 240, pinned: "left", cellRenderer: (p) => { const d = document.createElement("span"); d.textContent = p.value; if (p.data.fictional) { d.append(" "); d.appendChild(pillEl("fictional", "fic")); } return d; } },
+      { field: "name", headerName: "Business", flex: 2, minWidth: 300, pinned: "left", cellRenderer: (p) => { const d = document.createElement("span"); d.textContent = p.value; if (p.data.fictional) { d.append(" "); d.appendChild(pillEl("fictional", "fic")); } return d; } },
       { field: "statusLabel", headerName: "Stage", flex: 1.2, minWidth: 170, cellRenderer: (p) => pillEl(p.value, pillCls(p.data.status)) },
       { field: "score", headerName: "Weakness", width: 125, filter: "agNumberColumnFilter", cellRenderer: (p) => { if (p.value == null) return ""; const d = document.createElement("span"); d.textContent = p.value; const b = document.createElement("i"); b.className = "bar"; b.style.width = Math.round(p.value * 0.5) + "px"; d.appendChild(b); return d; } },
       { field: "rounds", headerName: "Snow Bell rounds", width: 160, filter: "agNumberColumnFilter", valueFormatter: (p) => (p.value ? `${p.value}${p.data.sentBack ? ` (${p.data.sentBack} sent back)` : ""}` : "") },
