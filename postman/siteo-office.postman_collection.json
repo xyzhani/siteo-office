@@ -1,0 +1,698 @@
+{
+  "info": {
+    "name": "Siteo Office",
+    "description": "API for Siteo Office (open source). Run the folders in order against a demo instance: 1 Pipeline → 2 Approvals & replies → 3 PayPal deposit → 4 PayPal invoice. 'Get state' saves emailId / leadId / orderId / invoiceId into collection variables. With PayPal Sandbox keys, open the deposit approveUrl in a browser and pay as the sandbox buyer instead of the simulated requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "emailId",
+      "value": ""
+    },
+    {
+      "key": "leadId",
+      "value": ""
+    },
+    {
+      "key": "orderId",
+      "value": ""
+    },
+    {
+      "key": "invoiceId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "0 · Health & status",
+      "item": [
+        {
+          "name": "Health",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/healthz",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "healthz"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Status (mode, providers, studio, team, niches)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "status"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Office state (what the 3D office polls)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/office",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "office"
+              ]
+            },
+            "description": "Agent states, handoffs and events (say/money)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "1 · Pipeline",
+      "item": [
+        {
+          "name": "Start a run",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/runs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "runs"
+              ]
+            },
+            "description": "Starts Misso → Tom → Knight ⇄ Snow Bell → Sherlock → Nemo. In demo mode the town is the fictional Sampleton.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"dentists in Galway\",\n  \"niche\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get state (saves ids)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/state",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "state"
+              ]
+            },
+            "description": "Runs, leads, emails, payments, funnel counts, money. Run again after the run finishes."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json();",
+                  "pm.test('state loads', () => pm.expect(d).to.have.property('leads'));",
+                  "const e = d.emails.find(x => x.status === 'awaiting_approval');",
+                  "if (e) { pm.collectionVariables.set('emailId', e.id); pm.collectionVariables.set('leadId', e.lead); }",
+                  "const dep = d.payments.find(p => p.type === 'deposit'); if (dep) pm.collectionVariables.set('orderId', dep.orderId);",
+                  "const inv = d.payments.find(p => p.type === 'invoice'); if (inv) pm.collectionVariables.set('invoiceId', inv.invoiceId);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Concept page",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/c/{{leadId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "c",
+                "{{leadId}}"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "name": "2 · Approvals & replies",
+      "item": [
+        {
+          "name": "Approve email (optionally edit)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/emails/{{emailId}}/approve",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "emails",
+                "{{emailId}}",
+                "approve"
+              ]
+            },
+            "description": "Empty fields keep the draft as written.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"\",\n  \"body\": \"\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Reject email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/emails/{{emailId}}/reject",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "emails",
+                "{{emailId}}",
+                "reject"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Customer replies 'yes'",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/leads/{{leadId}}/reply",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "leads",
+                "{{leadId}}",
+                "reply"
+              ]
+            },
+            "description": "Scrapper creates a PayPal order for the deposit and drafts the deposit email. Then Get state + Approve email again.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"Yes, I want it!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get state (saves ids)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/state",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "state"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json();",
+                  "pm.test('state loads', () => pm.expect(d).to.have.property('leads'));",
+                  "const e = d.emails.find(x => x.status === 'awaiting_approval');",
+                  "if (e) { pm.collectionVariables.set('emailId', e.id); pm.collectionVariables.set('leadId', e.lead); }",
+                  "const dep = d.payments.find(p => p.type === 'deposit'); if (dep) pm.collectionVariables.set('orderId', dep.orderId);",
+                  "const inv = d.payments.find(p => p.type === 'invoice'); if (inv) pm.collectionVariables.set('invoiceId', inv.invoiceId);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3 · PayPal deposit (Orders v2)",
+      "item": [
+        {
+          "name": "Simulated checkout: pay (no keys only)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/sim/checkout/{{orderId}}/pay",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sim",
+                "checkout",
+                "{{orderId}}",
+                "pay"
+              ]
+            },
+            "description": "Keyless demo only. With PayPal Sandbox keys, open the order's approveUrl and pay as the sandbox buyer."
+          }
+        },
+        {
+          "name": "PayPal return URL → capture",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/paypal/return?token={{orderId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "paypal",
+                "return"
+              ],
+              "query": [
+                {
+                  "key": "token",
+                  "value": "{{orderId}}"
+                }
+              ]
+            },
+            "description": "What PayPal redirects to after approval. Captures the order; on COMPLETED, Fluffy invoices the balance."
+          }
+        },
+        {
+          "name": "Webhook: CHECKOUT.ORDER.APPROVED",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/paypal",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks",
+                "paypal"
+              ]
+            },
+            "description": "With PAYPAL_WEBHOOK_ID set, unsigned test events are rejected (by design). The server always re-reads the order from PayPal before acting.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"WH-TEST\",\n  \"event_type\": \"CHECKOUT.ORDER.APPROVED\",\n  \"resource\": {\n    \"id\": \"{{orderId}}\"\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Get state (saves invoiceId)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/state",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "state"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json();",
+                  "pm.test('state loads', () => pm.expect(d).to.have.property('leads'));",
+                  "const e = d.emails.find(x => x.status === 'awaiting_approval');",
+                  "if (e) { pm.collectionVariables.set('emailId', e.id); pm.collectionVariables.set('leadId', e.lead); }",
+                  "const dep = d.payments.find(p => p.type === 'deposit'); if (dep) pm.collectionVariables.set('orderId', dep.orderId);",
+                  "const inv = d.payments.find(p => p.type === 'invoice'); if (inv) pm.collectionVariables.set('invoiceId', inv.invoiceId);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "4 · PayPal invoice (Invoicing v2)",
+      "item": [
+        {
+          "name": "Simulated invoice: pay (no keys only)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/sim/invoice/{{invoiceId}}/pay",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "sim",
+                "invoice",
+                "{{invoiceId}}",
+                "pay"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Webhook: INVOICING.INVOICE.PAID",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks/paypal",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks",
+                "paypal"
+              ]
+            },
+            "description": "The server re-reads the invoice from PayPal and only marks it paid if PayPal says PAID.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"WH-TEST-2\",\n  \"event_type\": \"INVOICING.INVOICE.PAID\",\n  \"resource\": {\n    \"invoice\": {\n      \"id\": \"{{invoiceId}}\"\n    }\n  }\n}"
+            }
+          }
+        },
+        {
+          "name": "Check invoices now (status + follow-up drafts)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/payments/check",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "check"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Get state",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/state",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "state"
+              ]
+            },
+            "description": ""
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json();",
+                  "pm.test('state loads', () => pm.expect(d).to.have.property('leads'));",
+                  "const e = d.emails.find(x => x.status === 'awaiting_approval');",
+                  "if (e) { pm.collectionVariables.set('emailId', e.id); pm.collectionVariables.set('leadId', e.lead); }",
+                  "const dep = d.payments.find(p => p.type === 'deposit'); if (dep) pm.collectionVariables.set('orderId', dep.orderId);",
+                  "const inv = d.payments.find(p => p.type === 'invoice'); if (inv) pm.collectionVariables.set('invoiceId', inv.invoiceId);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "5 · Teach & reset",
+      "item": [
+        {
+          "name": "Agent instructions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/agents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "agents"
+              ]
+            },
+            "description": ""
+          }
+        },
+        {
+          "name": "Reset demo data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "x-admin-token",
+                "value": "{{adminToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/demo/reset",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "demo",
+                "reset"
+              ]
+            },
+            "description": ""
+          }
+        }
+      ]
+    }
+  ]
+}

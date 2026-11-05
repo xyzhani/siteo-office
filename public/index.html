@@ -8,7 +8,10 @@
 <link rel="icon" href="/brand/logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-grid.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-theme-quartz.css">
 <link rel="stylesheet" href="/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/dist/ag-grid-community.min.js"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module" src="/app.js"></script>
 </head>
@@ -20,7 +23,7 @@
 </header>
 <main class="layout">
   <section class="office-col">
-    <div class="office" id="office"><div class="office-loading" id="office-loading">Opening the office…</div>
+    <div class="office" id="office"><div class="office-loading" id="office-loading"><span>🐾 Waking up the office…</span><small>On the free hosted demo the server may take 30–60 seconds to wake after a nap.</small></div>
       <button class="chip view-reset" id="view-reset">Whole office</button>
     </div>
     <div class="funnel" id="funnel">
@@ -70,6 +73,16 @@
     <div class="tab" id="tab-teach"><p class="lead-in">Each agent's instructions are plain text in <code>agents/*.md</code>. Change how they write, what they check, what they never say. This is teaching, not training: no fine-tuning, it takes effect on the next run.</p><div id="teach" class="list"></div></div>
   </aside>
 </main>
+<section class="grids" id="grids">
+  <div class="grid-card">
+    <div class="grid-head"><h2>Projects</h2><input id="projects-q" placeholder="Search projects…" aria-label="Search projects"><span class="meta">Sort, filter, click a row for details. Updates live as PayPal confirms payments.</span></div>
+    <div id="projects-grid" class="ag-theme-quartz grid-box"></div>
+  </div>
+  <div class="grid-card">
+    <div class="grid-head"><h2>Payments</h2><span class="meta">PayPal Checkout deposits and PayPal invoices</span></div>
+    <div id="payments-grid" class="ag-theme-quartz grid-box small-grid"></div>
+  </div>
+</section>
 <footer class="foot"><span id="credit">Built with <a href="https://siteostudio.com" target="_blank" rel="noopener">Siteo Office</a> · open source (MIT)</span></footer>
 <div class="toasts" id="toasts"></div>
 <div class="rain" id="rain" aria-hidden="true"></div>

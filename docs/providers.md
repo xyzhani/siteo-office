@@ -86,3 +86,7 @@ The interface (both adapters):
 **Adding Stripe:** create `src/providers/payments/stripe.js` with the same exports (Checkout Sessions for `createOrder`, Stripe Invoicing for `createInvoice`/`sendInvoice`), select it in `index.js` (e.g. `PAYMENTS_PROVIDER=stripe`), and add a webhook route in `server.js` that calls `pipeline.depositConfirmed()` / `pipeline.invoicePaid()`. The pipeline doesn't know which provider is behind it.
 
 See [paypal.md](paypal.md) for the full PayPal setup.
+
+## Postman
+
+A Postman collection covering every endpoint and the PayPal deposit / invoice / webhook flow is in [`postman/`](../postman/): import `siteo-office.postman_collection.json` and `siteo-office.postman_environment.json` (no secrets; set `baseUrl`, and `adminToken` only if you use one). Run the folders in order; **Get state** saves the ids the next requests need.

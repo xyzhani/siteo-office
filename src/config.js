@@ -102,14 +102,18 @@ export const settings = {
 
 // Demo mode: no AI key, or DEMO_MODE=true. Fictional businesses, rule-based agents, no outside calls
 // except PayPal Sandbox (if its keys are set).
-export const demoMode = bool(env.DEMO_MODE, !settings.llm.anthropicKey);
+// PUBLIC_DEMO=true (the hosted demo): always demo, whatever keys are set. Real searches and AI calls are off; PayPal Sandbox still works.
+export const publicDemo = bool(env.PUBLIC_DEMO, false);
+export const demoMode = publicDemo || bool(env.DEMO_MODE, !settings.llm.anthropicKey);
 if (settings.pacing.stepMs < 0) settings.pacing.stepMs = demoMode ? 2200 : 600;
 if (demoMode && env.FOLLOWUP_AFTER_MINUTES == null) settings.followupAfterMinutes = 2;
 export const paypalReady = !!(settings.paypal.clientId && settings.paypal.clientSecret);
+if (publicDemo && paypalReady && settings.paypal.env === "live") throw new Error("PUBLIC_DEMO must use PayPal Sandbox keys, not live ones");
 
 export function publicStatus() {
   return {
     demo: demoMode,
+    publicDemo,
     llm: demoMode ? "demo (rule-based)" : settings.llm.provider,
     llmReady: !!(settings.llm.anthropicKey && settings.llm.model),
     search: demoMode ? "demo (fictional)" : settings.search.provider,

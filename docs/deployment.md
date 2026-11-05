@@ -6,7 +6,7 @@ The repo includes a `render.yaml` blueprint.
 
 1. Push the repo to your GitHub account (or use the public repo).
 2. Click **Deploy to Render** in the README, or go to [dashboard.render.com](https://dashboard.render.com) → **New → Blueprint** and pick the repo.
-3. Render reads `render.yaml` and asks for the secret values. For a **public demo**, fill in only the PayPal **Sandbox** keys (and optionally `DEMO_BUYER_HINT`); leave the AI key empty. The blueprint sets `DEMO_MODE=true` and the test inbox, so visitors can click through the demo without a password.
+3. Render reads `render.yaml` and asks for the secret values: the PayPal **Sandbox** keys (and optionally `PAYPAL_WEBHOOK_ID`, `DEMO_BUYER_HINT`). The blueprint sets `PUBLIC_DEMO=true`: the hosted copy always replays the pipeline on fictional sample data, real searches and AI are switched off (even if keys are added), live PayPal keys are refused, and the Teach editor is read-only. Visitors can click through without a password.
 4. Click **Apply**. After the build, open the `https://<name>.onrender.com` URL.
 5. Optional: add the PayPal webhook (`https://<name>.onrender.com/webhooks/paypal`) and put its id in `PAYPAL_WEBHOOK_ID` ([paypal.md](paypal.md#5-webhooks)).
 
@@ -15,7 +15,9 @@ Notes:
 - `RENDER_EXTERNAL_URL` is set by Render, so links in emails and PayPal return URLs are correct without `PUBLIC_URL`.
 - **ADMIN_TOKEN.** If you set it, the dashboard asks for it before any action (start a run, approve, reply). An open demo doesn't need one: demo mode can't contact real businesses or spend AI money. **Add a token before you add an AI key or switch off demo mode.**
 - The free plan sleeps when idle (first load takes ~30 s) and its disk is temporary, so `data/db.json` resets on redeploys. For a real studio, use a paid plan with a [persistent disk](https://render.com/docs/disks) mounted at e.g. `/var/data` and set `DATA_DIR=/var/data`.
-- For live mode on Render: set `DEMO_MODE=false`, `ANTHROPIC_API_KEY`, `CLAUDE_MODEL`, keep `ADMIN_TOKEN`, and set up SMTP when you're ready.
+- Data is a JSON file (`data/db.json`), no database that could expire. The free plan resets it on redeploys, which is fine for a demo.
+- The free plan sleeps after ~15 minutes idle; the first request then takes 30–60 seconds (the page shows "Waking up the office…").
+- For live mode on Render (your own instance): remove `PUBLIC_DEMO`, set `DEMO_MODE=false`, `ANTHROPIC_API_KEY`, `CLAUDE_MODEL`, keep `ADMIN_TOKEN`, and set up SMTP when you're ready.
 
 ## Local
 
@@ -39,6 +41,7 @@ It's a single Node process with no build step: `node server.js`, listening on `P
 | Variable | Default | Description |
 |---|---|---|
 | `DEMO_MODE` | on when no AI key | `true` forces fictional demo data and rule-based agents |
+| `PUBLIC_DEMO` | `false` | `true` locks a hosted copy to demo mode whatever keys are set (Sandbox PayPal only, Teach read-only) |
 | `PORT` | `3000` | HTTP port |
 | `PUBLIC_URL` | `RENDER_EXTERNAL_URL` or `http://localhost:PORT` | Base URL for concept links and PayPal return URLs |
 | `ADMIN_TOKEN` | – | Require this token for dashboard actions |

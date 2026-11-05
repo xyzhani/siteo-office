@@ -45,7 +45,9 @@ async function boot() {
   $("#badges").innerHTML = b.join("");
   $("#niche").innerHTML = `<option value="">Auto</option>` + STATUS.niches.map((n) => `<option value="${esc(n.id)}">${esc(n.label)}</option>`).join("");
   $("#q").placeholder = STATUS.niches[0]?.example || "dentists in Galway";
-  $("#run-hint").innerHTML = STATUS.demo
+  $("#run-hint").innerHTML = STATUS.publicDemo
+    ? "This hosted demo replays the full pipeline on <b>fictional</b> sample businesses (real searches and AI are switched off here). PayPal Sandbox payments are real Sandbox calls. Run your own copy with your keys for real searches."
+    : STATUS.demo
     ? "Demo mode: the team works on <b>fictional</b> sample businesses in a made-up town, with rule-based agents. Add your keys in <code>.env</code> for real runs."
     : `Live: real businesses via ${esc(STATUS.search)}. Nothing is emailed without your approval.`;
   document.querySelectorAll(".steps b[data-role]").forEach((el) => { el.textContent = agentName(el.dataset.role); el.style.setProperty("--c", agentColor(el.dataset.role)); });
@@ -56,6 +58,7 @@ async function boot() {
     ? `PayPal <b>Sandbox</b>: pay with a sandbox test buyer account, never a real card.${STATUS.buyerHint ? " " + esc(STATUS.buyerHint) : ""}`
     : STATUS.payments.startsWith("paypal") ? "PayPal <b>live</b>: real money." : "Payments are <b>simulated</b> (no PayPal keys). Add PayPal Sandbox keys to use real Checkout and Invoicing.";
   mountOffice();
+  initGrids();
   await refresh();
   setInterval(refresh, 2500);
   const p = new URLSearchParams(location.search);
@@ -90,7 +93,58 @@ async function refresh() {
   for (const [k, v] of Object.entries(STATE.counts)) { const el = $(`.funnel [data-stage="${k}"]`); if (!el) continue; if (lastCounts[k] != null && v > lastCounts[k]) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); } el.querySelector("b").textContent = v; }
   lastCounts = STATE.counts;
   $("#pending-n").textContent = STATE.pending; $("#pending-btn").classList.toggle("has", STATE.pending > 0); $("#tab-pending").textContent = STATE.pending || "";
-  renderRuns(); renderApprovals(); renderInbox(); renderPipeline(); renderMoney(); renderActivity();
+  renderRuns(); renderApprovals(); renderInbox(); renderPipeline(); renderMoney(); renderActivity(); renderGrids();
+}
+
+// ── AG Grid (Community): Projects + Payments tables, live via getRowId delta updates
+let projectsGrid = null, paymentsGrid = null;
+const pillCls = (s) => (["paid", "deposit_paid", "invoice_sent", "captured"].includes(s) ? "good" : ["set_aside", "closed", "unsubscribed", "skipped", "rejected"].includes(s) ? "bad" : ["awaiting_approval", "deposit_pending_approval", "created", "sent", "deposit_link_sent"].includes(s) ? "wait" : "");
+const pillHtml = (text, cls) => { const el = document.createElement("span"); el.className = "st " + cls; el.textContent = text; return el; };
+const money = (n) => (n == null ? "" : `${STATUS.studio.currency} ${Number(n).toFixed(2)}`);
+function initGrids() {
+  if (!window.agGrid) { $("#grids").innerHTML = `<p class="empty">Tables couldn't load (AG Grid CDN unreachable). The tabs above still show everything.</p>`; return; }
+  const base = { defaultColDef: { sortable: true, filter: true, floatingFilter: true, resizable: true, minWidth: 90 }, animateRows: true, enableCellChangeFlash: true, getRowId: (p) => p.data.id, rowData: [], overlayNoRowsTemplate: "<span style='color:#646a7d'>Nothing yet. Start a run.</span>" };
+  projectsGrid = agGrid.createGrid($("#projects-grid"), {
+    ...base,
+    columnDefs: [
+      { field: "name", headerName: "Business", flex: 2, minWidth: 250, pinned: "left", cellRenderer: (p) => { const d = document.createElement("span"); d.textContent = p.value; if (p.data.fictional) d.appendChild(pillHtml("fictional", "fic")); return d; } },
+      { field: "statusLabel", headerName: "Stage", flex: 1.3, minWidth: 150, cellRenderer: (p) => pillHtml(p.value, pillCls(p.data.status)) },
+      { field: "score", headerName: "Weakness", width: 120, filter: "agNumberColumnFilter", cellRenderer: (p) => { if (p.value == null) return ""; const d = document.createElement("span"); d.textContent = p.value; const b = document.createElement("i"); b.className = "bar"; b.style.width = Math.round(p.value * 0.5) + "px"; d.appendChild(b); return d; } },
+      { field: "rounds", headerName: "Snow Bell rounds", width: 140, filter: "agNumberColumnFilter", valueFormatter: (p) => (p.value ? `${p.value}${p.data.sentBack ? ` (${p.data.sentBack} sent back)` : ""}` : "") },
+      { field: "deposit", headerName: "Deposit", width: 140, cellRenderer: (p) => (p.value ? pillHtml(p.value, pillCls(p.value)) : "") },
+      { field: "depositAmount", headerName: "Deposit $", width: 120, filter: "agNumberColumnFilter", valueFormatter: (p) => money(p.value) },
+      { field: "invoice", headerName: "Invoice", width: 120, cellRenderer: (p) => (p.value ? pillHtml(p.value, pillCls(p.value)) : "") },
+      { field: "invoiceAmount", headerName: "Invoice $", width: 120, filter: "agNumberColumnFilter", valueFormatter: (p) => money(p.value) },
+      { field: "town", headerName: "Town", width: 120 },
+      { field: "niche", headerName: "Niche", width: 110 },
+      { field: "updated", headerName: "Updated", width: 120, sort: "desc", filter: false, valueFormatter: (p) => (p.value ? ago(p.value) + " ago" : "") },
+    ],
+    onRowClicked: (e) => { showTab("pipeline"); const el = $(`#pipeline [data-lead="${e.data.id}"]`); if (el) { el.scrollIntoView({ behavior: "smooth", block: "center" }); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); } },
+  });
+  paymentsGrid = agGrid.createGrid($("#payments-grid"), {
+    ...base,
+    overlayNoRowsTemplate: "<span style='color:#646a7d'>No payments yet. They appear when a customer says yes.</span>",
+    columnDefs: [
+      { field: "kind", headerName: "Type", width: 110 },
+      { field: "business", headerName: "Business", flex: 1.5, minWidth: 150 },
+      { field: "amount", headerName: "Amount", width: 120, filter: "agNumberColumnFilter", valueFormatter: (p) => money(p.value) },
+      { field: "status", headerName: "Status", width: 120, cellRenderer: (p) => pillHtml(p.value, pillCls(p.value)) },
+      { field: "provider", headerName: "Via", width: 110 },
+      { field: "ref", headerName: "PayPal ID", flex: 1, minWidth: 160 },
+      { field: "created", headerName: "Created", width: 110, sort: "desc", filter: false, valueFormatter: (p) => (p.value ? ago(p.value) + " ago" : "") },
+    ],
+  });
+  $("#projects-q").addEventListener("input", (e) => projectsGrid.setGridOption("quickFilterText", e.target.value));
+}
+function renderGrids() {
+  if (!projectsGrid) return;
+  const pays = STATE.payments;
+  projectsGrid.setGridOption("rowData", STATE.leads.map((l) => {
+    const dep = pays.find((p) => p.lead === l.id && p.type === "deposit"), inv = pays.find((p) => p.lead === l.id && p.type === "invoice");
+    return { id: l.id, name: l.name, fictional: l.fictional, status: l.status, statusLabel: STATUS_LABEL[l.status] || l.status, score: l.score, rounds: l.checks?.length || null, sentBack: (l.checks || []).filter((c) => c.issues.length).length,
+      deposit: dep?.status || null, depositAmount: dep?.amount ?? null, invoice: inv?.status || null, invoiceAmount: inv?.amount ?? null, town: l.town, niche: l.niche, updated: l.updated };
+  }));
+  paymentsGrid.setGridOption("rowData", pays.map((p) => ({ id: p.id, kind: p.type === "deposit" ? "💳 Deposit" : "🧾 Invoice", business: leadById(p.lead)?.name || "", amount: p.amount, status: p.status, provider: p.provider, ref: p.orderId || p.invoiceId, created: p.created })));
 }
 // only re-render a list when its content changed and the user isn't typing in it
 function put(sel, html) { const el = $(sel); if (el.dataset.h === html) return; if (el.contains(document.activeElement) && /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return; el.dataset.h = html; el.innerHTML = html; }
@@ -137,7 +191,7 @@ function renderPipeline() {
   put("#pipeline", STATE.leads.length ? STATE.leads.map((l) => {
     const last = l.checks?.at(-1);
     const checks = (l.checks || []).map((c) => `<div class="check ${c.issues.length ? "" : "pass"}"><b>${esc(agentName("checker"))}, round ${c.round}:</b> ${c.issues.length ? "sent back to " + esc(agentName("developer")) + "<ul class='issues'>" + c.issues.map((i) => `<li>“${esc(i.line)}”: ${esc(i.problem)}</li>`).join("") + "</ul>" : "every line backed by a fact ✓"}</div>`).join("");
-    return `<div class="item"><h4>${esc(l.name)}${fic(l)} ${statusPill(l.status)}</h4><div class="meta">${l.score != null ? `Weakness ${l.score}/100` : ""}${l.pagespeed != null ? ` · PageSpeed ${l.pagespeed}` : ""} · <a href="${esc(l.website)}" target="_blank" rel="noopener">old site</a>${l.hasConcept ? ` · <a href="/c/${l.id}" target="_blank">concept</a>` : ""}${l.reason ? `<br>${esc(l.reason)}` : ""}</div>${l.issues?.length ? `<ul class="issues">${l.issues.slice(0, 5).map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}${checks}${l.seo ? `<div class="check pass"><b>${esc(agentName("seo"))}:</b> ${l.seo.map(esc).join(" · ")}</div>` : ""}</div>`;
+    return `<div class="item" data-lead="${l.id}"><h4>${esc(l.name)}${fic(l)} ${statusPill(l.status)}</h4><div class="meta">${l.score != null ? `Weakness ${l.score}/100` : ""}${l.pagespeed != null ? ` · PageSpeed ${l.pagespeed}` : ""} · <a href="${esc(l.website)}" target="_blank" rel="noopener">old site</a>${l.hasConcept ? ` · <a href="/c/${l.id}" target="_blank">concept</a>` : ""}${l.reason ? `<br>${esc(l.reason)}` : ""}</div>${l.issues?.length ? `<ul class="issues">${l.issues.slice(0, 5).map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : ""}${checks}${l.seo ? `<div class="check pass"><b>${esc(agentName("seo"))}:</b> ${l.seo.map(esc).join(" · ")}</div>` : ""}</div>`;
     void last;
   }).join("") : `<div class="empty">The pipeline is empty. Start a run.</div>`);
 }

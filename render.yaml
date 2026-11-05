@@ -1,5 +1,6 @@
-# Public demo by default (DEMO_MODE=true: fictional data, no AI spend). Before adding real keys,
-# also add an ADMIN_TOKEN env var so only you can start runs and approve emails.
+# Hosted demo: PUBLIC_DEMO=true replays fictional sample data with real searches and AI switched off;
+# PayPal SANDBOX payments still work. For real runs, self-host with your own keys (see docs/deployment.md).
+# Data is a JSON file (no database to expire); the free plan resets it on redeploys, which is fine for a demo.
 # One-click "Deploy to Render" blueprint. Render asks for the secret values (sync: false) when you deploy.
 services:
   - type: web
@@ -12,7 +13,7 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "22"
-      - key: DEMO_MODE
+      - key: PUBLIC_DEMO
         value: "true"
       - key: PAYPAL_ENV
         value: sandbox
@@ -27,10 +28,6 @@ services:
       - key: PAYPAL_CLIENT_SECRET
         sync: false
       - key: PAYPAL_WEBHOOK_ID
-        sync: false
-      - key: ANTHROPIC_API_KEY
-        sync: false
-      - key: CLAUDE_MODEL
         sync: false
       - key: DEMO_BUYER_HINT
         sync: false

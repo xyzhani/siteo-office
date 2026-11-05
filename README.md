@@ -7,6 +7,8 @@ Type one line, like `dentists in Galway`. The team finds local businesses with w
 ![The Siteo Office: 8 cat agents working in a 3D office](docs/img/office.png)
 
 > **Live demo:** _coming soon_ (link placeholder) · **Built by [Siteo](https://siteostudio.com)** · MIT licence
+>
+> The hosted demo replays the full pipeline on fictional sample data (real searches and AI are switched off there; PayPal **Sandbox** payments are real Sandbox calls). Run your own copy with your keys for real searches. It's on Render's free plan, so the first visit after a quiet spell can take 30–60 seconds while the office wakes up.
 
 ---
 
@@ -45,11 +47,18 @@ Full details: [how it works](docs/how-it-works.md).
 
 ![Pipeline tab: audit scores, Snow Bell's fact-check rounds and Sherlock's notes](docs/img/pipeline.png)
 
+## Why it matters
+
+Small studios and freelancers spend most of their time *finding* work, not doing it, and many small businesses still have websites that don't work on a phone. Siteo Office does the finding, the honest first draft and the getting-paid, while a human stays in charge of every email.
+
+It comes from real use. Running this approach for Siteo's own studio: **650 businesses found, 125 concepts built, 199 fact checks with 71 drafts sent back for fixes, about $17 of AI in total.**
+
 ## What you get
 
 - A live 3D office (three.js, fully procedural, no external assets) driven by the real pipeline state, mobile friendly.
 - The full pipeline: find → audit → concept → fact-check loop → SEO note → email + approval → reply → PayPal deposit → PayPal invoice → follow-ups.
-- A dashboard: concepts → approved → deposit paid → invoice sent → paid, plus approvals, a test inbox, payments and an activity feed.
+- A dashboard: concepts → approved → deposit paid → invoice sent → paid, sortable and filterable **Projects** and **Payments** tables (AG Grid) that update live as PayPal confirms payments, plus approvals, a test inbox and an activity feed.
+- A [Postman collection](postman/) for the API and the PayPal deposit / invoice / webhook flow.
 - **Make it yours:** rename and recolour the studio and the cats ([configuration](docs/configuration.md)), add your own niche ([niche packs](docs/niche-packs.md), dental and restaurants included), and edit each agent's instructions in plain text ([teaching your agents](docs/teaching-agents.md)).
 - **Swap providers:** LLM, business search, email and payments are small adapters ([providers](docs/providers.md)).
 
@@ -82,6 +91,22 @@ Every setting is listed in [`.env.example`](.env.example) and [deployment](docs/
 - Concepts only use facts from the business's own website; Snow Bell blocks invented claims, reviews and prices.
 - A per-run **AI cost cap**.
 - **You are responsible for following the email and privacy laws in your country** (for example CAN-SPAM, GDPR/PECR, CASL) before you contact anyone. Read [safety](docs/safety.md).
+
+## Tools used
+
+| Tool | How it's used |
+|---|---|
+| **Claude** (Anthropic API, model set by `CLAUDE_MODEL`) | Tom extracts facts from websites; Knight writes concept copy from those facts only; Snow Bell's AI fact-check (on top of rule checks); Sherlock's SEO note; Nemo, Scrapper and Fluffy write emails in the niche's tone; Scrapper classifies replies; Fluffy calls invoice tools (tool use). Off in demo mode, where every agent uses its rule-based path. |
+| **PayPal Orders v2** (Checkout) | Scrapper's deposit link; captured on return or webhook. |
+| **PayPal Invoicing v2** | Fluffy creates and sends the balance invoice, tracks its status, and reminders link to it. |
+| **PayPal Webhooks** | `CHECKOUT.ORDER.APPROVED`, `PAYMENT.CAPTURE.COMPLETED`, `INVOICING.INVOICE.PAID`, signature-verified and re-checked against the API. |
+| **PayPal Agent Toolkit** (optional) | With `PAYPAL_AGENT_TOOLKIT=true`, the official toolkit runs Fluffy's `create_invoice` / `send_invoice` / `get_invoice` tools (live mode). |
+| **AG Grid Community** | The Projects and Payments tables (sorting, filtering, quick search, status cells, live updates). |
+| **three.js** (0.160.0) | The procedural 3D cat office. |
+| **OpenStreetMap** (Nominatim + Overpass) | Default business search (Google Places or Apify optional). |
+| **Google PageSpeed Insights** | Tom's mobile speed check. |
+| **Render** | One-click hosting (`render.yaml`). |
+| **Playwright** | End-to-end screenshots at phone and desktop sizes. |
 
 ## Docs
 

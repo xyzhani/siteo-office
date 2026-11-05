@@ -4,7 +4,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
-import { ROOT, settings, demoMode, publicStatus, loadStudio, loadTeam, listNiches, loadNiche, ROLES, ROLE_FILES, paypalReady } from "./src/config.js";
+import { ROOT, settings, demoMode, publicDemo, publicStatus, loadStudio, loadTeam, listNiches, loadNiche, ROLES, ROLE_FILES, paypalReady } from "./src/config.js";
 import { db, lead as getLead, log } from "./src/store.js";
 import { officeState } from "./src/office-state.js";
 import * as pipeline from "./src/pipeline.js";
@@ -83,7 +83,7 @@ on("GET", "/api/agents", (req, res) => {
   send(res, 200, ROLES.map((r) => ({ role: r, name: team.agents[r].name, file: team.agents[r].instructions || ROLE_FILES[r] + ".md", text: fs.readFileSync(path.join(ROOT, "agents", path.basename(team.agents[r].instructions || ROLE_FILES[r] + ".md")), "utf8") })));
 });
 on("PUT", "/api/agents/:role", async (req, res, p) => {
-  if (demoMode && !settings.adminToken && process.env.RENDER) return send(res, 403, { error: "Editing is off on the public demo. Run it locally to teach your agents." });
+  if (publicDemo || (demoMode && !settings.adminToken && process.env.RENDER)) return send(res, 403, { error: "Editing is off on the public demo. Run it locally to teach your agents." });
   if (!ROLES.includes(p.role)) return send(res, 404, { error: "Unknown agent" });
   const b = await json(req); const team = loadTeam();
   fs.writeFileSync(path.join(ROOT, "agents", path.basename(team.agents[p.role].instructions || ROLE_FILES[p.role] + ".md")), String(b.text || "").slice(0, 20000));
