@@ -1,0 +1,15 @@
+{
+  "$comment": "What Tom extracts from the website. Knight may only use these facts. type: text (default) or list.",
+  "fields": [
+    { "key": "name", "label": "Practice name, exactly as written" },
+    { "key": "owner", "label": "Lead dentist or owner, with title (e.g. Dr. ...)" },
+    { "key": "phone", "label": "Main phone number" },
+    { "key": "email", "label": "Public email address" },
+    { "key": "address", "label": "Street address" },
+    { "key": "town", "label": "Town or city" },
+    { "key": "hours", "label": "Opening hours, one line per day range", "type": "list" },
+    { "key": "services", "label": "Treatments and services they list", "type": "list" },
+    { "key": "since", "label": "Year they opened, if stated" },
+    { "key": "extras", "label": "Practical details: parking, wheelchair access, languages, payment plans (only if stated)", "type": "list" }
+  ]
+}

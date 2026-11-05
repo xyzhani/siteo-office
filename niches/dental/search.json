@@ -1,0 +1,9 @@
+{
+  "label": "dental practices",
+  "example": "dentists in Galway",
+  "query": "dentist",
+  "keywords": ["dentist", "dentists", "dental", "orthodontist", "orthodontists"],
+  "osmTags": ["amenity=dentist", "healthcare=dentist"],
+  "cta": "Book an appointment",
+  "demoSlip": "Rated the best dentist in Sampleton, with 5-star reviews from every patient."
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{business.name}}{{#business.town}} · {{business.town}}{{/business.town}}</title>
+<meta name="description" content="{{copy.subheadline}}">
+<meta name="robots" content="noindex">
+<style>
+  :root{--ink:#2b1a12;--mut:#7a6152;--brand:#b5542d;--brand2:#f2b880;--paper:#fbf6ef;--card:#fff}
+  *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+  .note{position:sticky;top:0;z-index:5;background:#0f2a3a;color:#e8f6f6;font-size:13px;text-align:center;padding:8px 12px}
+  .note b{color:#7fd1c7}
+  header{padding:22px clamp(16px,5vw,64px);display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .logo{font-weight:800;letter-spacing:-.02em;font-size:20px}
+  .call{background:var(--brand);color:#fff;border-radius:999px;padding:10px 18px;text-decoration:none;font-weight:600;white-space:nowrap}
+  .hero{padding:48px clamp(16px,5vw,64px) 64px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+  .hero h1{font-size:clamp(34px,5.5vw,60px);line-height:1.05;margin:0 0 14px;letter-spacing:-.03em}
+  .hero p{font-size:18px;color:var(--mut);margin:0 0 26px}
+  .btn{display:inline-block;background:var(--ink);color:#fff;padding:14px 22px;border-radius:14px;text-decoration:none;font-weight:600}
+  .art{aspect-ratio:1/1;border-radius:36px;background:radial-gradient(circle at 30% 30%,#fff 0 12%,transparent 13%),linear-gradient(135deg,var(--brand2),var(--brand));box-shadow:0 30px 60px -30px rgba(15,42,58,.5);display:grid;place-items:center;font-size:110px}
+  section{padding:56px clamp(16px,5vw,64px)}
+  h2{font-size:30px;letter-spacing:-.02em;margin:0 0 22px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+  .card{background:var(--card);border-radius:20px;padding:22px;box-shadow:0 10px 30px -22px rgba(15,42,58,.5)}
+  .card h3{margin:0 0 6px;font-size:18px}.card p{margin:0;color:var(--mut);font-size:15px}
+  .about{max-width:760px;font-size:18px}
+  .info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  ul{margin:0;padding-left:18px}
+  footer{padding:40px clamp(16px,5vw,64px);color:var(--mut);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:inherit}
+  @media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:24px}.art{max-width:280px;font-size:80px}}
+</style>
+</head>
+<body>
+<div class="note">Concept preview made by <b>{{studio.name}}</b> for {{business.name}}, using only details from their current website. Not the live site.{{#fictional}} <b>Fictional demo business.</b>{{/fictional}}</div>
+<header>
+  <div class="logo">{{business.name}}</div>
+  {{#business.phone}}<a class="call" href="tel:{{business.phoneHref}}">Call {{business.phone}}</a>{{/business.phone}}
+</header>
+<div class="hero">
+  <div>
+    <h1>{{copy.headline}}</h1>
+    {{#copy.subheadline}}<p>{{copy.subheadline}}</p>{{/copy.subheadline}}
+    {{#business.phone}}<a class="btn" href="tel:{{business.phoneHref}}">{{copy.cta}}</a>{{/business.phone}}
+    {{^business.phone}}{{#business.email}}<a class="btn" href="mailto:{{business.email}}">{{copy.cta}}</a>{{/business.email}}{{/business.phone}}
+  </div>
+  <div class="art" aria-hidden="true">🍽️</div>
+</div>
+{{#show.services}}
+<section id="services"><h2>On the menu</h2><div class="grid">{{#copy.services}}<div class="card"><h3>{{name}}</h3>{{#description}}<p>{{description}}</p>{{/description}}</div>{{/copy.services}}</div></section>
+{{/show.services}}
+{{#copy.about}}<section><h2>About us</h2><p class="about">{{copy.about}}</p></section>{{/copy.about}}
+<section id="visit"><h2>Visit us</h2><div class="info">
+  {{#show.hours}}<div class="card"><h3>Opening hours</h3><ul>{{#business.hours}}<li>{{.}}</li>{{/business.hours}}</ul></div>{{/show.hours}}
+  <div class="card"><h3>Contact</h3><p>{{#business.address}}{{business.address}}<br>{{/business.address}}{{#business.phone}}<a href="tel:{{business.phoneHref}}">{{business.phone}}</a><br>{{/business.phone}}{{#business.email}}<a href="mailto:{{business.email}}">{{business.email}}</a>{{/business.email}}</p></div>
+</div></section>
+<footer><span>© {{year}} {{business.name}}</span>{{#credit}}<span>Concept by <a href="{{studio.website}}">{{studio.name}}</a> · Built with <a href="https://siteostudio.com">Siteo Office</a></span>{{/credit}}</footer>
+</body>
+</html>

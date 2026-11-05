@@ -1,0 +1,28 @@
+{
+  "name": "Your Studio",
+  "logo": "/brand/logo.svg",
+  "officeSign": "STUDIO",
+  "website": "https://example.com",
+  "colors": { "primary": "#6a5cff", "accent": "#ffb347", "ink": "#1b1d2b", "paper": "#f7f5f0" },
+  "sender": {
+    "name": "Alex from Your Studio",
+    "email": "hello@example.com",
+    "signature": "Alex\nYour Studio · example.com",
+    "address": "Your Studio, 1 Example Street, Example City"
+  },
+  "people": {
+    "founder": { "name": "You", "role": "Founder" },
+    "manager": { "name": "Muffy", "role": "Approvals" }
+  },
+  "conceptPrice": 500,
+  "depositPercent": 20,
+  "currency": "USD",
+  "language": "en",
+  "invoiceTerms": "Balance due before the website goes live. Includes one round of changes.",
+  "credit": true,
+  "safety": {
+    "unsubscribeLine": true,
+    "approveInvoices": false,
+    "maxFollowups": 3
+  }
+}

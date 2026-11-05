@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Siteo Office</title>
+<meta name="description" content="An open-source AI web agency run by 8 cat agents in a live 3D office.">
+<link rel="icon" href="/brand/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module" src="/app.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><img id="logo" src="/brand/logo.svg" alt=""><span id="studio-name">Siteo Office</span></div>
+  <div class="badges" id="badges"></div>
+  <button class="pending" id="pending-btn" title="Emails waiting for your approval">✉️ <b id="pending-n">0</b><span> to approve</span></button>
+</header>
+<main class="layout">
+  <section class="office-col">
+    <div class="office" id="office"><div class="office-loading" id="office-loading">Opening the office…</div>
+      <button class="chip view-reset" id="view-reset">Whole office</button>
+    </div>
+    <div class="funnel" id="funnel">
+      <div data-stage="concept"><b>0</b><span>Concepts</span></div>
+      <div data-stage="approved"><b>0</b><span>Approved &amp; sent</span></div>
+      <div data-stage="deposit"><b>0</b><span>Deposit paid</span></div>
+      <div data-stage="invoice"><b>0</b><span>Invoice sent</span></div>
+      <div data-stage="paid"><b>0</b><span>Paid</span></div>
+    </div>
+  </section>
+  <aside class="panel">
+    <nav class="tabs" id="tabs">
+      <button data-tab="run" class="on">Run</button>
+      <button data-tab="approvals">Approvals <i id="tab-pending"></i></button>
+      <button data-tab="inbox">Inbox</button>
+      <button data-tab="pipeline">Pipeline</button>
+      <button data-tab="money">Money</button>
+      <button data-tab="activity">Activity</button>
+      <button data-tab="teach">Teach</button>
+    </nav>
+    <div class="tab on" id="tab-run">
+      <form id="run-form" class="run-form">
+        <label for="q">What should the team look for?</label>
+        <div class="row"><input id="q" name="q" placeholder="dentists in Galway" autocomplete="off" maxlength="120"><select id="niche" aria-label="Niche pack"></select></div>
+        <button class="primary" id="run-btn">Start the team 🐾</button>
+        <p class="hint" id="run-hint"></p>
+      </form>
+      <h3>How it works</h3>
+      <ol class="steps">
+        <li><b data-role="finder">Misso</b> finds businesses with a website</li>
+        <li><b data-role="auditor">Tom</b> audits them and shortlists the weakest</li>
+        <li><b data-role="developer">Knight</b> builds a concept from real facts only</li>
+        <li><b data-role="checker">Snow Bell</b> fact-checks every line, sends it back if needed</li>
+        <li><b data-role="seo">Sherlock</b> notes what the old site misses</li>
+        <li><b data-role="sender">Nemo</b> writes the email; <u>you approve it</u></li>
+        <li><b data-role="inbox">Scrapper</b> reads the reply and sends a PayPal deposit link</li>
+        <li><b data-role="followup">Fluffy</b> invoices the balance with PayPal and follows up</li>
+      </ol>
+      <h3>Runs</h3><div id="runs" class="list"></div>
+      <button class="ghost small" id="reset-btn">Reset demo data</button>
+    </div>
+    <div class="tab" id="tab-approvals"><p class="lead-in">Nothing is sent until you approve it. Edit anything first.</p><div id="approvals" class="list"></div></div>
+    <div class="tab" id="tab-inbox"><p class="lead-in" id="inbox-intro"></p><div id="inbox" class="list"></div></div>
+    <div class="tab" id="tab-pipeline"><div id="pipeline" class="list"></div></div>
+    <div class="tab" id="tab-money"><div id="money-sum" class="money-sum"></div><p class="lead-in" id="buyer-hint"></p><button class="ghost small" id="check-btn">Check invoices now</button><div id="payments" class="list"></div></div>
+    <div class="tab" id="tab-activity"><div id="activity" class="feed"></div></div>
+    <div class="tab" id="tab-teach"><p class="lead-in">Each agent's instructions are plain text in <code>agents/*.md</code>. Change how they write, what they check, what they never say. This is teaching, not training: no fine-tuning, it takes effect on the next run.</p><div id="teach" class="list"></div></div>
+  </aside>
+</main>
+<footer class="foot"><span id="credit">Built with <a href="https://siteostudio.com" target="_blank" rel="noopener">Siteo Office</a> · open source (MIT)</span></footer>
+<div class="toasts" id="toasts"></div>
+<div class="rain" id="rain" aria-hidden="true"></div>
+</body>
+</html>

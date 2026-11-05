@@ -1,0 +1,13 @@
+{
+  "$comment": "8 fixed roles in v1. Rename them, recolour them, change fur and accessories, or switch one off (enabled: false). pattern: tabby | solid | points | patches. accessory: scarf | glasses | beret | deerstalker | inverness | mailcap | headset | bell | none.",
+  "agents": {
+    "finder":    { "name": "Misso",     "role": "Lead Finder",   "color": "#f59e42", "fur": "#e3893a", "pattern": "tabby",   "accessory": "scarf",       "enabled": true, "instructions": "misso.md" },
+    "auditor":   { "name": "Tom",       "role": "Site Auditor",  "color": "#5b8def", "fur": "#9aa1ab", "pattern": "tabby",   "accessory": "glasses",     "enabled": true, "instructions": "tom.md" },
+    "developer": { "name": "Knight",    "role": "Web Developer", "color": "#e0475a", "fur": "#26262c", "pattern": "solid",   "accessory": "beret",       "enabled": true, "instructions": "knight.md" },
+    "checker":   { "name": "Snow Bell", "role": "Fact Checker",  "color": "#b07a45", "fur": "#f3ece1", "pattern": "points",  "accessory": "deerstalker", "enabled": true, "instructions": "snow-bell.md" },
+    "seo":       { "name": "Sherlock",  "role": "SEO Expert",    "color": "#3fae74", "fur": "#8f6240", "pattern": "tabby",   "accessory": "inverness",   "enabled": true, "instructions": "sherlock.md" },
+    "sender":    { "name": "Nemo",      "role": "Email Writer",  "color": "#3d7be0", "fur": "#f7f5f1", "pattern": "patches", "accessory": "mailcap",     "enabled": true, "instructions": "nemo.md" },
+    "inbox":     { "name": "Scrapper",  "role": "Inbox & Deposits", "color": "#4fd1c5", "fur": "#ecdfca", "pattern": "points", "accessory": "headset",   "enabled": true, "instructions": "scrapper.md" },
+    "followup":  { "name": "Fluffy",    "role": "Invoices & Follow-ups", "color": "#e8b931", "fur": "#d99a5c", "pattern": "tabby", "accessory": "bell", "enabled": true, "instructions": "fluffy.md" }
+  }
+}

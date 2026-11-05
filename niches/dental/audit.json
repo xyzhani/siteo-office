@@ -1,0 +1,18 @@
+{
+  "$comment": "Points added to a site's weakness score (0-100, higher = weaker). Sites below shortlistMinScore are left alone.",
+  "weights": {
+    "noViewport": 22,
+    "noHttps": 10,
+    "slowMobile": 18,
+    "noMetaDescription": 6,
+    "noTitle": 4,
+    "tableLayout": 12,
+    "oldTags": 6,
+    "oldCopyright": 10,
+    "noTelLink": 6,
+    "noBooking": 10,
+    "heavyPage": 6
+  },
+  "bookingWords": ["book", "appointment", "booking"],
+  "shortlistMinScore": 30
+}

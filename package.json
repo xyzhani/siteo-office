@@ -1,0 +1,19 @@
+{
+  "name": "siteo-office",
+  "version": "1.0.0",
+  "description": "An open-source AI web agency run by 8 cat agents in a live 3D office. Finds local businesses with weak websites, builds fact-checked concept sites, emails with human approval, and takes deposits and invoices with PayPal.",
+  "license": "MIT",
+  "type": "module",
+  "main": "server.js",
+  "engines": { "node": ">=20.12" },
+  "scripts": {
+    "dev": "node --watch-path=src --watch-path=server.js server.js",
+    "start": "node server.js",
+    "test": "node --test test/"
+  },
+  "optionalDependencies": {
+    "nodemailer": "^6.9.16"
+  },
+  "keywords": ["ai-agents", "paypal", "three.js", "web-agency", "claude", "open-source"],
+  "homepage": "https://siteostudio.com"
+}

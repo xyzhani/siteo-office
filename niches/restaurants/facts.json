@@ -1,0 +1,14 @@
+{
+  "fields": [
+    { "key": "name", "label": "Restaurant name, exactly as written" },
+    { "key": "owner", "label": "Owner or head chef, if named" },
+    { "key": "phone", "label": "Phone number for bookings" },
+    { "key": "email", "label": "Public email address" },
+    { "key": "address", "label": "Street address" },
+    { "key": "town", "label": "Town or city" },
+    { "key": "hours", "label": "Opening hours, one line per day range", "type": "list" },
+    { "key": "services", "label": "What they serve: menus, dishes, cuisines, takeaway, private dining (only as listed)", "type": "list" },
+    { "key": "since", "label": "Year they opened, if stated" },
+    { "key": "extras", "label": "Practical details: terrace, dog-friendly, dietary options, parking (only if stated)", "type": "list" }
+  ]
+}

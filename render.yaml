@@ -1,0 +1,36 @@
+# One-click "Deploy to Render" blueprint. Render asks for the secret values (sync: false) when you deploy.
+services:
+  - type: web
+    name: siteo-office
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DEMO_MODE
+        value: "true"
+      - key: PAYPAL_ENV
+        value: sandbox
+      - key: EMAIL_PROVIDER
+        value: test
+      - key: SEARCH_PROVIDER
+        value: osm
+      - key: MAX_AI_USD_PER_RUN
+        value: "2"
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: CLAUDE_MODEL
+        sync: false
+      - key: DEMO_BUYER_HINT
+        sync: false

@@ -1,0 +1,5 @@
+{
+  "weights": { "noViewport": 22, "noHttps": 10, "slowMobile": 18, "noMetaDescription": 6, "noTitle": 4, "tableLayout": 12, "oldTags": 6, "oldCopyright": 10, "noTelLink": 8, "noBooking": 10, "heavyPage": 6 },
+  "bookingWords": ["book", "reserve", "reservation", "table", "order"],
+  "shortlistMinScore": 30
+}
