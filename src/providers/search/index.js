@@ -4,7 +4,7 @@
 import { settings, demoMode } from "../../config.js";
 import { demoBusinesses } from "../../demo/businesses.js";
 
-const UA = `SiteoOffice/1.0 (open-source; ${settings.search.contact || "https://github.com/siteo-office"})`;
+const UA = `SiteoOffice/1.0 (open-source; ${settings.search.contact || "https://github.com/xyzhani/siteo-office"})`;
 const cleanUrl = (u) => { if (!u) return null; try { const x = new URL(/^https?:\/\//i.test(u) ? u : "https://" + u); return /^https?:$/.test(x.protocol) ? x.href : null; } catch { return null; } };
 
 async function demo(niche, _town, limit) {

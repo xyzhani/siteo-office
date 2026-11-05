@@ -7,7 +7,7 @@ This guide takes you from zero to a full run: the cats find businesses, you appr
 You need [Node.js](https://nodejs.org) 20.12 or newer.
 
 ```bash
-git clone https://github.com/<you>/siteo-office.git
+git clone https://github.com/xyzhani/siteo-office.git
 cd siteo-office
 npm install
 cp .env.example .env

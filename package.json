@@ -25,5 +25,6 @@
     "claude",
     "open-source"
   ],
-  "homepage": "https://siteostudio.com"
+  "homepage": "https://siteostudio.com",
+  "repository": { "type": "git", "url": "https://github.com/xyzhani/siteo-office.git" }
 }

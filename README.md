@@ -17,11 +17,11 @@ Type one line, like `dentists in Galway`. The team finds local businesses with w
 | Way | Time | What you need |
 |---|---|---|
 | **1. Try the demo** | 1 click | Nothing. Open the live demo and press **Start the team**. It runs on clearly labelled **fictional** businesses and replays a recorded run of the real AI agents. |
-| **2. Deploy to Render** | ~3 min | A free Render account. [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/<you>/siteo-office) (see [deployment](docs/deployment.md)) |
+| **2. Deploy to Render** | ~3 min | A free Render account. [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/xyzhani/siteo-office) (see [deployment](docs/deployment.md)) |
 | **3. Run it locally** | ~2 min | Node 20.12+ |
 
 ```bash
-git clone https://github.com/<you>/siteo-office.git
+git clone https://github.com/xyzhani/siteo-office.git
 cd siteo-office
 npm install
 cp .env.example .env      # leave it empty for demo mode

@@ -22,7 +22,7 @@ Notes:
 ## Local
 
 ```bash
-git clone https://github.com/<you>/siteo-office.git
+git clone https://github.com/xyzhani/siteo-office.git
 cd siteo-office
 npm install
 cp .env.example .env

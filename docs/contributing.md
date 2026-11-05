@@ -5,7 +5,7 @@ Thanks for helping the cats! Siteo Office is MIT-licensed and deliberately simpl
 ## Setup
 
 ```bash
-git clone https://github.com/<you>/siteo-office.git
+git clone https://github.com/xyzhani/siteo-office.git
 cd siteo-office
 npm install
 cp .env.example .env

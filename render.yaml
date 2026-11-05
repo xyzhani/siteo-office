@@ -1,6 +1,7 @@
 # Hosted demo: PUBLIC_DEMO=true replays fictional sample data with real searches and AI switched off;
 # PayPal SANDBOX payments still work. For real runs, self-host with your own keys (see docs/deployment.md).
 # Data is a JSON file (no database to expire); the free plan resets it on redeploys, which is fine for a demo.
+# Repo: https://github.com/xyzhani/siteo-office · Deploy: https://render.com/deploy?repo=https://github.com/xyzhani/siteo-office
 # One-click "Deploy to Render" blueprint. Render asks for the secret values (sync: false) when you deploy.
 services:
   - type: web
