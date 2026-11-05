@@ -9,7 +9,7 @@ export function studioVars(lead, extra = {}) {
   const sym = { USD: "$", EUR: "€", GBP: "£" }[s.currency] || s.currency + " ";
   const fmt = (n) => sym + Number(n).toFixed(Number(n) % 1 ? 2 : 0);
   return {
-    business: lead.name, owner_or_team: lead.facts?.owner || `the ${lead.name} team`, studio: s.name, sender: s.sender?.name || s.name, signature: s.sender?.signature || s.name,
+    business: lead.name, owner_or_team: lead.facts?.owner || `the ${lead.name} team`, studio: s.name, sender: s.sender?.name || s.people?.founder?.name || s.name, signature: s.sender?.signature || [s.people?.founder?.name, s.name].filter(Boolean).join("\n"),
     website: s.website || "", price: fmt(s.conceptPrice), deposit: fmt((s.conceptPrice * s.depositPercent) / 100), balance: fmt(s.conceptPrice - (s.conceptPrice * s.depositPercent) / 100),
     deposit_percent: s.depositPercent + "%", currency: s.currency, ...extra,
   };

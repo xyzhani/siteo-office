@@ -13,7 +13,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { settings, demoMode, ROOT } from "../../config.js";
-import { save } from "../../store.js";
+import { save, db } from "../../store.js";
 import { sleep } from "../../util.js";
 import * as claude from "./claude.js";
 import * as fake from "./fake.js";
@@ -32,9 +32,10 @@ function rec(niche) {
   if (!recordings[niche]) { try { recordings[niche] = JSON.parse(fs.readFileSync(path.join(REC_DIR, niche + ".json"), "utf8")); } catch { recordings[niche] = { recordedAt: null, calls: {} }; } }
   return recordings[niche];
 }
-function store(key, value) {
+function store(key, value, usage) {
   const niche = key.split("/")[0], r = rec(niche);
   r.calls[key] = value; r.recordedAt = new Date().toISOString();
+  if (usage) (r.usage ||= {})[key] = usage;
   fs.mkdirSync(REC_DIR, { recursive: true });
   fs.writeFileSync(path.join(REC_DIR, niche + ".json"), JSON.stringify(r, null, 1));
 }
@@ -48,7 +49,18 @@ export class CostCapError extends Error {}
 // Is AI available for this step? (in replay: only if the recording has this exact step)
 export const available = (key) => mode === "live" || mode === "record" || (mode === "replay" && recorded(key) !== undefined);
 
-function charge(run, usage) {
+// key "<niche>/<agent>/…" → the cat's role id, for the Salary page
+const ROLE_OF = { tom: "auditor", knight: "developer", snowbell: "checker", sherlock: "seo", sender: "sender", inbox: "inbox", scrapper: "inbox", followup: "followup", fluffy: "followup" };
+function paySalary(key, usage, replayed) {
+  const role = ROLE_OF[String(key || "").split("/")[1]] || "other";
+  const usd = (usage.input * settings.llm.usdPerMTokIn + usage.output * settings.llm.usdPerMTokOut) / 1e6;
+  const s = ((db.salary ||= {})[role] ||= { calls: 0, in: 0, out: 0, usd: 0, replayedCalls: 0, replayedUsd: 0 });
+  if (replayed) { s.replayedCalls++; s.replayedUsd = +(s.replayedUsd + usd).toFixed(5); }
+  else { s.calls++; s.in += usage.input; s.out += usage.output; s.usd = +(s.usd + usd).toFixed(5); }
+  save();
+}
+function charge(run, usage, key) {
+  paySalary(key, usage, false);
   const usd = (usage.input * settings.llm.usdPerMTokIn + usage.output * settings.llm.usdPerMTokOut) / 1e6;
   if (run) {
     run.cost_usd = +((run.cost_usd || 0) + usd).toFixed(5);
@@ -60,15 +72,19 @@ function charge(run, usage) {
 function guard(run) {
   if (run && (run.cost_usd || 0) >= settings.llm.maxUsdPerRun) throw new CostCapError(`AI cost cap reached ($${settings.llm.maxUsdPerRun} per run). Raise MAX_AI_USD_PER_RUN to continue.`);
 }
-async function replayed(key) { await sleep(Math.min(1500, settings.pacing.stepMs * 0.5)); return structuredClone(recorded(key)); }
+async function replayed(key) {
+  await sleep(Math.min(1500, settings.pacing.stepMs * 0.5));
+  const u = rec(key.split("/")[0]).usage?.[key]; if (u) paySalary(key, u, true); // what the real call cost when recorded (not spent now)
+  return structuredClone(recorded(key));
+}
 
 // Plain completion → text
 export async function text(run, { key, system, prompt, maxTokens }) {
   if (mode === "replay") return replayed(key);
   guard(run);
   const r = await provider.complete({ system, messages: [{ role: "user", content: prompt }], maxTokens });
-  charge(run, r.usage);
-  if (mode === "record" && key) store(key, r.text);
+  charge(run, r.usage, key);
+  if (mode === "record" && key) store(key, r.text, r.usage);
   return r.text;
 }
 
@@ -78,11 +94,11 @@ export async function json(run, { key, system, prompt, maxTokens = 1800, scrub, 
   if (mode === "replay") { const v = await replayed(key); return unscrub ? unscrub(v) : v; }
   guard(run);
   const r = await provider.complete({ system: system + "\n\nReply with ONE valid JSON object only. No prose, no code fences.", messages: [{ role: "user", content: prompt }], maxTokens });
-  charge(run, r.usage);
+  charge(run, r.usage, key);
   const t = r.text, s = t.indexOf("{"), e = t.lastIndexOf("}");
   if (s < 0 || e < s) throw new Error("AI did not return JSON");
   const out = JSON.parse(t.slice(s, e + 1));
-  if (mode === "record" && key) store(key, scrub ? scrub(structuredClone(out)) : out);
+  if (mode === "record" && key) store(key, scrub ? scrub(structuredClone(out)) : out, r.usage);
   return out;
 }
 
@@ -104,10 +120,12 @@ export async function agent(run, { key, system, prompt, tools, handlers, maxTurn
   }
   const messages = [{ role: "user", content: prompt }];
   let finalText = "";
+  const total = { input: 0, output: 0 };
   for (let turn = 0; turn < maxTurns; turn++) {
     guard(run);
     const r = await provider.complete({ system, messages, tools, maxTokens: 1200 });
-    charge(run, r.usage);
+    charge(run, r.usage, key);
+    total.input += r.usage.input; total.output += r.usage.output;
     messages.push({ role: "assistant", content: r.content });
     const uses = r.content.filter((c) => c.type === "tool_use");
     finalText = r.text;
@@ -132,7 +150,7 @@ export async function agent(run, { key, system, prompt, tools, handlers, maxTurn
       for (const m of JSON.stringify(c.output ?? "").matchAll(ID_RE)) if (!ids.includes(m[1])) ids.push(m[1]);
       return { tool: c.tool, input };
     });
-    store(key, { text: finalText, calls: rcalls });
+    store(key, { text: finalText, calls: rcalls }, total);
   }
   return { text: finalText, calls };
 }

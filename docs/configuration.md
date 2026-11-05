@@ -36,8 +36,9 @@ Secrets never go in these files. Keys live in `.env` (see [deployment](deploymen
 | `sender.email` | The "From" address (or set `EMAIL_FROM` in `.env`). |
 | `sender.signature` | Placed at the end of every email (`{signature}` in `emails.md`). Use `\n` for new lines. |
 | `sender.address` | Your postal address, shown above the unsubscribe line. Many email laws require one. |
-| `people.founder` | The human at the founder desk in the office (name + role on the sign and label). |
-| `people.manager` | The human at the approvals desk, where Nemo brings emails for approval. |
+| `people.founder` | The human at the founder desk: `name` (default "You"), `role` (or `title`, default "Founder"), `look`. Used on office signs and labels, in approval messages ("Approved by …"), the activity feed, and as the email sender name/signature fallback. |
+| `people.manager` | The human at the approvals desk, where Nemo brings emails: `name` (default "Muffy"), `role` (default "Approvals"), `enabled` (`false` hides them; approvals still work from the dashboard), `look`. Shown in the office, on the Approvals page ("waiting for …") and in the feed. |
+| `people.*.look` | Hex colours: `accent` (label dot and desk sign), `shirt`, `pants`, `skin`, `hair`, `shoes`. Anything left out keeps the default. |
 | `conceptPrice` | Price of the full website, in `currency`. Used in emails and to compute deposit and balance. |
 | `depositPercent` | Deposit taken with PayPal Checkout when a customer says yes (1–100, default 20). The balance is invoiced. |
 | `currency` | Three-letter code PayPal supports, e.g. `USD`, `EUR`, `GBP`. |
@@ -49,6 +50,17 @@ Secrets never go in these files. Keys live in `.env` (see [deployment](deploymen
 | `safety.maxFollowups` | Maximum reminder drafts per unpaid invoice. |
 
 Human approval of every email is always on in v1 and can't be switched off from config.
+
+### Example: your own founder and manager
+
+```json
+"people": {
+  "founder": { "name": "Sam", "title": "Founder", "look": { "accent": "#00a3ff", "shirt": "#2b2d42", "hair": "#6b4423" } },
+  "manager": { "name": "Robin", "role": "Approvals", "enabled": true, "look": { "accent": "#ff7a00", "shirt": "#ff7a00", "pants": "#1f2937" } }
+}
+```
+
+Use made-up or your own names; the defaults are neutral.
 
 ## team.config.json
 

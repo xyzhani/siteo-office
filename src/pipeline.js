@@ -122,8 +122,9 @@ async function execute(run) {
       queueEmail(l, "first", "sender", e);
       setStatus(l, "awaiting_approval");
       office.idle("sender");
-      office.say("sender", `Email to ${l.name} is waiting for your approval ✉️`);
-      log("sender", `Drafted the email to ${l.name}. Waiting for human approval.`, { lead: l.id });
+      const mgr = loadStudio().people?.manager;
+      office.say("sender", `Email to ${l.name} is waiting for ${mgr?.enabled === false ? "your" : mgr?.name ? mgr.name + "'s" : "your"} approval ✉️`);
+      log("sender", `Drafted the email to ${l.name}. Waiting for ${mgr?.enabled === false || !mgr?.name ? "human" : mgr.name + "'s"} approval.`, { lead: l.id });
       await pace(0.6);
     }
     finishRun(run, "done");
@@ -190,8 +191,9 @@ export async function approveEmail(eid, edits = {}) {
   office.working(e.agent, `Sending to ${l.name}`, l.name);
   const r = await mail.send({ from: e.from, to: e.to, subject: e.subject, text: e.body, headers: { "List-Unsubscribe": `<mailto:${settings.email.from || "studio@example.com"}?subject=unsubscribe>` } });
   Object.assign(e, { status: "sent", sent_at: now(), delivery: r }); save();
-  office.say(e.agent, `Approved! Sent to ${l.name} 📨`);
-  log(e.agent, `Sent "${e.subject}" to ${l.name} (${r.deliveredTo})`, { lead: l.id });
+  const people = loadStudio().people || {};
+  office.say(e.agent, `Approved by ${people.founder?.name || "you"}! Sent to ${l.name} 📨`);
+  log(e.agent, `Approved by ${people.founder?.name || "you"} and sent "${e.subject}" to ${l.name} (${r.deliveredTo})`, { lead: l.id });
   if (e.kind === "first") { setStatus(l, "sent", { emailedAt: now() }); office.handoff("sender", "inbox", l.name); }
   if (e.kind === "deposit") setStatus(l, "deposit_link_sent");
   if (e.kind === "followup") l.followups = (l.followups || 0) + 1;
@@ -204,7 +206,7 @@ export function rejectEmail(eid) {
   e.status = "rejected"; save();
   const l = getLead(e.lead);
   if (e.kind === "first" && l) setStatus(l, "closed", { reason: "Email rejected by a human" });
-  log(e.agent, `Email to ${l?.name} rejected by a human`, { lead: e.lead });
+  log(e.agent, `Email to ${l?.name} skipped by ${loadStudio().people?.founder?.name || "a human"}`, { lead: e.lead });
   return e;
 }
 
@@ -325,7 +327,7 @@ export async function sweepInvoices() {
 }
 
 export function resetDemo() {
-  db.runs.length = 0; db.leads.length = 0; db.emails.length = 0; db.payments.length = 0; db.log.length = 0; db.unsubscribed.length = 0; db.sim = { orders: {}, invoices: {} };
+  db.runs.length = 0; db.leads.length = 0; db.emails.length = 0; db.payments.length = 0; db.log.length = 0; db.unsubscribed.length = 0; db.sim = { orders: {}, invoices: {} }; db.salary = {};
   save();
 }
 export { isSimulated };

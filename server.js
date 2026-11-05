@@ -56,8 +56,8 @@ const on = (method, pattern, fn, opts = {}) => routes.push({ method, re: new Reg
 // ── API
 on("GET", "/api/status", (req, res) => {
   const studio = loadStudio();
-  send(res, 200, { ...publicStatus(), aiMode: llm.mode, recording: llm.recordingInfo(), studio: { name: studio.name, logo: studio.logo, website: studio.website, colors: studio.colors, currency: studio.currency, depositPercent: studio.depositPercent, conceptPrice: studio.conceptPrice, credit: studio.credit !== false, people: studio.people, officeSign: studio.officeSign },
-    team: loadTeam().agents, niches: listNiches().map((n) => ({ id: n, label: loadNiche(n).search.label, example: loadNiche(n).search.example })) });
+  send(res, 200, { ...publicStatus(), aiMode: llm.mode, recording: llm.recordingInfo(), studio: { name: studio.name, logo: studio.logo, website: studio.website, colors: studio.colors, currency: studio.currency, depositPercent: studio.depositPercent, conceptPrice: studio.conceptPrice, credit: studio.credit !== false, people: studio.people, officeSign: studio.officeSign, sender: { name: studio.sender?.name, signature: studio.sender?.signature }, language: studio.language, invoiceTerms: studio.invoiceTerms, safety: studio.safety },
+    team: loadTeam().agents, niches: listNiches().map((n) => { const x = loadNiche(n); return { id: n, label: x.search.label, example: x.search.example, keywords: x.search.keywords, osmTags: x.search.osmTags, facts: x.facts.fields.map((f) => f.key), forbidden: (x.rules.match(/^\s*[-*]\s+.+$/gm) || []).length, shortlistMinScore: x.audit.shortlistMinScore }; }) });
 });
 on("GET", "/api/office", (req, res) => send(res, 200, officeState()));
 on("GET", "/api/state", (req, res) => {
@@ -67,7 +67,7 @@ on("GET", "/api/state", (req, res) => {
   const order = ["concept", "approved", "deposit", "invoice", "paid"];
   for (const l of db.leads) { const s = pipeline.stage(l); if (!s) continue; for (const k of order.slice(0, order.indexOf(s) + 1)) counts[k]++; }
   const money = { deposits: db.payments.filter((p) => p.type === "deposit" && p.status === "captured").reduce((a, p) => a + p.amount, 0), invoiced: db.payments.filter((p) => p.type === "invoice").reduce((a, p) => a + p.amount, 0), paid: db.payments.filter((p) => p.type === "invoice" && p.status === "paid").reduce((a, p) => a + p.amount, 0) };
-  send(res, 200, { runs: db.runs.slice(0, 10), leads, emails: db.emails.slice(-150).reverse(), payments: db.payments.slice(-100).reverse(), log: db.log.slice(-120).reverse(), counts, money, pending: db.emails.filter((e) => e.status === "awaiting_approval").length });
+  send(res, 200, { salary: db.salary || {}, runs: db.runs.slice(0, 10), leads, emails: db.emails.slice(-150).reverse(), payments: db.payments.slice(-100).reverse(), log: db.log.slice(-120).reverse(), counts, money, pending: db.emails.filter((e) => e.status === "awaiting_approval").length });
 });
 on("POST", "/api/runs", async (req, res) => {
   const b = await json(req);

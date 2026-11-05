@@ -34,7 +34,7 @@ const LOOK = {
 };
 
 // Studio people + brand (set by configureOffice before mountOffice)
-const PEOPLE = { founder: { name: "You", role: "Founder" }, manager: { name: "Muffy", role: "Approvals" } };
+const PEOPLE = { founder: { name: "You", role: "Founder", enabled: true, look: {} }, manager: { name: "Muffy", role: "Approvals", enabled: true, look: {} } };
 const BRAND = { sign: "STUDIO", logo: null };
 export const PATTERNS = ["tabby", "solid", "points", "patches"];
 export const ACCESSORIES = ["scarf", "glasses", "beret", "deerstalker", "inverness", "mailcap", "headset", "bell", "none"];
@@ -54,8 +54,13 @@ export function configureOffice({ team, people, brand } = {}) {
     if (PATTERNS.includes(t.pattern)) L.pattern = t.pattern;
     if (ACCESSORIES.includes(t.accessory)) L.acc = t.accessory;
   }
-  if (people?.founder?.name) PEOPLE.founder = { ...PEOPLE.founder, ...people.founder };
-  if (people?.manager?.name) PEOPLE.manager = { ...PEOPLE.manager, ...people.manager };
+  // people: { founder|manager: { name, role (or title), enabled, look: { accent, shirt, pants, skin, hair, shoes } } }
+  const hex = (v) => (/^#[0-9a-f]{6}$/i.test(v || "") ? v : undefined);
+  for (const k of ["founder", "manager"]) {
+    const p = people?.[k]; if (!p) continue;
+    const look = Object.fromEntries(Object.entries(p.look || {}).map(([a, v]) => [a, hex(v)]).filter(([, v]) => v));
+    PEOPLE[k] = { ...PEOPLE[k], ...(p.name ? { name: String(p.name).slice(0, 24) } : {}), ...((p.role || p.title) ? { role: String(p.role || p.title).slice(0, 24) } : {}), enabled: p.enabled !== false, look };
+  }
   if (brand?.sign) BRAND.sign = String(brand.sign).slice(0, 14);
   if (brand?.logo) BRAND.logo = brand.logo;
 }
@@ -586,7 +591,7 @@ function buildOffice(scene, CAB, BEDS) {
   signPlane(signTex("Meeting room", null, { w: 384, h: 96, bg: "rgba(255,255,255,.92)", color: "#596070", size: 40, weight: 600 }), 1.1, 0.28, 3.2, 2.0, 3.02);
   signPlane(signTex("Nap lounge", null, { w: 384, h: 96, bg: "rgba(255,255,255,.0)", color: "#b88566", size: 52, weight: 700 }), 2.0, 0.5, LOUNGE.cx, 0.006, 10.35, 0).rotation.set(-Math.PI / 2, 0, 0);
   signPlane(signTex(`${PEOPLE.founder.name} · ${PEOPLE.founder.role}`, null, { w: 512, h: 112, gradBg: true, color: "#ffffff", size: 46 }), 1.05, 0.23, -12, 2.0, -5.48);
-  signPlane(signTex(`${PEOPLE.manager.name} · ${PEOPLE.manager.role}`, null, { w: 512, h: 112, bg: "#d7262c", color: "#ffffff", size: 46 }), 1.05, 0.23, -6.6, 2.0, -5.48);
+  signPlane(signTex(`${PEOPLE.manager.name} · ${PEOPLE.manager.role}`, null, { w: 512, h: 112, bg: PEOPLE.manager.look?.accent || "#d7262c", color: "#ffffff", size: 46 }), 1.05, 0.23, -6.6, 2.0, -5.48);
 
   // ── furniture helpers
   function plant(x, z, s = 1, kind = "bush", pot = W.terra) {
@@ -735,7 +740,7 @@ function buildOffice(scene, CAB, BEDS) {
   const mx = MANAGER.deskX, mz = MANAGER.deskZ;
   B.rbox(1.8, 0.06, 0.85, W.birch, mx, 0.75, mz, 0, 0.02);
   B.box(1.7, 0.55, 0.04, W.white, mx, 0.45, mz + 0.4);
-  signPlane(signTex(`${PEOPLE.manager.name} · ${PEOPLE.manager.role}`, null, { w: 512, h: 112, bg: "#d7262c", color: "#ffffff", size: 48 }), 0.62, 0.14, mx, 0.58, mz + 0.425);
+  signPlane(signTex(`${PEOPLE.manager.name} · ${PEOPLE.manager.role}`, null, { w: 512, h: 112, bg: PEOPLE.manager.look?.accent || "#d7262c", color: "#ffffff", size: 48 }), 0.62, 0.14, mx, 0.58, mz + 0.425);
   [-1, 1].forEach((e) => B.box(0.05, 0.72, 0.8, W.white, mx + e * 0.85, 0.36, mz));
   // open laptop facing Muffy (screen toward -z), like Hani's
   const lx = mx - 0.28, lzz = mz - 0.24;
@@ -1682,9 +1687,10 @@ function armIK(arm) {
 function toTorso(h, world) { return h.torso.worldToLocal(world.clone()); }
 
 function buildHani() {
-  const h0 = buildHuman({ skin: "#c48c66", shirt: "#141417", pants: "#24252b", shoes: "#f4f4f2", seatY: 0.56, headW: 0.95, headScale: 1.12, torsoLen: 0.3 });
+  const L = PEOPLE.founder.look || {};
+  const h0 = buildHuman({ skin: L.skin || "#c48c66", shirt: L.shirt || "#141417", pants: L.pants || "#24252b", shoes: L.shoes || "#f4f4f2", seatY: 0.56, headW: 0.95, headScale: 1.12, torsoLen: 0.3 });
   const h = h0, H = h.head;
-  const hairD = mat("#1a110e", { roughness: 0.42, envMapIntensity: 0.7 }), hairS = mat("#2a201c", { roughness: 0.9 });
+  const hairD = mat(L.hair || "#1a110e", { roughness: 0.42, envMapIntensity: 0.7 }), hairS = mat(L.hair ? shade(L.hair, 0.08) : "#2a201c", { roughness: 0.9 });
   const capG = track(new THREE.SphereGeometry(1, 24, 12, 0, Math.PI * 2, 0, Math.PI * 0.52));
   H.add(place(mesh(capG, hairS, true), 0, 0.006, -0.004, 0.22, 0, 0, 0.126, 0.136, 0.136));
   [-1, 1].forEach((s) => H.add(place(mesh(G.box(), hairS), s * 0.118, -0.012, 0.05, 0, 0, 0, 0.01, 0.05, 0.028)));
@@ -1719,9 +1725,10 @@ function buildHani() {
   return h;
 }
 function buildMuffy() {
-  const h = buildHuman({ skin: "#d9a77f", shirt: "#d7262c", pants: "#3e5f8a", shoes: "#f0f0f0", seatY: 0.5, scale: 0.8, headScale: 1.18, headW: 0.98, jawW: 0.92, torsoLen: 0.22 });
+  const L = PEOPLE.manager.look || {};
+  const h = buildHuman({ skin: L.skin || "#d9a77f", shirt: L.shirt || L.accent || "#d7262c", pants: L.pants || "#3e5f8a", shoes: L.shoes || "#f0f0f0", seatY: 0.5, scale: 0.8, headScale: 1.18, headW: 0.98, jawW: 0.92, torsoLen: 0.22 });
   const H = h.head;
-  const hair = mat("#141012", { roughness: 0.5, envMapIntensity: 0.5 });
+  const hair = mat(L.hair || "#141012", { roughness: 0.5, envMapIntensity: 0.5 });
   const capG = track(new THREE.SphereGeometry(1, 24, 12, 0, Math.PI * 2, 0, Math.PI * 0.55));
   H.add(place(mesh(capG, hair, true), 0, 0.01, -0.012, -0.18, 0, 0, 0.13, 0.142, 0.138));
   const r = rng(9);
@@ -2044,8 +2051,9 @@ export function mountOffice(container, { getState, onSelectAgent, onSelectManage
     const L = mkLabel(name, accent, "so-human", () => select({ kind }));
     L.st.textContent = role; const a = new THREE.Object3D(); a.position.set(0, y, 0); h.root.add(a); const o = new CSS2DObject(L.el); a.add(o); labelObjs.push(o); L.anchor = a; return L;
   };
-  const haniLbl = hLabel(hani, PEOPLE.founder.name, PEOPLE.founder.role, "#8b7bff", "founder", 1.78);
-  const muffyLbl = hLabel(muffy, PEOPLE.manager.name, PEOPLE.manager.role, "#d7262c", "manager", 1.58);
+  const haniLbl = hLabel(hani, PEOPLE.founder.name, PEOPLE.founder.role, PEOPLE.founder.look?.accent || "#8b7bff", "founder", 1.78);
+  const muffyLbl = hLabel(muffy, PEOPLE.manager.name, PEOPLE.manager.role, PEOPLE.manager.look?.accent || "#d7262c", "manager", 1.58);
+  if (PEOPLE.manager.enabled === false) { muffy.root.visible = false; muffyLbl.el.style.display = "none"; }
   const roomLbl = mkLabel("Meeting room", "#0f766e", "so-room", () => select({ kind: "meeting" }));
   const roomObj = new CSS2DObject(roomLbl.el);
   { const a = new THREE.Object3D(); a.position.set(4.8, 2.75, 0.25); scene.add(a); a.add(roomObj); labelObjs.push(roomObj); }

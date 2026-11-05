@@ -114,7 +114,7 @@ export function publicStatus() {
   return {
     demo: demoMode,
     publicDemo,
-    llm: demoMode ? "demo (rule-based)" : settings.llm.provider,
+    llm: settings.llm.provider,
     llmReady: !!(settings.llm.anthropicKey && settings.llm.model),
     search: demoMode ? "demo (fictional)" : settings.search.provider,
     email: settings.email.provider === "smtp" && settings.email.smtp.host ? "smtp" : "test inbox",
@@ -123,5 +123,12 @@ export function publicStatus() {
     maxUsdPerRun: settings.llm.maxUsdPerRun,
     buyerHint: paypalReady && settings.paypal.env === "sandbox" ? settings.paypal.buyerHint : "",
     adminLocked: !!settings.adminToken,
+    // which keys are set (never the values)
+    keys: {
+      anthropic: !!settings.llm.anthropicKey, model: !!settings.llm.model, paypal: paypalReady, paypalEnv: settings.paypal.env, paypalWebhook: !!settings.paypal.webhookId,
+      google: !!settings.search.googleKey, apify: !!settings.search.apifyToken, pagespeed: !!settings.audit.pagespeedKey, smtp: !!settings.email.smtp.host, admin: !!settings.adminToken,
+      agentToolkit: /^(1|true|yes)$/i.test(process.env.PAYPAL_AGENT_TOOLKIT || ""),
+    },
+    searchProvider: settings.search.provider, emailProvider: settings.email.provider, usdPerMTok: { input: settings.llm.usdPerMTokIn, output: settings.llm.usdPerMTokOut },
   };
 }

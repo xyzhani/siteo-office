@@ -6,8 +6,9 @@
 <title>Siteo Office</title>
 <meta name="description" content="An open-source AI web agency run by 8 cat agents in a live 3D office.">
 <link rel="icon" href="/brand/logo.svg">
+<script>try{var t=localStorage.getItem("so.theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark")}catch(e){document.documentElement.dataset.theme="dark"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-grid.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@32.3.3/styles/ag-theme-quartz.css">
 <link rel="stylesheet" href="/styles.css">
@@ -16,74 +17,117 @@
 <script type="module" src="/app.js"></script>
 </head>
 <body>
-<header class="top">
-  <div class="brand"><img id="logo" src="/brand/logo.svg" alt=""><span id="studio-name">Siteo Office</span></div>
-  <div class="badges" id="badges"></div>
-  <button class="pending" id="pending-btn" title="Emails waiting for your approval">✉️ <b id="pending-n">0</b><span> to approve</span></button>
-</header>
-<main class="layout">
-  <section class="office-col">
-    <div class="office" id="office"><div class="office-loading" id="office-loading"><span>🐾 Waking up the office…</span><small>On the free hosted demo the server may take 30–60 seconds to wake after a nap.</small></div>
-      <button class="chip view-reset" id="view-reset">Whole office</button>
+<div class="shell">
+  <aside class="side" id="side">
+    <div class="side-top">
+      <a class="brand" href="#office"><img id="logo" class="mark" src="/brand/logo.svg" alt=""><span id="studio-name">Siteo Office</span></a>
+      <button class="menu-btn" id="menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
     </div>
-    <div class="funnel" id="funnel">
-      <div data-stage="concept"><b>0</b><span>Concepts</span></div>
-      <div data-stage="approved"><b>0</b><span>Approved &amp; sent</span></div>
-      <div data-stage="deposit"><b>0</b><span>Deposit paid</span></div>
-      <div data-stage="invoice"><b>0</b><span>Invoice sent</span></div>
-      <div data-stage="paid"><b>0</b><span>Paid</span></div>
-    </div>
-  </section>
-  <aside class="panel">
-    <nav class="tabs" id="tabs">
-      <button data-tab="run" class="on">Run</button>
-      <button data-tab="approvals">Approvals <i id="tab-pending"></i></button>
-      <button data-tab="inbox">Inbox</button>
-      <button data-tab="pipeline">Pipeline</button>
-      <button data-tab="money">Money</button>
-      <button data-tab="activity">Activity</button>
-      <button data-tab="teach">Teach</button>
+    <nav id="nav">
+      <a href="#office" data-view="office"><span class="ic">🏢</span>Office</a>
+      <a href="#overview" data-view="overview"><span class="ic">📊</span>Overview</a>
+      <a href="#approvals" data-view="approvals"><span class="ic">✉️</span>Approvals<b class="count" id="n-approvals"></b></a>
+      <a href="#projects" data-view="projects"><span class="ic">🗂️</span>Projects<b class="count dim" id="n-projects"></b></a>
+      <a href="#inbox" data-view="inbox"><span class="ic">📥</span>Inbox<b class="count dim" id="n-inbox"></b></a>
+      <a href="#money" data-view="money"><span class="ic">💰</span>Money</a>
+      <a href="#salary" data-view="salary"><span class="ic">🐟</span>Salary</a>
+      <a href="#activity" data-view="activity"><span class="ic">⚡</span>Activity</a>
+      <a href="#settings" data-view="settings"><span class="ic">⚙️</span>Settings</a>
+      <a href="#connections" data-view="connections"><span class="ic">🔌</span>Connections</a>
     </nav>
-    <div class="tab on" id="tab-run">
-      <form id="run-form" class="run-form">
-        <label for="q">What should the team look for?</label>
-        <div class="row"><input id="q" name="q" placeholder="dentists in Galway" autocomplete="off" maxlength="120"><select id="niche" aria-label="Niche pack"></select></div>
-        <button class="primary" id="run-btn">Start the team 🐾</button>
-        <p class="hint" id="run-hint"></p>
-      </form>
-      <h3>How it works</h3>
-      <ol class="steps">
-        <li><b data-role="finder">Misso</b> finds businesses with a website</li>
-        <li><b data-role="auditor">Tom</b> audits them and shortlists the weakest</li>
-        <li><b data-role="developer">Knight</b> builds a concept from real facts only</li>
-        <li><b data-role="checker">Snow Bell</b> fact-checks every line, sends it back if needed</li>
-        <li><b data-role="seo">Sherlock</b> notes what the old site misses</li>
-        <li><b data-role="sender">Nemo</b> writes the email; <u>you approve it</u></li>
-        <li><b data-role="inbox">Scrapper</b> reads the reply and sends a PayPal deposit link</li>
-        <li><b data-role="followup">Fluffy</b> invoices the balance with PayPal and follows up</li>
-      </ol>
-      <h3>Runs</h3><div id="runs" class="list"></div>
-      <button class="ghost small" id="reset-btn">Reset demo data</button>
+    <div class="side-foot">
+      <div class="live"><span class="dot on" id="live-dot"></span><span id="live-text">Office open</span></div>
+      <div class="side-row"><span class="chip-mode" id="mode-chip">DEMO</span><button class="theme-btn" id="theme-btn" aria-label="Switch dark / light theme">🌙</button></div>
     </div>
-    <div class="tab" id="tab-approvals"><p class="lead-in">Nothing is sent until you approve it. Edit anything first.</p><div id="approvals" class="list"></div></div>
-    <div class="tab" id="tab-inbox"><p class="lead-in" id="inbox-intro"></p><div id="inbox" class="list"></div></div>
-    <div class="tab" id="tab-pipeline"><div id="pipeline" class="list"></div></div>
-    <div class="tab" id="tab-money"><div id="money-sum" class="money-sum"></div><p class="lead-in" id="buyer-hint"></p><button class="ghost small" id="check-btn">Check invoices now</button><div id="payments" class="list"></div></div>
-    <div class="tab" id="tab-activity"><div id="activity" class="feed"></div></div>
-    <div class="tab" id="tab-teach"><p class="lead-in">Each agent's instructions are plain text in <code>agents/*.md</code>. Change how they write, what they check, what they never say. This is teaching, not training: no fine-tuning, it takes effect on the next run.</p><div id="teach" class="list"></div></div>
   </aside>
-</main>
-<section class="grids" id="grids">
-  <div class="grid-card">
-    <div class="grid-head"><h2>Projects</h2><input id="projects-q" placeholder="Search projects…" aria-label="Search projects"><span class="meta">Sort, filter, click a row for details. Updates live as PayPal confirms payments.</span></div>
-    <div id="projects-grid" class="ag-theme-quartz grid-box"></div>
-  </div>
-  <div class="grid-card">
-    <div class="grid-head"><h2>Payments</h2><span class="meta">PayPal Checkout deposits and PayPal invoices</span></div>
-    <div id="payments-grid" class="ag-theme-quartz grid-box small-grid"></div>
-  </div>
-</section>
-<footer class="foot"><span id="credit">Built with <a href="https://siteostudio.com" target="_blank" rel="noopener">Siteo Office</a> · open source (MIT)</span></footer>
+
+  <main class="main" id="main">
+    <!-- OFFICE -->
+    <section class="view" id="view-office">
+      <div class="head"><div><h1>The <em>office</em></h1><p class="muted" id="office-sub">Eight cats run your web agency. Give them a job and watch.</p></div>
+        <form class="runbar" id="run-form"><input id="q" placeholder="dentists in Galway" autocomplete="off" maxlength="120" aria-label="What to look for"><select id="niche" aria-label="Niche pack"></select><button class="btn primary" id="run-btn">Start the team 🐾</button></form>
+      </div>
+      <p class="hint" id="run-hint"></p>
+      <div class="office-wrap" id="office"><div class="office-loading" id="office-loading"><span>🐾 Waking up the office…</span><small>On the free hosted demo the server may take 30–60 seconds to wake after a nap.</small></div>
+        <button class="btn small ghost view-reset" id="view-reset">Whole office</button>
+      </div>
+      <div class="funnel" id="funnel">
+        <div data-stage="concept"><b>0</b><span>Concepts</span></div>
+        <div data-stage="approved"><b>0</b><span>Approved &amp; sent</span></div>
+        <div data-stage="deposit"><b>0</b><span>Deposit paid</span></div>
+        <div data-stage="invoice"><b>0</b><span>Invoice sent</span></div>
+        <div data-stage="paid"><b>0</b><span>Paid</span></div>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="view" id="view-overview">
+      <div class="head"><div><h1>Studio <em>overview</em></h1><p class="muted">From a weak website to a paid invoice.</p></div></div>
+      <div class="tiles" id="ov-tiles"></div>
+      <div class="grid2">
+        <div class="panel"><h2>Pipeline</h2><div id="ov-funnel" class="bars"></div></div>
+        <div class="panel"><h2>Recent activity</h2><div id="ov-feed" class="feed"></div></div>
+      </div>
+      <div class="panel mt"><h2>Runs</h2><div id="runs" class="list"></div><button class="btn small ghost mt" id="reset-btn">Reset demo data</button></div>
+    </section>
+
+    <!-- APPROVALS -->
+    <section class="view" id="view-approvals">
+      <div class="head"><div><h1>Your <em>approvals</em></h1><p class="muted" id="approvals-sub">Nothing is sent until you approve it. Edit anything first.</p></div></div>
+      <div id="approvals" class="list"></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="view" id="view-projects">
+      <div class="head"><div><h1>All <em>projects</em></h1><p class="muted">Every business the team looked at. Click a row for the full story.</p></div><input class="search" id="projects-q" placeholder="Search projects…" aria-label="Search projects"></div>
+      <div class="panel flush"><div id="projects-grid" class="grid-box"></div></div>
+    </section>
+
+    <!-- INBOX -->
+    <section class="view" id="view-inbox">
+      <div class="head"><div><h1>The <em>inbox</em></h1><p class="muted" id="inbox-intro"></p></div></div>
+      <div id="inbox" class="list"></div>
+    </section>
+
+    <!-- MONEY -->
+    <section class="view" id="view-money">
+      <div class="head"><div><h1>The <em>money</em></h1><p class="muted" id="buyer-hint"></p></div><button class="btn small" id="check-btn">Check invoices now</button></div>
+      <div class="tiles" id="money-tiles"></div>
+      <div class="panel flush"><div id="payments-grid" class="grid-box"></div></div>
+      <div id="payments" class="list mt"></div>
+    </section>
+
+    <!-- SALARY -->
+    <section class="view" id="view-salary">
+      <div class="head"><div><h1>Cat <em>salaries</em></h1><p class="muted" id="salary-sub">What each cat costs in AI: calls, tokens and dollars.</p></div></div>
+      <div class="tiles" id="salary-tiles"></div>
+      <div class="panel"><div class="table-wrap"><table id="salary-table"></table></div></div>
+    </section>
+
+    <!-- ACTIVITY -->
+    <section class="view" id="view-activity">
+      <div class="head"><div><h1>Live <em>activity</em></h1><p class="muted">Everything the team did, newest first.</p></div></div>
+      <div class="panel"><div id="activity" class="feed"></div></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" id="view-settings">
+      <div class="head"><div><h1>Studio <em>settings</em></h1><p class="muted">Read from your config files. Edit them and restart to change anything.</p></div></div>
+      <div class="grid2"><div class="panel" id="set-studio"></div><div class="panel" id="set-niches"></div></div>
+      <div class="panel mt"><h2>The team <small class="muted">· edit in <code>team.config.json</code></small></h2><div id="set-team" class="team-grid"></div></div>
+      <div class="panel mt"><h2>Teach your agents <small class="muted">· <code>agents/*.md</code></small></h2><p class="muted small">Plain-text instructions sent with every AI call. Teaching, not training: no fine-tuning; changes apply on the next run.</p><div id="teach" class="list"></div></div>
+    </section>
+
+    <!-- CONNECTIONS -->
+    <section class="view" id="view-connections">
+      <div class="head"><div><h1>Your <em>connections</em></h1><p class="muted">Which services are set up. Keys live only in <code>.env</code> or your host's environment and are never shown here.</p></div></div>
+      <div class="conn-grid" id="conns"></div>
+    </section>
+
+    <footer class="foot"><span id="credit">Built with <a href="https://siteostudio.com" target="_blank" rel="noopener">Siteo Office</a> · open source (MIT)</span></footer>
+  </main>
+</div>
+<div class="drawer hidden" id="drawer"><div class="drawer-panel"><button class="close" id="drawer-close" aria-label="Close">×</button><div id="drawer-body"></div></div></div>
 <div class="toasts" id="toasts"></div>
 <div class="rain" id="rain" aria-hidden="true"></div>
 </body>

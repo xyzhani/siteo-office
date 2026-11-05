@@ -11,8 +11,8 @@
     "address": "Your Studio, 1 Example Street, Example City"
   },
   "people": {
-    "founder": { "name": "You", "role": "Founder" },
-    "manager": { "name": "Muffy", "role": "Approvals" }
+    "founder": { "name": "You", "role": "Founder", "look": { "accent": "#8b7bff", "shirt": "#141417", "pants": "#24252b", "skin": "#c48c66", "hair": "#1a110e" } },
+    "manager": { "name": "Muffy", "role": "Approvals", "enabled": true, "look": { "accent": "#d7262c", "shirt": "#d7262c", "pants": "#3e5f8a", "skin": "#d9a77f", "hair": "#141012" } }
   },
   "conceptPrice": 500,
   "depositPercent": 20,

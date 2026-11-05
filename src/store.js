@@ -5,7 +5,7 @@ import crypto from "node:crypto";
 import { settings } from "./config.js";
 
 const FILE = path.join(settings.dataDir, "db.json");
-const EMPTY = () => ({ runs: [], leads: [], emails: [], payments: [], events: [], log: [], unsubscribed: [] });
+const EMPTY = () => ({ runs: [], leads: [], emails: [], payments: [], events: [], log: [], unsubscribed: [], salary: {} });
 export let db = EMPTY();
 try { fs.mkdirSync(settings.dataDir, { recursive: true }); if (fs.existsSync(FILE)) db = { ...EMPTY(), ...JSON.parse(fs.readFileSync(FILE, "utf8")) }; } catch (e) { console.warn("[store] starting empty:", e.message); }
 
@@ -17,7 +17,7 @@ export function save() {
     try { fs.writeFileSync(FILE + ".tmp", JSON.stringify(db)); fs.renameSync(FILE + ".tmp", FILE); } catch (e) { console.warn("[store] save failed:", e.message); }
   }, 300);
 }
-export function reset() { db = EMPTY(); save(); }
+export function reset() { Object.assign(db, EMPTY()); save(); }
 export const id = (p = "") => p + crypto.randomBytes(6).toString("hex");
 export const now = () => new Date().toISOString();
 
