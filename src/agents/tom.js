@@ -52,10 +52,11 @@ export function heuristicFacts(text, b, niche) {
   return { name: b.name, phone, email, address: b.address || null, town: b.town || null, owner, since, hours, services, extras };
 }
 
-async function aiFacts(run, text, b, niche) {
+async function aiFacts(run, text, b, niche, key) {
   const fields = niche.facts.fields.map((f) => `- ${f.key}${f.type === "list" ? " (list of strings)" : ""}: ${f.label}`).join("\n");
   const sys = loadAgentInstructions("auditor") + "\n\nNiche fact fields:\n" + fields;
   const out = await llm.json(run, {
+    key,
     system: sys,
     prompt: `Business: ${b.name}\nWebsite: ${b.website}\nKnown from the listing: phone=${b.phone || "?"} address=${b.address || "?"}\n\nVisible text of the website:\n"""\n${text.slice(0, 12000)}\n"""\n\nReturn {"facts": {<field>: value or null}}. Copy facts exactly as written on the site. If a fact is not on the page, use null. Never invent.`,
     maxTokens: 1200,
@@ -71,8 +72,9 @@ export async function audit(run, niche, lead) {
   const s = score(signals, psi, niche.audit.weights);
   const text = visibleText(page.html);
   let facts = heuristicFacts(text, { ...lead, town: lead.town }, niche);
-  if (llm.available()) {
-    try { const f = await aiFacts(run, text, lead, niche); facts = { ...facts, ...Object.fromEntries(Object.entries(f).filter(([, v]) => v != null && !(Array.isArray(v) && !v.length))) }; }
+  const key = `${lead.niche}/tom/${lead.slug || lead.id}`;
+  if (llm.available(key)) {
+    try { const f = await aiFacts(run, text, lead, niche, key); facts = { ...facts, ...Object.fromEntries(Object.entries(f).filter(([, v]) => v != null && !(Array.isArray(v) && !v.length))) }; }
     catch (e) { if (e instanceof llm.CostCapError) throw e; }
   }
   facts.email = facts.email || signals.emails[0] || lead.email || null;

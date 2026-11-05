@@ -1972,7 +1972,7 @@ export function mountOffice(container, { getState, onSelectAgent, onSelectManage
   const DEF_TARGET = new THREE.Vector3(0, 0, 0.3);
   camera.position.copy(DEF_TARGET).addScaledVector(DEF_DIR, 60);
   camera.lookAt(DEF_TARGET);
-  const defZoom = () => (CW / CH < 0.8 ? 1.35 : CW < 640 ? 1.2 : 1);
+  const defZoom = () => (CW / CH < 0.8 ? 1.35 : CW < 640 ? 1.08 : 1);
   const fit = () => {
     const aspect = CW / CH; let halfH = 12.2; if (halfH * aspect < 19.0) halfH = 19.0 / aspect;
     camera.left = -halfH * aspect; camera.right = halfH * aspect; camera.top = halfH; camera.bottom = -halfH; camera.updateProjectionMatrix();

@@ -34,17 +34,18 @@ export function ruleCheck(copy, facts, rules) {
   return issues;
 }
 
-async function aiCheck(run, copy, facts, rules) {
+async function aiCheck(run, copy, facts, rules, key) {
   const sys = `${loadAgentInstructions("checker")}\n\nNiche rules:\n${rules}`;
   const lines = copyLines(copy).map(([f, t], i) => `${i + 1}. [${f}] ${t}`).join("\n");
-  const r = await llm.json(run, { system: sys, prompt: `FACTS:\n${JSON.stringify(facts, null, 2)}\n\nCOPY LINES:\n${lines}\n\nReturn {"issues": [{"line": "<exact line text>", "problem": "<why it is not supported by the facts or breaks a rule>"}]}. Return an empty list if every line is supported.`, maxTokens: 1000 });
+  const r = await llm.json(run, { key, system: sys, prompt: `FACTS:\n${JSON.stringify(facts, null, 2)}\n\nCOPY LINES:\n${lines}\n\nReturn {"issues": [{"line": "<exact line text>", "problem": "<why it is not supported by the facts or breaks a rule>"}]}. Return an empty list if every line is supported.`, maxTokens: 1000 });
   return (r.issues || []).filter((i) => i && i.line).map((i) => ({ field: "ai", line: String(i.line).replace(/^\d+\.\s*\[\w+\]\s*/, ""), problem: String(i.problem || "Not supported by the facts") }));
 }
 
-export async function check(run, niche, lead, copy) {
+export async function check(run, niche, lead, copy, round = 1) {
   const issues = ruleCheck(copy, lead.facts, niche.rules);
-  if (llm.available()) {
-    try { for (const i of await aiCheck(run, copy, lead.facts, niche.rules)) if (!issues.some((x) => x.line === i.line)) issues.push(i); }
+  const key = `${lead.niche}/snowbell/${lead.slug || lead.id}/${round}`;
+  if (llm.available(key)) {
+    try { for (const i of await aiCheck(run, copy, lead.facts, niche.rules, key)) if (!issues.some((x) => x.line === i.line)) issues.push(i); }
     catch (e) { if (e instanceof llm.CostCapError) throw e; }
   }
   return { pass: issues.length === 0, issues };

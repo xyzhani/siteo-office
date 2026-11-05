@@ -5,15 +5,25 @@
   "license": "MIT",
   "type": "module",
   "main": "server.js",
-  "engines": { "node": ">=20.12" },
+  "engines": {
+    "node": ">=20.12"
+  },
   "scripts": {
     "dev": "node --watch-path=src --watch-path=server.js server.js",
     "start": "node server.js",
-    "test": "node --test test/demo-flow.test.js"
+    "test": "node --test test/demo-flow.test.js",
+    "record-demo": "node scripts/record-demo.js"
   },
   "optionalDependencies": {
     "nodemailer": "^6.9.16"
   },
-  "keywords": ["ai-agents", "paypal", "three.js", "web-agency", "claude", "open-source"],
+  "keywords": [
+    "ai-agents",
+    "paypal",
+    "three.js",
+    "web-agency",
+    "claude",
+    "open-source"
+  ],
   "homepage": "https://siteostudio.com"
 }

@@ -38,17 +38,21 @@ async function boot() {
   if (s.colors?.primary) document.documentElement.style.setProperty("--primary", s.colors.primary);
   if (!s.credit) $("#credit").innerHTML = "Open source (MIT)";
   const b = [];
-  b.push(STATUS.demo ? `<span class="badge demo" title="Fictional sample businesses; no AI key used">DEMO · fictional businesses</span>` : `<span class="badge live">LIVE · ${esc(STATUS.search)}</span>`);
+  b.push(STATUS.demo ? `<span class="badge demo" title="Fictional sample businesses">DEMO · fictional businesses</span>` : `<span class="badge live">LIVE · ${esc(STATUS.search)}</span>`);
+  if (STATUS.aiMode === "replay") b.push(`<span class="badge ai" title="Recorded ${esc((STATUS.recording?.recordedAt || "").slice(0, 10))}">AI: replaying a recorded real run</span>`);
+  else if (STATUS.aiMode === "rules") b.push(`<span class="badge">AI: rule-based (no recording)</span>`);
+  else b.push(`<span class="badge ai">AI: Claude ${STATUS.aiMode === "record" ? "(recording)" : "live"}</span>`);
   b.push(`<span class="badge pp">${STATUS.payments.startsWith("paypal") ? "PayPal " + esc(STATUS.payments.split("-")[1]) : "Payments simulated"}</span>`);
   b.push(`<span class="badge">Email: ${esc(STATUS.email)}</span>`);
   if (!STATUS.demo) b.push(`<span class="badge">AI cap $${STATUS.maxUsdPerRun}/run</span>`);
   $("#badges").innerHTML = b.join("");
   $("#niche").innerHTML = `<option value="">Auto</option>` + STATUS.niches.map((n) => `<option value="${esc(n.id)}">${esc(n.label)}</option>`).join("");
   $("#q").placeholder = STATUS.niches[0]?.example || "dentists in Galway";
+  const aiLine = STATUS.aiMode === "replay" ? "<b>Demo: replaying a recorded run of the real AI agents</b> (Claude), step by step, for $0." : "The agents use their rule-based paths (no AI recording in this copy).";
   $("#run-hint").innerHTML = STATUS.publicDemo
-    ? "This hosted demo replays the full pipeline on <b>fictional</b> sample businesses (real searches and AI are switched off here). PayPal Sandbox payments are real Sandbox calls. Run your own copy with your keys for real searches."
+    ? `${aiLine} The businesses are <b>fictional</b>; real searches and live AI are switched off on this hosted copy. PayPal Sandbox payments are real Sandbox calls. Run your own copy with your keys for real searches.`
     : STATUS.demo
-    ? "Demo mode: the team works on <b>fictional</b> sample businesses in a made-up town, with rule-based agents. Add your keys in <code>.env</code> for real runs."
+    ? `Demo mode on <b>fictional</b> businesses in a made-up town. ${aiLine} Add your keys in <code>.env</code> for real runs.`
     : `Live: real businesses via ${esc(STATUS.search)}. Nothing is emailed without your approval.`;
   document.querySelectorAll(".steps b[data-role]").forEach((el) => { el.textContent = agentName(el.dataset.role); el.style.setProperty("--c", agentColor(el.dataset.role)); });
   $("#inbox-intro").innerHTML = STATUS.email === "test inbox"

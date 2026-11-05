@@ -4,7 +4,7 @@
 
 The repo includes a `render.yaml` blueprint.
 
-1. Push the repo to your GitHub account (or use the public repo).
+1. Record the demo's AI run locally once (`npm run record-demo`, see [getting started](getting-started.md#record-the-demos-ai-run-once)) and commit `demo/recorded/`. Then push the repo to your GitHub account.
 2. Click **Deploy to Render** in the README, or go to [dashboard.render.com](https://dashboard.render.com) → **New → Blueprint** and pick the repo.
 3. Render reads `render.yaml` and asks for the secret values: the PayPal **Sandbox** keys (and optionally `PAYPAL_WEBHOOK_ID`, `DEMO_BUYER_HINT`). The blueprint sets `PUBLIC_DEMO=true`: the hosted copy always replays the pipeline on fictional sample data, real searches and AI are switched off (even if keys are added), live PayPal keys are refused, and the Teach editor is read-only. Visitors can click through without a password.
 4. Click **Apply**. After the build, open the `https://<name>.onrender.com` URL.

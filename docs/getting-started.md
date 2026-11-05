@@ -20,7 +20,7 @@ Open **http://localhost:3000**. You'll see the office and a yellow **DEMO · fic
 
 ## 2. Your first run (demo mode)
 
-1. In the **Run** tab, press **Start the team 🐾** (the box is pre-filled with an example; in demo mode the town is always the fictional "Sampleton").
+1. In the **Run** tab, press **Start the team 🐾**. The header shows whether the agents **replay a recorded real AI run** (see below) or use rule-based paths. (the box is pre-filled with an example; in demo mode the town is always the fictional "Sampleton").
 2. Watch the office:
    - **Misso** searches and carries a folder to **Tom**.
    - **Tom** audits each fake "old website" (they're served by the app at `/demo-sites/...`, so Tom really fetches and reads them).
@@ -41,6 +41,21 @@ Open **http://localhost:3000**. You'll see the office and a yellow **DEMO · fic
 6. In **Money**, click **Pay invoice as the customer**. When it's paid you get the second 💰 moment and the funnel shows **Paid**.
 
 If the invoice stays unpaid, Fluffy drafts a friendly reminder for you to approve (after 2 minutes in demo mode, 3 days live).
+
+## Record the demo's AI run (once)
+
+Demo mode replays a **recorded run of the real AI agents** so it shows real Claude output without a key or any cost. The recording lives in `demo/recorded/<niche>.json`. To make (or refresh) it:
+
+1. Put `ANTHROPIC_API_KEY` and `CLAUDE_MODEL` in `.env`.
+2. Run:
+   ```bash
+   npm run record-demo                 # both shipped packs
+   npm run record-demo -- dental       # or just one
+   ```
+   It starts a private copy of the app, runs the real agents on the **fictional** demo businesses (Tom's facts, Knight's concepts, Snow Bell's real fact-check and send-back reasons, Sherlock, Nemo, Scrapper's replies, Fluffy's invoice tool calls, a follow-up), with simulated payments and the test inbox, and saves every AI output. It prints the AI cost (well under $1).
+3. Commit the `demo/recorded/*.json` files.
+
+From then on, keyless and hosted demos replay those outputs step by step (the header shows **AI: replaying a recorded real run**). Links, order and invoice ids, prices and recipients always come from the current run, never from the recording. If you change a niche pack, studio prices or the demo businesses, record again. The first business's first draft always gets the niche's `demoSlip` sentence added, so the recording always shows a real fact-check catching an unsupported claim.
 
 ## 4. Add PayPal Sandbox (recommended)
 

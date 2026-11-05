@@ -1,7 +1,10 @@
 # FAQ
 
 **Do I need any keys to try it?**
-No. With an empty `.env` you get demo mode: fictional businesses, rule-based agents, a simulated checkout. Add PayPal Sandbox keys for real Sandbox payments.
+No. With an empty `.env` you get demo mode: fictional businesses, a replay of a recorded real AI run (or rule-based agents if there's no recording), a simulated checkout. Add PayPal Sandbox keys for real Sandbox payments.
+
+**Is the demo's AI real?**
+Yes: it replays outputs recorded from the real Claude agents on the fictional businesses (`npm run record-demo`). Nothing is invented for the demo except one deliberate slip in the first draft, so you can watch the real fact-check catch it. Typed replies that weren't recorded use the rule-based path.
 
 **Are the demo businesses real?**
 No. Every demo business, person, address and the town "Sampleton" are made up. Their old websites are served by the app itself and carry a "fictional" banner; their emails use the reserved `.example` domain.

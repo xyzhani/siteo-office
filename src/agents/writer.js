@@ -20,15 +20,22 @@ export function unsubscribeLine(lead) {
   return s.safety.unsubscribeLine ? `\n\n—\n${s.sender?.address ? s.sender.address + "\n" : ""}Not interested? Reply "unsubscribe" and we won't email you again.` : "";
 }
 
-export async function write(run, { role, kind, niche, lead, vars, context = "" }) {
+export async function write(run, { role, kind, niche, lead, vars, context = "", n = 0 }) {
   const sections = parseSections(niche.emails);
   const tone = sections["tone"] || "";
   const tpl = sections[kind] || "";
   const [subjLine, ...bodyLines] = fill(tpl, vars).split("\n");
   let subject = subjLine.replace(/^subject:\s*/i, "").trim(), body = bodyLines.join("\n").trim();
-  if (llm.available()) {
+  const key = `${lead.niche}/${role}/${kind.replace(/\s+/g, "-")}/${lead.slug || lead.id}${n ? "/" + n : ""}`;
+  // links and ids differ per run: record them as {placeholders}, put today's values back on replay
+  const LINKS = ["concept_url", "checkout_url", "invoice_url", "invoice_number"].filter((k) => vars[k]);
+  const swap = (o, f) => ({ subject: f(String(o.subject || "")), body: f(String(o.body || "")) });
+  const scrub = (o) => swap(o, (t) => LINKS.reduce((x, k) => x.split(vars[k]).join(`{${k}}`), t));
+  const unscrub = (o) => swap(o, (t) => fill(t, vars));
+  if (llm.available(key)) {
     try {
       const r = await llm.json(run, {
+        key, scrub, unscrub,
         system: `${loadAgentInstructions(role)}\n\nTone guide:\n${tone}`,
         prompt: `Write the "${kind}" email.\nExample to follow closely (same facts, links and length):\nSubject: ${subject}\n${body}\n\nFacts you may use:\n${JSON.stringify(vars, null, 2)}\n${context}\n\nKeep every link exactly as given. No claims beyond the facts. Return {"subject": string, "body": string (plain text, no signature line beyond the given signature)}.`,
         maxTokens: 900,

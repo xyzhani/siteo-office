@@ -11,6 +11,10 @@ npm install
 cp .env.example .env
 npm run dev
 npm test          # end-to-end demo flow, no keys needed
+
+# record + replay with the fake LLM (no key, nothing written to demo/recorded/):
+LLM_PROVIDER=fake DEMO_RECORDING_DIR=/tmp/rec npm run record-demo
+DEMO_RECORDING_DIR=/tmp/rec npm test
 ```
 
 Screenshots of the office with Playwright (headless Chromium renders WebGL slowly, so the script advances the office clock itself):
@@ -30,6 +34,8 @@ src/office-state.js       what the 3D office polls (agent states, handoffs, even
 src/agents/*.js           the 8 agents (writer.js is shared email writing)
 src/providers/            llm/, search/, email/, payments/ adapters
 src/demo/businesses.js    fictional demo businesses and their "old websites"
+src/providers/llm/fake.js a fake LLM for tests (LLM_PROVIDER=fake)
+scripts/record-demo.js    records a real AI run for the demo (demo/recorded/)
 public/office.js          the procedural three.js office
 public/app.js, styles.css the dashboard
 niches/<id>/              niche packs

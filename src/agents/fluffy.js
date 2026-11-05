@@ -46,13 +46,18 @@ const findInvoiceId = (x) => (String(typeof x === "string" ? x : JSON.stringify(
 export async function invoiceBalance(run, lead) {
   const studio = loadStudio();
   const balance = +(studio.conceptPrice - (studio.conceptPrice * studio.depositPercent) / 100).toFixed(2);
-  const facts = { recipient_name: lead.name, recipient_email: lead.facts?.email, item_name: `Website build: ${lead.name} (balance)`, item_description: `Balance after the ${studio.depositPercent}% deposit (PayPal capture ${lead.deposit?.captureId || "confirmed"}).`, amount: balance, currency_code: studio.currency, note: `Thank you for your deposit. This invoice is the remaining balance for your new website.` };
+  const facts = { recipient_name: lead.name, recipient_email: lead.facts?.email, item_name: `Website build: ${lead.name} (balance)`, item_description: `Balance after the ${studio.depositPercent}% deposit.`, amount: balance, currency_code: studio.currency, note: `Thank you for your deposit. This invoice is the remaining balance for your new website.` };
   // the official toolkit's tools take their own input shapes, so only the AI (which reads their schemas) drives them
-  const tk = llm.available() ? await toolkitHandlers() : null;
+  const key = `${lead.niche}/fluffy/${lead.slug || lead.id}`;
+  // (not while recording: a replay runs the built-in tools, which take our input shape)
+  const tk = llm.mode === "live" ? await toolkitHandlers() : null;
   const tools = tk?.tools || TOOLS, handlers = tk?.handlers || ourHandlers(lead);
+  // replaying a recorded run: money and recipient always come from today's config, never from the recording
+  if (llm.mode === "replay") { const create = handlers.create_invoice; handlers.create_invoice = (i) => create({ ...i, ...facts }); }
   let calls;
-  if (llm.available()) {
+  if (llm.available(key)) {
     const r = await llm.agent(run, {
+      key,
       system: loadAgentInstructions("followup"), tools, handlers,
       prompt: `The customer paid the deposit. Create a PayPal invoice for the balance with exactly these details, then send it. Do nothing else.\n${JSON.stringify(facts, null, 2)}`,
     });

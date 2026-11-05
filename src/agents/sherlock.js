@@ -11,9 +11,10 @@ export function ruleNote(audit) {
 
 export async function note(run, lead) {
   const base = ruleNote(lead.audit);
-  if (!llm.available()) return base;
+  const key = `${lead.niche}/sherlock/${lead.slug || lead.id}`;
+  if (!llm.available(key)) return base;
   try {
-    const r = await llm.json(run, { system: loadAgentInstructions("seo"), prompt: `Measured issues on ${lead.name}'s current website:\n${lead.audit.issues.map((i) => "- " + i.label).join("\n")}\nPageSpeed mobile: ${lead.audit.pagespeed?.score ?? "not measured"}\n\nReturn {"points": [up to 4 short plain-English points a business owner understands]}. Only use the measured issues above.`, maxTokens: 500 });
+    const r = await llm.json(run, { key, system: loadAgentInstructions("seo"), prompt: `Measured issues on ${lead.name}'s current website:\n${lead.audit.issues.map((i) => "- " + i.label).join("\n")}\nPageSpeed mobile: ${lead.audit.pagespeed?.score ?? "not measured"}\n\nReturn {"points": [up to 4 short plain-English points a business owner understands]}. Only use the measured issues above.`, maxTokens: 500 });
     return { points: (r.points || []).slice(0, 4).map(String).filter(Boolean).length ? r.points.slice(0, 4).map(String) : base.points };
   } catch (e) { if (e instanceof llm.CostCapError) throw e; return base; }
 }

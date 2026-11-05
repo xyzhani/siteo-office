@@ -10,7 +10,7 @@ code{background:#efece5;padding:1px 5px;border-radius:6px;font-size:12px}
 .brand span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .badges{display:flex;gap:6px;flex-wrap:wrap;flex:1;min-width:0}
 .badge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;background:#efece5;color:#4a4f60;white-space:nowrap}
-.badge.demo{background:#ffe9a8;color:#5a4300}.badge.live{background:#d8f5e3;color:#0f6b3a}.badge.pp{background:#e1ecff;color:#003087}
+.badge.demo{background:#ffe9a8;color:#5a4300}.badge.live{background:#d8f5e3;color:#0f6b3a}.badge.ai{background:#efe9ff;color:#4b3cc9}.badge.pp{background:#e1ecff;color:#003087}
 .pending{border:0;background:var(--ink);color:#fff;border-radius:999px;padding:7px 13px;font-weight:600;white-space:nowrap}
 .pending.has{background:linear-gradient(135deg,#8b7bff,#ff8fb1);animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{50%{transform:scale(1.04)}}

@@ -11,6 +11,7 @@ import * as pipeline from "./src/pipeline.js";
 import { payments, isSimulated, simulated } from "./src/providers/payments/index.js";
 import { demoBySlug, demoSiteHtml } from "./src/demo/businesses.js";
 import { esc } from "./src/util.js";
+import * as llm from "./src/providers/llm/index.js";
 
 const PUBLIC = path.join(ROOT, "public");
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".json": "application/json", ".ico": "image/x-icon", ".webp": "image/webp", ".gif": "image/gif" };
@@ -55,7 +56,7 @@ const on = (method, pattern, fn, opts = {}) => routes.push({ method, re: new Reg
 // ── API
 on("GET", "/api/status", (req, res) => {
   const studio = loadStudio();
-  send(res, 200, { ...publicStatus(), studio: { name: studio.name, logo: studio.logo, website: studio.website, colors: studio.colors, currency: studio.currency, depositPercent: studio.depositPercent, conceptPrice: studio.conceptPrice, credit: studio.credit !== false, people: studio.people, officeSign: studio.officeSign },
+  send(res, 200, { ...publicStatus(), aiMode: llm.mode, recording: llm.recordingInfo(), studio: { name: studio.name, logo: studio.logo, website: studio.website, colors: studio.colors, currency: studio.currency, depositPercent: studio.depositPercent, conceptPrice: studio.conceptPrice, credit: studio.credit !== false, people: studio.people, officeSign: studio.officeSign },
     team: loadTeam().agents, niches: listNiches().map((n) => ({ id: n, label: loadNiche(n).search.label, example: loadNiche(n).search.example })) });
 });
 on("GET", "/api/office", (req, res) => send(res, 200, officeState()));
@@ -165,7 +166,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(settings.port, () => {
   console.log(`\n🐾 Siteo Office is open: http://localhost:${settings.port}`);
-  console.log(`   mode: ${demoMode ? "DEMO (fictional businesses, no AI key needed)" : "LIVE"} · payments: ${paypalReady ? "PayPal " + settings.paypal.env : "simulated"} · email: ${publicStatus().email}\n`);
+  console.log(`   mode: ${demoMode ? "DEMO (fictional businesses)" : "LIVE"} · AI: ${llm.mode} · payments: ${paypalReady ? "PayPal " + settings.paypal.env : "simulated"} · email: ${publicStatus().email}\n`);
 });
 if (!demoMode && !settings.adminToken && (process.env.RENDER || settings.publicUrl)) console.warn("⚠️  Live mode on a public URL without ADMIN_TOKEN: anyone could start runs. Set ADMIN_TOKEN.");
 // background: watch unpaid invoices and draft follow-ups (every minute)

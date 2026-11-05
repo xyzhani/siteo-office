@@ -13,9 +13,10 @@ export function ruleIntent(text) {
 
 export async function read(run, lead, text) {
   let intent = ruleIntent(text), summary = "";
-  if (llm.available()) {
+  const key = `${lead.niche}/scrapper/${lead.slug || lead.id}/${String(text).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60)}`;
+  if (llm.available(key)) {
     try {
-      const r = await llm.json(run, { system: loadAgentInstructions("inbox"), prompt: `We emailed ${lead.name} a free concept website and offered to build it. Their reply:\n"""\n${String(text).slice(0, 4000)}\n"""\nReturn {"intent": "interested" | "question" | "not_interested" | "unsubscribe", "summary": one short sentence}.`, maxTokens: 300 });
+      const r = await llm.json(run, { key, system: loadAgentInstructions("inbox"), prompt: `We emailed ${lead.name} a free concept website and offered to build it. Their reply:\n"""\n${String(text).slice(0, 4000)}\n"""\nReturn {"intent": "interested" | "question" | "not_interested" | "unsubscribe", "summary": one short sentence}.`, maxTokens: 300 });
       if (["interested", "question", "not_interested", "unsubscribe"].includes(r.intent)) intent = r.intent;
       summary = String(r.summary || "");
     } catch (e) { if (e instanceof llm.CostCapError) throw e; }

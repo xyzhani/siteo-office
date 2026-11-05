@@ -8,7 +8,7 @@ Type one line, like `dentists in Galway`. The team finds local businesses with w
 
 > **Live demo:** _coming soon_ (link placeholder) · **Built by [Siteo](https://siteostudio.com)** · MIT licence
 >
-> The hosted demo replays the full pipeline on fictional sample data (real searches and AI are switched off there; PayPal **Sandbox** payments are real Sandbox calls). Run your own copy with your keys for real searches. It's on Render's free plan, so the first visit after a quiet spell can take 30–60 seconds while the office wakes up.
+> The hosted demo runs the real pipeline on fictional sample data and replays a recorded run of the real AI agents (live searches and AI calls are switched off there; PayPal **Sandbox** payments are real Sandbox calls). Run your own copy with your keys for real searches. It's on Render's free plan, so the first visit after a quiet spell can take 30–60 seconds while the office wakes up.
 
 ---
 
@@ -16,7 +16,7 @@ Type one line, like `dentists in Galway`. The team finds local businesses with w
 
 | Way | Time | What you need |
 |---|---|---|
-| **1. Try the demo** | 1 click | Nothing. Open the live demo and press **Start the team**. It runs on clearly labelled **fictional** businesses. |
+| **1. Try the demo** | 1 click | Nothing. Open the live demo and press **Start the team**. It runs on clearly labelled **fictional** businesses and replays a recorded run of the real AI agents. |
 | **2. Deploy to Render** | ~3 min | A free Render account. [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/<you>/siteo-office) (see [deployment](docs/deployment.md)) |
 | **3. Run it locally** | ~2 min | Node 20.12+ |
 
@@ -28,7 +28,7 @@ cp .env.example .env      # leave it empty for demo mode
 npm run dev               # → http://localhost:3000
 ```
 
-With an empty `.env` you get **demo mode**: fictional businesses in a made-up town, rule-based agents (no AI key) and a clearly marked simulated checkout. Add PayPal **Sandbox** keys and the deposit and invoice become real Sandbox payments. Add a Claude key and the agents write with AI on real businesses.
+With an empty `.env` you get **demo mode**: fictional businesses in a made-up town, the agents **replaying a recorded run of the real Claude agents** (from `demo/recorded/`, $0, no key), and a clearly marked simulated checkout. Without a recording, the agents fall back to simple rule-based paths. Add PayPal **Sandbox** keys and the deposit and invoice become real Sandbox payments. Add a Claude key and the agents write with AI on real businesses.
 
 ## The team
 
@@ -96,7 +96,7 @@ Every setting is listed in [`.env.example`](.env.example) and [deployment](docs/
 
 | Tool | How it's used |
 |---|---|
-| **Claude** (Anthropic API, model set by `CLAUDE_MODEL`) | Tom extracts facts from websites; Knight writes concept copy from those facts only; Snow Bell's AI fact-check (on top of rule checks); Sherlock's SEO note; Nemo, Scrapper and Fluffy write emails in the niche's tone; Scrapper classifies replies; Fluffy calls invoice tools (tool use). Off in demo mode, where every agent uses its rule-based path. |
+| **Claude** (Anthropic API, model set by `CLAUDE_MODEL`) | Tom extracts facts from websites; Knight writes concept copy from those facts only; Snow Bell's AI fact-check (on top of rule checks); Sherlock's SEO note; Nemo, Scrapper and Fluffy write emails in the niche's tone; Scrapper classifies replies; Fluffy calls invoice tools (tool use). In demo mode, a recorded real run is replayed (`npm run record-demo`); with no recording, rule-based paths. |
 | **PayPal Orders v2** (Checkout) | Scrapper's deposit link; captured on return or webhook. |
 | **PayPal Invoicing v2** | Fluffy creates and sends the balance invoice, tracks its status, and reminders link to it. |
 | **PayPal Webhooks** | `CHECKOUT.ORDER.APPROVED`, `PAYMENT.CAPTURE.COMPLETED`, `INVOICING.INVOICE.PAID`, signature-verified and re-checked against the API. |

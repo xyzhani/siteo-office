@@ -53,6 +53,8 @@ async function execute(run) {
   const niche = loadNiche(run.niche);
   run.status = "running"; save();
   try {
+    if (llm.mode === "replay") log("system", "Demo: the agents replay a recorded run of the real AI (Claude) on these fictional businesses. $0, no key needed.", { run: run.id });
+    else if (llm.mode === "rules" && demoMode) log("system", "Demo: no recording found, so the agents use their rule-based paths. Run `npm run record-demo` with an AI key to record a real AI run.", { run: run.id });
     // the team walks from the nap lounge to their desks first
     office.say("finder", `New job: ${run.query}. Everyone to your desks!`);
     await pace(demoMode ? 3 : 1);
@@ -63,7 +65,7 @@ async function execute(run) {
     await pace();
     const { businesses } = await misso.find({ niche, town: run.town, limit: settings.search.maxResults });
     const fresh = businesses.filter((b) => !db.unsubscribed.includes(hostOf(b.website)));
-    const leads = fresh.map((b) => ({ id: id("b"), run: run.id, niche: run.niche, name: b.name, website: b.website, phone: b.phone, address: b.address, email: b.email || null, town: run.town, fictional: !!b.fictional, source: b.source, status: "found", created: now(), updated: now() }));
+    const leads = fresh.map((b) => ({ id: id("b"), run: run.id, niche: run.niche, name: b.name, slug: b.sourceId, website: b.website, phone: b.phone, address: b.address, email: b.email || null, town: run.town, fictional: !!b.fictional, source: b.source, status: "found", created: now(), updated: now() }));
     db.leads.push(...leads); run.counts.found = leads.length; save();
     office.say("finder", `Found ${leads.length} ${niche.search.label} with a website`);
     log("finder", `Found ${leads.length} businesses with websites`, { run: run.id });
@@ -147,7 +149,7 @@ async function buildAndCheck(run, niche, l) {
     setStatus(l, "checking");
     office.working("checker", `Fact-checking ${l.name} (round ${round})`, l.name);
     await pace();
-    const res = await snowBell.check(run, niche, l, copy);
+    const res = await snowBell.check(run, niche, l, copy, round);
     (l.checks ||= []).push({ round, issues: res.issues, at: now() }); save();
     if (res.pass) {
       l.conceptHtml = knight.renderConcept(niche, l, copy);
@@ -315,7 +317,7 @@ export async function sweepInvoices() {
     const niche = loadNiche(l.niche), run = db.runs.find((r) => r.id === l.run);
     office.working("followup", `Drafting a friendly reminder for ${l.name}`, l.name);
     const vars = writer.studioVars(l, { invoice_url: p.payerUrl || "", invoice_number: p.number || "" });
-    queueEmail(l, "followup", "followup", await writer.write(run, { role: "followup", kind: "follow-up", niche, lead: l, vars }));
+    queueEmail(l, "followup", "followup", await writer.write(run, { role: "followup", kind: "follow-up", niche, lead: l, vars, n: (l.followups || 0) + 1 }));
     office.say("followup", `Drafted reminder #${(l.followups || 0) + 1} for ${l.name}`);
     setTimeout(() => office.idle("followup"), 2500);
     save();

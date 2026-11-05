@@ -23,7 +23,16 @@ Siteo Office is one Node app. A run goes through 8 agents in order; each step up
 
 ## The agents in detail
 
-Each agent is a small file in `src/agents/` plus its editable instructions in `agents/*.md`. With an AI key they use Claude; without one (demo mode) every agent has a rule-based path, so the whole pipeline works with no keys.
+Each agent is a small file in `src/agents/` plus its editable instructions in `agents/*.md`. The AI layer (`src/providers/llm/index.js`) has four modes:
+
+| Mode | When | What the agents do |
+|---|---|---|
+| `live` | AI key + `CLAUDE_MODEL`, not demo | Real Claude calls on real businesses |
+| `record` | `npm run record-demo` | Real Claude calls on the fictional demo businesses; outputs saved to `demo/recorded/` |
+| `replay` | Demo mode with a recording | The recorded real outputs, step by step, for $0 |
+| `rules` | Demo mode without a recording | Each agent's rule-based path |
+
+Every AI step has a stable key (agent + business + round), so a replay returns exactly what the real agent said for that step. Anything not in the recording (for example a reply you type yourself) uses the rule-based path.
 
 ### 1. Misso · Lead Finder (`src/agents/misso.js`)
 - Parses your line into **what** and **where** (`dentists` / `Galway`) and picks the niche pack whose `search.json` keywords match (or the one you chose).
