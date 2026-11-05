@@ -40,12 +40,24 @@ async function officeShot(theme, file) {
   return { browser, page, run };
 }
 
+const runsIdle = async () => { for (;;) { const s = await j("/api/state"); if (!s.runs.some((x) => ["queued", "running"].includes(x.status))) return; await wait(2000); } };
 (async () => {
-  // light office first, then a fresh dark run that the other shots continue from
-  let r = await officeShot("light", "office-light.png"); await r.browser.close();
-  r = await officeShot("dark", "office-dark.png");
+  let r;
+  if (process.argv.includes("--after-clip")) {
+    // continue from the run that test/record-clip.cjs started (its frames give the office stills)
+    await runsIdle();
+    r = await open("dark", 1440, 900, 1);
+    await r.page.evaluate(() => window.__soDebug.pause()); // stop rendering the hidden office: screenshots stay fast
+  } else {
+    // light office first, then a fresh dark run that the other shots continue from
+    r = await officeShot("light", "office-light.png"); await r.browser.close();
+    await runsIdle();
+    r = await officeShot("dark", "office-dark.png");
+    await runsIdle();
+    await r.page.evaluate(() => window.__soDebug.pause());
+  }
   const { page } = r;
-  for (;;) { const s = await j("/api/state"); if (s.runs[0]?.status === "done") break; await page.waitForTimeout(1000); await sim(page, 1); }
+  page.setDefaultTimeout(120000);
   await page.evaluate(() => (location.hash = "approvals")); await page.waitForTimeout(2600);
   await page.screenshot({ path: `${out}/approvals.png` });
 
@@ -81,8 +93,8 @@ async function officeShot(theme, file) {
 
   // phone: the office with the top-bar menu open
   const m = await open("dark", 390, 844, 2);
-  for (let i = 0; i < 4; i++) { await m.page.waitForTimeout(800); await sim(m.page, 1.5); }
-  await m.page.click("#menu-btn"); await m.page.waitForTimeout(500);
+  m.page.setDefaultTimeout(120000);
+  for (let i = 0; i < 6; i++) { await m.page.waitForTimeout(800); await sim(m.page, 2); }
   await m.page.screenshot({ path: `${out}/mobile.png` });
   await m.browser.close();
 
