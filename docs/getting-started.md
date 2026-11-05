@@ -46,7 +46,7 @@ If the invoice stays unpaid, Fluffy drafts a friendly reminder for you to approv
 
 Demo mode replays a **recorded run of the real AI agents** so it shows real Claude output without a key or any cost. The recording lives in `demo/recorded/<niche>.json`. To make (or refresh) it:
 
-1. Put `ANTHROPIC_API_KEY` and `CLAUDE_MODEL` in `.env`.
+1. Put `ANTHROPIC_API_KEY` and `CLAUDE_MODEL` in `.env`. (If `ANTHROPIC_API_KEY` is already used by something else in your environment, for example a coding agent's own login, set `OFFICE_ANTHROPIC_API_KEY` and `OFFICE_CLAUDE_MODEL` instead. Only the record script reads these fallback names; the app itself uses the normal ones.)
 2. Run:
    ```bash
    npm run record-demo                 # both shipped packs

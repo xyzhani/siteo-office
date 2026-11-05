@@ -13,6 +13,10 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const niches = (process.argv[2] || "dental,restaurants").split(",").filter((n) => /^[a-z0-9-]+$/.test(n));
 const PORT = 3950 + Math.floor(Math.random() * 40), B = `http://localhost:${PORT}`;
 const env = { ...process.env, PORT: String(PORT), DATA_DIR: fs.mkdtempSync(path.join(os.tmpdir(), "so-rec-")), DEMO_MODE: "true", PUBLIC_DEMO: "", RECORD_DEMO: "true", PACE_MS: "0", FOLLOWUP_AFTER_MINUTES: "0", PAYPAL_CLIENT_ID: "", PAYPAL_CLIENT_SECRET: "", EMAIL_PROVIDER: "test", ADMIN_TOKEN: "", PUBLIC_URL: B };
+// Fallback names for the key and model (only here): OFFICE_ANTHROPIC_API_KEY / OFFICE_CLAUDE_MODEL, for setups where
+// ANTHROPIC_API_KEY is reserved for something else (e.g. a coding agent's own auth). .env values still work as usual.
+if (!process.env.ANTHROPIC_API_KEY && process.env.OFFICE_ANTHROPIC_API_KEY) env.ANTHROPIC_API_KEY = process.env.OFFICE_ANTHROPIC_API_KEY;
+if (!process.env.CLAUDE_MODEL && process.env.OFFICE_CLAUDE_MODEL) env.CLAUDE_MODEL = process.env.OFFICE_CLAUDE_MODEL;
 // must match the quick-reply buttons in public/app.js so the demo replays them
 const QUESTION = "Looks nice. How much would it cost and how long does it take?";
 const YES = "Yes, I want it! Let's go ahead.";
@@ -29,7 +33,7 @@ const srv = spawn(process.execPath, ["server.js"], { cwd: ROOT, env, stdio: ["ig
 try {
   await until(() => fetch(B + "/healthz").then((r) => r.ok).catch(() => false), 20000);
   const st = await api("/api/status");
-  if (st.aiMode !== "record") throw new Error("AI isn't available. Set ANTHROPIC_API_KEY and CLAUDE_MODEL in .env first.");
+  if (st.aiMode !== "record") throw new Error("AI isn't available. Set ANTHROPIC_API_KEY and CLAUDE_MODEL (in .env, or OFFICE_ANTHROPIC_API_KEY / OFFICE_CLAUDE_MODEL in the environment) first.");
   let total = 0;
   for (const niche of niches) {
     console.log(`\n▶ ${niche}: running the real agents on the fictional demo businesses…`);
