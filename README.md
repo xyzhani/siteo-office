@@ -47,13 +47,15 @@ AI-written sales copy loves to invent things: "the best dentist in town", "5-sta
 
 ## What the business owner gets
 
-A one-page concept of their own site, built only from details already on it, clearly marked as a concept preview.
+A one-page concept of their own site, built only from details already on it, clearly marked as a concept preview. Two niche packs ship: **dental practices** and **freight & logistics firms** (the logistics template has a small three.js container-yard hero).
 
 ![A generated concept site for a fictional dental practice](docs/img/concept-dental.png)
 
-<p align="center"><img src="docs/img/concept-scroll.gif" width="64%" alt="Scrolling through the dental concept"> <img src="docs/img/concept-restaurant.png" width="34%" alt="A concept for a fictional restaurant"></p>
+![A generated concept site for a fictional freight forwarder, with a 3D container-yard hero](docs/img/concept-logistics.png)
 
-<sub>Dental and restaurant packs are included; a new niche is a folder of text files and one HTML template.</sub>
+<p align="center"><img src="docs/img/concept-dental-scroll.gif" width="49%" alt="Scrolling through the dental concept"> <img src="docs/img/concept-logistics-scroll.gif" width="49%" alt="Scrolling through the logistics concept"></p>
+
+<sub>Every line on these pages comes from the business's own website. A new niche is a folder of text files and one HTML template ([niche packs](docs/niche-packs.md)).</sub>
 
 ## Getting paid with PayPal
 
@@ -113,7 +115,7 @@ It comes from real use. Running this approach for Siteo's own studio: **650 busi
 - The full pipeline: find → audit → concept → fact-check loop → SEO note → email + approval → reply → PayPal deposit → PayPal invoice → follow-ups.
 - A Siteo-style dashboard with a dark/light switch: Office, Overview, Approvals, Projects, Inbox, Money, **Salary** (AI cost per cat), Activity, Settings and Connections. The funnel goes concepts → approved → deposit paid → invoice sent → paid, sortable and filterable **Projects** and **Payments** tables (AG Grid) that update live as PayPal confirms payments, plus approvals, a test inbox and an activity feed.
 - A [Postman collection](postman/) for the API and the PayPal deposit / invoice / webhook flow.
-- **Make it yours:** rename and recolour the studio and the cats ([configuration](docs/configuration.md)), add your own niche ([niche packs](docs/niche-packs.md), dental and restaurants included), and edit each agent's instructions in plain text ([teaching your agents](docs/teaching-agents.md)).
+- **Make it yours:** rename and recolour the studio and the cats ([configuration](docs/configuration.md)), add your own niche ([niche packs](docs/niche-packs.md), dental and logistics included), and edit each agent's instructions in plain text ([teaching your agents](docs/teaching-agents.md)).
 - **Swap providers:** LLM, business search, email and payments are small adapters ([providers](docs/providers.md)).
 
 ## What you need
