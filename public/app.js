@@ -177,8 +177,9 @@ $("#inbox").addEventListener("click", async (ev) => {
 
 // ── money
 function renderMoney() {
+  const sim = !STATUS.payments.startsWith("paypal");
   const m = STATE.money, open = Math.max(0, m.invoiced - m.paid);
-  put("#money-tiles", tile("Deposits captured", money(m.deposits), "PayPal Checkout", "rgba(255,196,107,.3)") + tile("Invoiced", money(m.invoiced), "PayPal Invoicing") + tile("Invoices paid", money(m.paid), "confirmed by PayPal", "rgba(91,227,163,.3)") + tile("Still open", money(open), `${STATE.emails.filter((e) => e.kind === "followup" && e.status === "awaiting_approval").length} reminders to approve`, "rgba(255,122,133,.3)"));
+  put("#money-tiles", tile("Deposits captured", money(m.deposits), sim ? "simulated checkout" : "PayPal Checkout", "rgba(255,196,107,.3)") + tile("Invoiced", money(m.invoiced), sim ? "simulated invoices" : "PayPal Invoicing") + tile("Invoices paid", money(m.paid), sim ? "simulated payments" : "confirmed by PayPal", "rgba(91,227,163,.3)") + tile("Still open", money(open), `${STATE.emails.filter((e) => e.kind === "followup" && e.status === "awaiting_approval").length} reminders to approve`, "rgba(255,122,133,.3)"));
   const payable = STATE.payments.filter((p) => !["captured", "paid"].includes(p.status) && (p.type === "deposit" ? p.approveUrl : p.payerUrl));
   put("#payments", payable.map((p) => { const l = leadById(p.lead); return `<div class="card"><h4>${p.type === "deposit" ? "💳 Deposit" : "🧾 Invoice " + esc(p.number || "")} · ${esc(l?.name)}${fic(l)} ${pill(p.status)}</h4><div class="meta">${money(p.amount)} · ${esc(p.provider)}</div><div class="acts"><a class="btn pp small" href="${esc(p.type === "deposit" ? p.approveUrl : p.payerUrl)}" target="_blank" rel="noopener">${p.type === "deposit" ? "Pay deposit as the customer" : "Pay invoice as the customer"}</a></div></div>`; }).join(""));
 }
