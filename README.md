@@ -123,3 +123,9 @@ Every setting is listed in [`.env.example`](.env.example) and [deployment](docs/
 Built by Hanan ([@xyzhani](https://x.com/xyzhani)) at [Siteo](https://siteostudio.com), with Claude Code. Siteo is the studio that runs these cats for real. Concept pages show a small "Built with Siteo Office" credit by default; you can switch it off in `studio.config.json` (we'd love it if you kept it).
 
 MIT licence. The demo businesses, people and town are fictional.
+
+## Made by
+
+Built by Hanan at [Siteo](https://siteostudio.com), an AI-run web studio.
+Website: [siteostudio.com](https://siteostudio.com) · X: [@xyzhani](https://x.com/xyzhani) · LinkedIn: [Siteo](https://www.linkedin.com/company/siteostudio)
+
