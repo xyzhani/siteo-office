@@ -1,0 +1,9 @@
+{
+  "label": "freight & logistics firms",
+  "example": "freight forwarders in Felixstowe",
+  "query": "freight forwarder",
+  "keywords": ["freight", "forwarder", "forwarders", "logistics", "customs", "broker", "brokers", "haulage", "haulier", "hauliers", "shipping", "cargo"],
+  "osmTags": ["office=logistics", "office=freight_forwarder", "office=customs_broker", "industrial=logistics"],
+  "cta": "Request a quote",
+  "demoSlip": "The UK's leading forwarder, trusted by 500+ shippers with a 100% on-time record."
+}

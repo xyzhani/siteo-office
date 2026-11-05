@@ -1,0 +1,604 @@
+{
+ "recordedAt": "2026-11-05T13:06:05.655Z",
+ "calls": {
+  "logistics/tom/northgate-freight": {
+   "facts": {
+    "name": "Northgate Freight",
+    "owner": "Ruth Adeyemi",
+    "phone": "+00 555 0301",
+    "email": "ops@northgate-freight.example",
+    "address": "Unit 4, Dockside Park, Sampleton",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Fri 7:30–18:00",
+     "Sat 8:00–12:00"
+    ],
+    "services": [
+     "Sea freight (FCL and LCL)",
+     "Air freight",
+     "Customs clearance",
+     "Bonded warehousing"
+    ],
+    "routes": [
+     "Sampleton Port",
+     "Northern Europe",
+     "Far East"
+    ],
+    "accreditations": [
+     "Member of the Sampleton Freight Association",
+     "Fictionland Customs Agent Licence No. 4471"
+    ],
+    "since": "1992",
+    "extras": [
+     "24-hour container yard at the depot."
+    ]
+   }
+  },
+  "logistics/tom/harbourline-customs": {
+   "facts": {
+    "name": "Harbourline Customs",
+    "owner": "Viktor Lindqvist",
+    "phone": "+00 555 0302",
+    "email": "entries@harbourline-customs.example",
+    "address": "2 Customs House Lane, Sampleton",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Fri 8:00–17:00"
+    ],
+    "services": [
+     "Import and export declarations",
+     "Transit documents",
+     "Duty and tariff advice"
+    ],
+    "routes": [
+     "Sampleton Port",
+     "Sampleton Airport"
+    ],
+    "accreditations": [
+     "Fictionland Customs Agent Licence No. 2280"
+    ],
+    "since": "2006",
+    "extras": [
+     "Same-day entries for cargo received before 14:00."
+    ]
+   }
+  },
+  "logistics/tom/sampleton-haulage": {
+   "facts": {
+    "name": "Sampleton Haulage Co.",
+    "owner": "Dee Morrow",
+    "phone": "+00 555 0303",
+    "email": "bookings@sampleton-haulage.example",
+    "address": "Mill Road Depot, Sampleton",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Sat 6:00–20:00"
+    ],
+    "services": [
+     "Container haulage",
+     "Pallet distribution",
+     "Port collections"
+    ],
+    "routes": [
+     "Sampleton Port to the Midlands",
+     "Nationwide pallet network"
+    ],
+    "accreditations": null,
+    "since": "1985",
+    "extras": [
+     "Tail-lift and curtain-side trailers."
+    ]
+   }
+  },
+  "logistics/tom/brightway-logistics": {
+   "facts": {
+    "name": "Brightway Logistics",
+    "owner": null,
+    "phone": "+00 555 0304",
+    "email": "hello@brightway-logistics.example",
+    "address": "1 Harbour Gate, Sampleton",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Fri 8:00–18:00"
+    ],
+    "services": [
+     "Road freight",
+     "Warehousing"
+    ],
+    "routes": null,
+    "accreditations": null,
+    "since": null,
+    "extras": [
+     "Book online in 60 seconds"
+    ]
+   }
+  },
+  "logistics/tom/quayside-forwarding": {
+   "facts": {
+    "name": "Quayside Forwarding",
+    "owner": "Imani Clarke",
+    "phone": "+00 555 0305",
+    "email": "quotes@quayside-forwarding.example",
+    "address": "9 Quayside, Sampleton",
+    "town": "Sampleton",
+    "hours": [
+     "Mon–Fri 8:30–17:30"
+    ],
+    "services": [
+     "Groupage",
+     "Project cargo",
+     "Customs brokerage"
+    ],
+    "routes": [
+     "Sampleton Port",
+     "Mediterranean ports"
+    ],
+    "accreditations": [
+     "Member of the Sampleton Freight Association"
+    ],
+    "since": "2001",
+    "extras": null
+   }
+  },
+  "logistics/knight/northgate-freight/1": {
+   "headline": "Northgate Freight",
+   "subheadline": "Sea freight, air freight, customs clearance and bonded warehousing in Sampleton.",
+   "about": "Northgate Freight is a freight company based at Unit 4, Dockside Park, Sampleton. Ruth Adeyemi has run it since 1992. We work from Sampleton Port to Northern Europe and the Far East. Our depot has a 24-hour container yard. We are a member of the Sampleton Freight Association and hold Fictionland Customs Agent Licence No. 4471.",
+   "services": [
+    {
+     "name": "Sea freight (FCL and LCL)",
+     "description": ""
+    },
+    {
+     "name": "Air freight",
+     "description": ""
+    },
+    {
+     "name": "Customs clearance",
+     "description": ""
+    },
+    {
+     "name": "Bonded warehousing",
+     "description": ""
+    }
+   ],
+   "cta": "Request a quote"
+  },
+  "logistics/snowbell/northgate-freight/1": {
+   "issues": [
+    {
+     "line": "The UK's leading forwarder, trusted by 500+ shippers with a 100% on-time record.",
+     "problem": "Uses the forbidden words \"leading\", \"trusted by\", \"100%\" and \"on-time record\". \"500+ shippers\" is a customer count that is not in the facts. \"UK\" is a country the facts do not mention. The line is an unsupported superlative and track-record claim."
+    }
+   ]
+  },
+  "logistics/knight/northgate-freight/2": {
+   "headline": "Northgate Freight",
+   "subheadline": "Sea freight, air freight, customs clearance and bonded warehousing in Sampleton.",
+   "about": "Northgate Freight is a freight company based at Unit 4, Dockside Park, Sampleton. Ruth Adeyemi has run it since 1992. We work from Sampleton Port to Northern Europe and the Far East, and our depot has a 24-hour container yard. We are a member of the Sampleton Freight Association and hold Fictionland Customs Agent Licence No. 4471.",
+   "services": [
+    {
+     "name": "Sea freight (FCL and LCL)",
+     "description": ""
+    },
+    {
+     "name": "Air freight",
+     "description": ""
+    },
+    {
+     "name": "Customs clearance",
+     "description": ""
+    },
+    {
+     "name": "Bonded warehousing",
+     "description": ""
+    }
+   ],
+   "cta": "Request a quote"
+  },
+  "logistics/snowbell/northgate-freight/2": {
+   "issues": [
+    {
+     "line": "Ruth Adeyemi has run it since 1992.",
+     "problem": "The facts list Ruth Adeyemi as owner and give 1992 as the company's start year. They do not say she has run the company since 1992, so this ties her to that year without support."
+    }
+   ]
+  },
+  "logistics/knight/northgate-freight/3": {
+   "headline": "Northgate Freight",
+   "subheadline": "Sea freight, air freight, customs clearance and bonded warehousing in Sampleton.",
+   "about": "Northgate Freight is a freight company based at Unit 4, Dockside Park, Sampleton. It has operated since 1992, and Ruth Adeyemi is the owner. We work from Sampleton Port to Northern Europe and the Far East, and our depot has a 24-hour container yard. We are a member of the Sampleton Freight Association and hold Fictionland Customs Agent Licence No. 4471.",
+   "services": [
+    {
+     "name": "Sea freight (FCL and LCL)",
+     "description": ""
+    },
+    {
+     "name": "Air freight",
+     "description": ""
+    },
+    {
+     "name": "Customs clearance",
+     "description": ""
+    },
+    {
+     "name": "Bonded warehousing",
+     "description": ""
+    }
+   ],
+   "cta": "Request a quote"
+  },
+  "logistics/snowbell/northgate-freight/3": {
+   "issues": []
+  },
+  "logistics/sherlock/northgate-freight": {
+   "points": [
+    "The site isn't set up for phones, so pages can look tiny or hard to read for customers browsing on mobile.",
+    "The phone number can't be tapped to call, so mobile visitors have to copy or write it down instead of reaching you in one touch.",
+    "There's no clear page title or description for Google, so your business may appear as a vague or unhelpful listing in search results.",
+    "There's no online booking or reservation link, so customers who are ready to get in touch have no quick way to do it."
+   ]
+  },
+  "logistics/sender/first-email/northgate-freight": {
+   "subject": "A website concept for Northgate Freight",
+   "body": "Hi Ruth Adeyemi,\n\nI looked at the Northgate Freight website and put together a free concept of a modern version, using only the details already on your site:\n\n{concept_url}\n\nA few things the current site is missing:\n• The site isn't set up for phones, so pages can look tiny or hard to read for customers browsing on mobile.\n• The phone number can't be tapped to call, so mobile visitors have to copy or write it down instead of reaching you in one touch.\n• There's no clear page title or description for Google, so your business may appear as a vague or unhelpful listing in search results.\n• There's no online booking or reservation link, so customers who are ready to get in touch have no quick way to do it.\n\nIf it's useful, we can build the real site for $500. No obligation; just reply if you'd like to talk it through.\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/knight/harbourline-customs/1": {
+   "headline": "Harbourline Customs",
+   "subheadline": "Import and export declarations, transit documents and duty and tariff advice in Sampleton.",
+   "about": "Harbourline Customs is a customs agent in Sampleton, run by Viktor Lindqvist since 2006. We work with cargo through Sampleton Port and Sampleton Airport. Cargo received before 14:00 gets same-day entries. We hold Fictionland Customs Agent Licence No. 2280. Find us at 2 Customs House Lane, open Mon–Fri 8:00–17:00.",
+   "services": [
+    {
+     "name": "Import and export declarations",
+     "description": ""
+    },
+    {
+     "name": "Transit documents",
+     "description": ""
+    },
+    {
+     "name": "Duty and tariff advice",
+     "description": ""
+    }
+   ],
+   "cta": "Request a quote"
+  },
+  "logistics/snowbell/harbourline-customs/1": {
+   "issues": []
+  },
+  "logistics/sherlock/harbourline-customs": {
+   "points": [
+    "The site isn't set up for phones, so visitors on mobile often have to pinch and zoom to read it, and many will give up and leave.",
+    "The phone number can't be tapped to call, so someone ready to reach you has to copy or memorize it instead.",
+    "There's no online booking or reservation link, so customers can only get started by contacting you another way.",
+    "The site looks and is built the way it was in 2017 (old layout and code, not updated since), which can make a business seem less current than it is."
+   ]
+  },
+  "logistics/sender/first-email/harbourline-customs": {
+   "subject": "A website concept for Harbourline Customs",
+   "body": "Hi Viktor Lindqvist,\n\nI looked at the Harbourline Customs website and put together a free concept of a modern version, using only the details already on your site:\n\n{concept_url}\n\nA few things the current site is missing:\n• The site isn't set up for phones, so visitors on mobile often have to pinch and zoom to read it, and many will give up and leave.\n• The phone number can't be tapped to call, so someone ready to reach you has to copy or memorize it instead.\n• There's no online booking or reservation link, so customers can only get started by contacting you another way.\n• The site looks and is built the way it was in 2017 (old layout and code, not updated since), which can make a business seem less current than it is.\n\nIf it's useful, we can build the real site for $500. No obligation; just reply if you'd like to talk it through.\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/knight/sampleton-haulage/1": {
+   "headline": "Sampleton Haulage Co.",
+   "subheadline": "Container haulage, pallet distribution and port collections in Sampleton.",
+   "about": "Sampleton Haulage Co. has been run from Mill Road Depot, Sampleton, since 1985. Dee Morrow is the owner. We run tail-lift and curtain-side trailers. We are open Mon–Sat 6:00–20:00.",
+   "services": [
+    {
+     "name": "Container haulage",
+     "description": ""
+    },
+    {
+     "name": "Pallet distribution",
+     "description": "Part of a nationwide pallet network."
+    },
+    {
+     "name": "Port collections",
+     "description": "Collections from Sampleton Port to the Midlands."
+    }
+   ],
+   "cta": "Request a quote"
+  },
+  "logistics/snowbell/sampleton-haulage/1": {
+   "issues": []
+  },
+  "logistics/sherlock/sampleton-haulage": {
+   "points": [
+    "The site isn't set up for phones, so visitors on mobile will likely have to pinch and zoom to read it, and many will give up and look elsewhere.",
+    "The phone number can't be tapped to call, so customers on their phones have to remember or copy it, which adds a barrier to getting in touch.",
+    "The page title is generic or missing, so people scanning Google results or browser tabs can't easily tell who you are or what you do.",
+    "There's no short description for Google, so it picks random text from the page to show under your name, which may not explain your haulage services clearly."
+   ]
+  },
+  "logistics/sender/first-email/sampleton-haulage": {
+   "subject": "A website concept for Sampleton Haulage Co.",
+   "body": "Hi Dee Morrow,\n\nI looked at the Sampleton Haulage Co. website and put together a free concept of a modern version, using only the details already on your site:\n\n{concept_url}\n\nA few things the current site is missing:\n• The site isn't set up for phones, so visitors on mobile will likely have to pinch and zoom to read it, and many will give up and look elsewhere.\n• The phone number can't be tapped to call, so customers on their phones have to remember or copy it, which adds a barrier to getting in touch.\n• The page title is generic or missing, so people scanning Google results or browser tabs can't easily tell who you are or what you do.\n• There's no short description for Google, so it picks random text from the page to show under your name, which may not explain your haulage services clearly.\n\nIf it's useful, we can build the real site for $500. No obligation; just reply if you'd like to talk it through.\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/scrapper/sampleton-haulage/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "intent": "question",
+   "summary": "Sampleton Haulage Co. likes the concept and asks about price and turnaround time, but hasn't said yes yet."
+  },
+  "logistics/inbox/reply-to-a-question/sampleton-haulage": {
+   "subject": "Re: the Sampleton Haulage Co. website concept",
+   "body": "Hi Dee Morrow,\n\nThanks for your reply. The full website is $500, with a 20% deposit ($100) to start. The balance of $400 is due after that.\n\nI don't have a confirmed timeline to give you yet, so I would rather not guess. The concept is here: {concept_url}\n\nHappy to answer anything else.\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/scrapper/sampleton-haulage/yes-i-want-it-let-s-go-ahead": {
+   "intent": "interested",
+   "summary": "Sampleton Haulage Co. said yes to the concept website and wants to go ahead, so a PayPal deposit link draft can be prepared for human approval."
+  },
+  "logistics/inbox/deposit-email/sampleton-haulage": {
+   "subject": "Next step for the Sampleton Haulage Co. website",
+   "body": "Hi Dee Morrow,\n\nThanks for confirming. To get started we take a 20% deposit ($100), paid securely with PayPal:\n\n{checkout_url}\n\nOnce it's paid we'll send the invoice for the balance ($400) and start the build.\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/fluffy/sampleton-haulage": {
+   "text": "I created the balance invoice and sent it to Sampleton Haulage Co. (bookings@sampleton-haulage.example).\n\n- **Invoice ID:** SIM-INV-EE2806D075C4 (number SIM-0001)\n- **Amount:** 400 USD\n- **Status:** SENT\n- **Customer view:** http://localhost:3963/sim/invoice/SIM-INV-EE2806D075C4\n\nI did nothing else.",
+   "calls": [
+    {
+     "tool": "create_invoice",
+     "input": {
+      "recipient_name": "Sampleton Haulage Co.",
+      "recipient_email": "bookings@sampleton-haulage.example",
+      "item_name": "Website build: Sampleton Haulage Co. (balance)",
+      "item_description": "Balance after the 20% deposit.",
+      "amount": 400,
+      "currency_code": "USD",
+      "note": "Thank you for your deposit. This invoice is the remaining balance for your new website."
+     }
+    },
+    {
+     "tool": "send_invoice",
+     "input": {
+      "invoice_id": "{{id0}}"
+     }
+    }
+   ]
+  },
+  "logistics/followup/follow-up/sampleton-haulage/1": {
+   "subject": "Reminder: invoice {invoice_number}",
+   "body": "Hi Dee Morrow,\n\nA short reminder that the balance for your new website ($400) is still open. You can pay it with PayPal here:\n\n{invoice_url}\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/scrapper/harbourline-customs/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "intent": "question",
+   "summary": "They like the concept and ask about price and timeline, but haven't said yes yet."
+  },
+  "logistics/inbox/reply-to-a-question/harbourline-customs": {
+   "subject": "Re: the Harbourline Customs website concept",
+   "body": "Hi Viktor Lindqvist,\n\nThanks for your reply. The full website is $500, with a 20% deposit ($100) to start. The remaining $400 is due after that.\n\nI don't have a confirmed timeline to give you yet, so I won't guess. The concept is here: {concept_url}\n\nHappy to answer anything else.\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/scrapper/harbourline-customs/yes-i-want-it-let-s-go-ahead": {
+   "intent": "interested",
+   "summary": "Harbourline Customs enthusiastically wants the website and asks to go ahead, so a PayPal Checkout deposit link should be sent."
+  },
+  "logistics/inbox/deposit-email/harbourline-customs": {
+   "subject": "Next step for the Harbourline Customs website",
+   "body": "Hi Viktor Lindqvist,\n\nThanks for confirming. To get started we take a 20% deposit ($100), paid securely with PayPal:\n\n{checkout_url}\n\nOnce it's paid we'll send the invoice for the balance ($400) and start the build.\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/fluffy/harbourline-customs": {
+   "text": "I created the balance invoice and sent it to Harbourline Customs (entries@harbourline-customs.example).\n\n- **Invoice ID:** SIM-INV-696D3C7BB95B (number SIM-0002)\n- **Amount:** 400 USD\n- **Status:** SENT\n- **Customer view:** http://localhost:3963/sim/invoice/SIM-INV-696D3C7BB95B\n\nI didn't do anything else.",
+   "calls": [
+    {
+     "tool": "create_invoice",
+     "input": {
+      "recipient_name": "Harbourline Customs",
+      "recipient_email": "entries@harbourline-customs.example",
+      "item_name": "Website build: Harbourline Customs (balance)",
+      "item_description": "Balance after the 20% deposit.",
+      "amount": 400,
+      "currency_code": "USD",
+      "note": "Thank you for your deposit. This invoice is the remaining balance for your new website."
+     }
+    },
+    {
+     "tool": "send_invoice",
+     "input": {
+      "invoice_id": "{{id0}}"
+     }
+    }
+   ]
+  },
+  "logistics/followup/follow-up/harbourline-customs/1": {
+   "subject": "Reminder: invoice {invoice_number}",
+   "body": "Hi Viktor Lindqvist,\n\nA short reminder that the balance for your new website ($400) is still open. You can pay it with PayPal here:\n\n{invoice_url}\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/scrapper/northgate-freight/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "intent": "question",
+   "summary": "They like the concept but are asking about price and timeline without yet saying they want to proceed."
+  },
+  "logistics/inbox/reply-to-a-question/northgate-freight": {
+   "subject": "Re: the Northgate Freight website concept",
+   "body": "Hi Ruth Adeyemi,\n\nThanks for your reply. The full website is $500, with a 20% deposit ($100) to start. The remaining $400 is the balance.\n\nOn timing, I would rather confirm a date with you directly than guess in an email. The concept is here: {concept_url}\n\nHappy to answer anything else.\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/scrapper/northgate-freight/yes-i-want-it-let-s-go-ahead": {
+   "intent": "interested",
+   "summary": "Northgate Freight clearly said yes and wants to go ahead with the website, so the PayPal deposit link can be drafted for approval."
+  },
+  "logistics/inbox/deposit-email/northgate-freight": {
+   "subject": "Next step for the Northgate Freight website",
+   "body": "Hi Ruth Adeyemi,\n\nThanks for confirming. To get started we take a 20% deposit ($100), paid securely with PayPal:\n\n{checkout_url}\n\nOnce it's paid we'll send the invoice for the balance ($400) and start the build.\n\nAlex\nYour Studio · example.com"
+  },
+  "logistics/fluffy/northgate-freight": {
+   "text": "I created the balance invoice and sent it to Northgate Freight (ops@northgate-freight.example).\n\n- **Invoice ID:** SIM-INV-82A86BDC542A (number SIM-0003)\n- **Amount:** 400 USD\n- **Status:** SENT\n- **Customer view:** http://localhost:3963/sim/invoice/SIM-INV-82A86BDC542A\n\nI didn't do anything else.",
+   "calls": [
+    {
+     "tool": "create_invoice",
+     "input": {
+      "recipient_name": "Northgate Freight",
+      "recipient_email": "ops@northgate-freight.example",
+      "item_name": "Website build: Northgate Freight (balance)",
+      "item_description": "Balance after the 20% deposit.",
+      "amount": 400,
+      "currency_code": "USD",
+      "note": "Thank you for your deposit. This invoice is the remaining balance for your new website."
+     }
+    },
+    {
+     "tool": "send_invoice",
+     "input": {
+      "invoice_id": "{{id0}}"
+     }
+    }
+   ]
+  },
+  "logistics/followup/follow-up/northgate-freight/1": {
+   "subject": "Reminder: invoice {invoice_number}",
+   "body": "Hi Ruth Adeyemi,\n\nA short reminder that the balance for your new website ($400) is still open. You can pay it with PayPal here:\n\n{invoice_url}\n\nAlex\nYour Studio · example.com"
+  }
+ },
+ "usage": {
+  "logistics/tom/northgate-freight": {
+   "input": 936,
+   "output": 280
+  },
+  "logistics/tom/harbourline-customs": {
+   "input": 905,
+   "output": 224
+  },
+  "logistics/tom/sampleton-haulage": {
+   "input": 888,
+   "output": 221
+  },
+  "logistics/tom/brightway-logistics": {
+   "input": 754,
+   "output": 167
+  },
+  "logistics/tom/quayside-forwarding": {
+   "input": 876,
+   "output": 207
+  },
+  "logistics/knight/northgate-freight/1": {
+   "input": 1099,
+   "output": 273
+  },
+  "logistics/snowbell/northgate-freight/1": {
+   "input": 1288,
+   "output": 333
+  },
+  "logistics/knight/northgate-freight/2": {
+   "input": 1577,
+   "output": 779
+  },
+  "logistics/snowbell/northgate-freight/2": {
+   "input": 1244,
+   "output": 451
+  },
+  "logistics/knight/northgate-freight/3": {
+   "input": 1562,
+   "output": 280
+  },
+  "logistics/snowbell/northgate-freight/3": {
+   "input": 1251,
+   "output": 187
+  },
+  "logistics/sherlock/northgate-freight": {
+   "input": 347,
+   "output": 159
+  },
+  "logistics/sender/first-email/northgate-freight": {
+   "input": 995,
+   "output": 332
+  },
+  "logistics/knight/harbourline-customs/1": {
+   "input": 1050,
+   "output": 259
+  },
+  "logistics/snowbell/harbourline-customs/1": {
+   "input": 1191,
+   "output": 290
+  },
+  "logistics/sherlock/harbourline-customs": {
+   "input": 329,
+   "output": 160
+  },
+  "logistics/sender/first-email/harbourline-customs": {
+   "input": 1004,
+   "output": 337
+  },
+  "logistics/knight/sampleton-haulage/1": {
+   "input": 1017,
+   "output": 232
+  },
+  "logistics/snowbell/sampleton-haulage/1": {
+   "input": 1137,
+   "output": 280
+  },
+  "logistics/sherlock/sampleton-haulage": {
+   "input": 342,
+   "output": 183
+  },
+  "logistics/sender/first-email/sampleton-haulage": {
+   "input": 1054,
+   "output": 364
+  },
+  "logistics/scrapper/sampleton-haulage/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "input": 331,
+   "output": 56
+  },
+  "logistics/inbox/reply-to-a-question/sampleton-haulage": {
+   "input": 749,
+   "output": 180
+  },
+  "logistics/scrapper/sampleton-haulage/yes-i-want-it-let-s-go-ahead": {
+   "input": 328,
+   "output": 67
+  },
+  "logistics/inbox/deposit-email/sampleton-haulage": {
+   "input": 792,
+   "output": 170
+  },
+  "logistics/fluffy/sampleton-haulage": {
+   "input": 4035,
+   "output": 488
+  },
+  "logistics/followup/follow-up/sampleton-haulage/1": {
+   "input": 725,
+   "output": 132
+  },
+  "logistics/scrapper/harbourline-customs/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "input": 327,
+   "output": 41
+  },
+  "logistics/inbox/reply-to-a-question/harbourline-customs": {
+   "input": 749,
+   "output": 178
+  },
+  "logistics/scrapper/harbourline-customs/yes-i-want-it-let-s-go-ahead": {
+   "input": 324,
+   "output": 63
+  },
+  "logistics/inbox/deposit-email/harbourline-customs": {
+   "input": 793,
+   "output": 170
+  },
+  "logistics/fluffy/harbourline-customs": {
+   "input": 3990,
+   "output": 476
+  },
+  "logistics/followup/follow-up/harbourline-customs/1": {
+   "input": 729,
+   "output": 136
+  },
+  "logistics/scrapper/northgate-freight/looks-nice-how-much-would-it-cost-and-how-long-does-it-take": {
+   "input": 326,
+   "output": 43
+  },
+  "logistics/inbox/reply-to-a-question/northgate-freight": {
+   "input": 743,
+   "output": 403
+  },
+  "logistics/scrapper/northgate-freight/yes-i-want-it-let-s-go-ahead": {
+   "input": 323,
+   "output": 60
+  },
+  "logistics/inbox/deposit-email/northgate-freight": {
+   "input": 791,
+   "output": 170
+  },
+  "logistics/fluffy/northgate-freight": {
+   "input": 3970,
+   "output": 468
+  },
+  "logistics/followup/follow-up/northgate-freight/1": {
+   "input": 726,
+   "output": 135
+  }
+ }
+}

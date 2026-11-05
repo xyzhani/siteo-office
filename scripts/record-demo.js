@@ -10,7 +10,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const niches = (process.argv[2] || "dental,restaurants").split(",").filter((n) => /^[a-z0-9-]+$/.test(n));
+const niches = (process.argv[2] || "dental,logistics").split(",").filter((n) => /^[a-z0-9-]+$/.test(n));
 const PORT = 3950 + Math.floor(Math.random() * 40), B = `http://localhost:${PORT}`;
 const env = { ...process.env, PORT: String(PORT), DATA_DIR: fs.mkdtempSync(path.join(os.tmpdir(), "so-rec-")), DEMO_MODE: "true", PUBLIC_DEMO: "", RECORD_DEMO: "true", PACE_MS: "0", FOLLOWUP_AFTER_MINUTES: "0", PAYPAL_CLIENT_ID: "", PAYPAL_CLIENT_SECRET: "", EMAIL_PROVIDER: "test", ADMIN_TOKEN: "", PUBLIC_URL: B };
 // Fallback names for the key and model (only here): OFFICE_ANTHROPIC_API_KEY / OFFICE_CLAUDE_MODEL, for setups where

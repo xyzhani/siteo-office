@@ -20,17 +20,24 @@ export const DEMO = {
     D({ slug: "oakmere-dental-practice", name: "Oakmere Dental Practice", owner: "Dr. Sana Pike", phone: "+00 555 0105", email: "info@oakmere-dental.example", address: "21 Oakmere Road, Sampleton",
       hours: ["Mon–Fri 9:00–17:00"], services: ["General dentistry", "Hygienist", "Mouthguards"], since: "2008", extra: "", style: "dated" }),
   ],
-  restaurants: [
-    D({ slug: "copper-kettle-bistro", name: "The Copper Kettle Bistro", owner: "Ines Varga", phone: "+00 555 0201", email: "book@copper-kettle.example", address: "7 Market Square, Sampleton",
-      hours: ["Wed–Sun 12:00–22:00"], services: ["Seasonal lunch menu", "Sunday roast", "Private dining room for 20"], since: "2009", extra: "Dog-friendly terrace.", style: "old" }),
-    D({ slug: "saltmarsh-fish-kitchen", name: "Saltmarsh Fish Kitchen", owner: "Callum Reid", phone: "+00 555 0202", email: "hello@saltmarsh-kitchen.example", address: "3 Pier Road, Sampleton",
-      hours: ["Tue–Sat 17:00–22:30"], services: ["Fish of the day", "Takeaway fish and chips", "Kids' menu"], since: "2015", extra: "", style: "dated" }),
-    D({ slug: "nonna-rosetta-trattoria", name: "Nonna Rosetta Trattoria", owner: "Rosa Bellini", phone: "+00 555 0203", email: "ciao@nonna-rosetta.example", address: "45 High Street, Sampleton",
-      hours: ["Mon–Sun 12:00–23:00"], services: ["Fresh pasta made daily", "Wood-fired pizza", "Gluten-free options"], since: "1996", extra: "Family run.", style: "old" }),
-    D({ slug: "greenleaf-cafe", name: "Greenleaf Café", owner: "Priya Shah", phone: "+00 555 0204", email: "hi@greenleaf-cafe.example", address: "9 Park Lane, Sampleton",
-      hours: ["Mon–Sat 8:00–16:00"], services: ["Breakfast", "Vegan bowls", "Coffee"], since: "2020", extra: "", style: "modern" }),
-    D({ slug: "ember-oak-grill", name: "Ember & Oak Grill", owner: "Marco Duval", phone: "+00 555 0205", email: "reservations@ember-oak.example", address: "60 Bridge Street, Sampleton",
-      hours: ["Thu–Sun 17:00–23:00"], services: ["Steaks from the grill", "Vegetarian grill plates", "Weekend brunch"], since: "2012", extra: "", style: "dated" }),
+  logistics: [
+    D({ slug: "northgate-freight", name: "Northgate Freight", owner: "Ruth Adeyemi", phone: "+00 555 0301", email: "ops@northgate-freight.example", address: "Unit 4, Dockside Park, Sampleton",
+      hours: ["Mon–Fri 7:30–18:00", "Sat 8:00–12:00"], services: ["Sea freight (FCL and LCL)", "Air freight", "Customs clearance", "Bonded warehousing"],
+      routes: ["Sampleton Port", "Northern Europe", "Far East"], accreditations: ["Member of the Sampleton Freight Association", "Fictionland Customs Agent Licence No. 4471"],
+      since: "1992", extra: "24-hour container yard at the depot.", style: "old" }),
+    D({ slug: "harbourline-customs", name: "Harbourline Customs", owner: "Viktor Lindqvist", phone: "+00 555 0302", email: "entries@harbourline-customs.example", address: "2 Customs House Lane, Sampleton",
+      hours: ["Mon–Fri 8:00–17:00"], services: ["Import and export declarations", "Transit documents", "Duty and tariff advice"],
+      routes: ["Sampleton Port", "Sampleton Airport"], accreditations: ["Fictionland Customs Agent Licence No. 2280"],
+      since: "2006", extra: "Same-day entries for cargo received before 14:00.", style: "dated" }),
+    D({ slug: "sampleton-haulage", name: "Sampleton Haulage Co.", owner: "Dee Morrow", phone: "+00 555 0303", email: "bookings@sampleton-haulage.example", address: "Mill Road Depot, Sampleton",
+      hours: ["Mon–Sat 6:00–20:00"], services: ["Container haulage", "Pallet distribution", "Port collections"],
+      routes: ["Sampleton Port to the Midlands", "Nationwide pallet network"], accreditations: [],
+      since: "1985", extra: "Tail-lift and curtain-side trailers.", style: "old" }),
+    D({ slug: "brightway-logistics", name: "Brightway Logistics", owner: "Sam Ortega", phone: "+00 555 0304", email: "hello@brightway-logistics.example", address: "1 Harbour Gate, Sampleton",
+      hours: ["Mon–Fri 8:00–18:00"], services: ["Road freight", "Warehousing"], routes: ["Fictionland"], accreditations: [], since: "2018", extra: "", style: "modern" }),
+    D({ slug: "quayside-forwarding", name: "Quayside Forwarding", owner: "Imani Clarke", phone: "+00 555 0305", email: "quotes@quayside-forwarding.example", address: "9 Quayside, Sampleton",
+      hours: ["Mon–Fri 8:30–17:30"], services: ["Groupage", "Project cargo", "Customs brokerage"], routes: ["Sampleton Port", "Mediterranean ports"], accreditations: ["Member of the Sampleton Freight Association"],
+      since: "2001", extra: "", style: "dated" }),
   ],
 };
 
@@ -56,6 +63,8 @@ export function demoSiteHtml(b) {
 <p>Welcome to ${esc(b.name)}, ${esc(b.address)}. ${esc(b.owner)} and the team look forward to seeing you.</p>
 <h3>Our services</h3><ul>${list(b.services)}</ul>
 <h3>Opening hours</h3><ul>${list(b.hours)}</ul>
+${b.routes?.length ? `<h3>Routes we cover</h3><ul>${list(b.routes)}</ul>` : ""}
+${b.accreditations?.length ? `<h3>Accreditations</h3><ul>${list(b.accreditations)}</ul>` : ""}
 ${b.extra ? `<p>${esc(b.extra)}</p>` : ""}
 <p>Call us: ${esc(b.phone)}<br>Email: <a href="mailto:${esc(b.email)}">${esc(b.email)}</a></p>
 <p><img src="/demo-sites/photo.svg" width="900" height="600"> <img src="/demo-sites/photo.svg" width="900" height="600"></p>

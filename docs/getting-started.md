@@ -85,7 +85,7 @@ Restart. The badge says **PayPal sandbox** and deposits and invoices are real Sa
 ## Troubleshooting
 
 - **The office says it couldn't load.** It needs WebGL and loads three.js from a CDN. Everything else still works.
-- **"Say where"**: in live mode type `<what> in <town>`, e.g. `restaurants in Bristol`.
+- **"Say where"**: in live mode type `<what> in <town>`, e.g. `freight forwarders in Felixstowe`.
 - **OpenStreetMap is slow or busy**: public Overpass servers get busy; the app tries mirrors. You can set `OVERPASS_URL`.
 - **PayPal auth failed**: check `PAYPAL_ENV` matches your keys (Sandbox keys only work with `sandbox`).
 - **Reset everything**: Run tab → **Reset demo data** (or delete `data/db.json`).

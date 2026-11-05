@@ -45,5 +45,5 @@ Yes, set `"credit": false` in `studio.config.json`. We'd appreciate it if you ke
 **Where is my data?**
 In `data/db.json` on your server. Delete it (or press **Reset demo data**) to start over.
 
-**Can I run it for clients other than dentists and restaurants?**
+**Can I run it for clients other than dentists and logistics firms?**
 Yes. Make a niche pack in a few files ([niche packs](niche-packs.md)).

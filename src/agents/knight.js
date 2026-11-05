@@ -3,6 +3,7 @@ import { loadAgentInstructions, loadStudio } from "../config.js";
 import { render } from "../util.js";
 import * as llm from "../providers/llm/index.js";
 
+const LIST_KEYS = (niche, f) => [...new Set([...(niche.facts?.fields || []).filter((x) => x.type === "list").map((x) => x.key), "hours", "extras", ...Object.keys(f || {}).filter((k) => Array.isArray(f[k]))])];
 const list = (v) => (Array.isArray(v) ? v.filter(Boolean).map(String) : v ? [String(v)] : []);
 
 // Rule-based copy (demo + fallback): every sentence is built from facts, nothing added.
@@ -58,9 +59,10 @@ export function renderConcept(niche, lead, copy) {
   const studio = loadStudio();
   const f = lead.facts || {};
   return render(niche.template, {
-    business: { ...f, hours: list(f.hours), extras: list(f.extras), phoneHref: (f.phone || "").replace(/[^\d+]/g, "") },
+    // every list fact (hours, extras, routes, accreditations…) is normalised, with a show.<key> flag for templates
+    business: { ...f, ...Object.fromEntries(LIST_KEYS(niche, f).map((k) => [k, list(f[k])])), phoneHref: (f.phone || "").replace(/[^\d+]/g, "") },
     copy,
-    show: { services: (copy.services || []).length > 0, hours: list(f.hours).length > 0 },
+    show: { services: (copy.services || []).length > 0, ...Object.fromEntries(LIST_KEYS(niche, f).filter((k) => k !== "services").map((k) => [k, list(f[k]).length > 0])) },
     studio: { name: studio.name, website: studio.website, colors: studio.colors || {} },
     credit: studio.credit !== false,
     fictional: !!lead.fictional,

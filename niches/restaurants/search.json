@@ -1,9 +1,0 @@
-{
-  "label": "restaurants",
-  "example": "restaurants in Bristol",
-  "query": "restaurant",
-  "keywords": ["restaurant", "restaurants", "cafe", "cafes", "café", "bistro", "bistros", "pizzeria", "pizzerias", "trattoria"],
-  "osmTags": ["amenity=restaurant", "amenity=cafe"],
-  "cta": "Reserve a table",
-  "demoSlip": "The best food in Sampleton, loved by 10,000 happy diners."
-}

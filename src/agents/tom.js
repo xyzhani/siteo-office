@@ -44,7 +44,9 @@ export function heuristicFacts(text, b, niche) {
   const email = (text.match(/[\w.+-]+@[\w-]+\.[\w.-]+/) || [])[0] || b.email || null;
   const dayRe = /\b(mon|tue|wed|thu|fri|sat|sun)[a-z]*\b.*\d/i;
   const hours = lines.filter((l) => dayRe.test(l) && l.length < 60);
-  const servicesHeading = lines.findIndex((l) => /services|treatments|menu|what we do/i.test(l) && l.length < 40);
+  // prefer a real heading ("Our services") over a navigation item ("Services")
+  let servicesHeading = lines.findIndex((l) => /^our (services|treatments)|^what we do/i.test(l));
+  if (servicesHeading < 0) servicesHeading = lines.findIndex((l) => /services|treatments|what we do/i.test(l) && l.length < 40 && !/^(services|menu)$/i.test(l));
   const services = servicesHeading >= 0 ? lines.slice(servicesHeading + 1, servicesHeading + 8).filter((l) => l.length < 60 && !dayRe.test(l) && !/opening|hours|call|email/i.test(l)).slice(0, 6) : [];
   const owner = (text.match(/\b(Dr\.?\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)/) || [])[1] || null;
   const since = (text.match(/\b(?:est\.?|established|since)\s*((?:19|20)\d{2})/i) || [])[1] || null;

@@ -1,0 +1,17 @@
+{
+  "$comment": "What Tom extracts from a freight / customs / haulage website. Knight may only use these facts.",
+  "fields": [
+    { "key": "name", "label": "Company name, exactly as written" },
+    { "key": "owner", "label": "Named director or contact person, if stated" },
+    { "key": "phone", "label": "Main phone number" },
+    { "key": "email", "label": "Public email address" },
+    { "key": "address", "label": "Office or depot address" },
+    { "key": "town", "label": "Town or city" },
+    { "key": "hours", "label": "Office hours, one line per day range", "type": "list" },
+    { "key": "services", "label": "Services they list (e.g. sea freight, air freight, road haulage, customs clearance, warehousing), in their words", "type": "list" },
+    { "key": "routes", "label": "Routes, lanes, ports or countries they say they serve (only as stated)", "type": "list" },
+    { "key": "accreditations", "label": "Accreditations, memberships or registrations exactly as the site states them (never infer any)", "type": "list" },
+    { "key": "since", "label": "Year founded, if stated" },
+    { "key": "extras", "label": "Other practical details: depot facilities, languages, cut-off times (only if stated)", "type": "list" }
+  ]
+}

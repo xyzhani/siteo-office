@@ -1,6 +1,6 @@
 # Niche packs
 
-A niche pack teaches the team one kind of business: what to search for, which facts to collect, how to judge a weak site, what the concept looks like, what must never be claimed, and how to write the emails. Two packs ship: **`dental`** and **`restaurants`**.
+A niche pack teaches the team one kind of business: what to search for, which facts to collect, how to judge a weak site, what the concept looks like, what must never be claimed, and how to write the emails. Two packs ship: **`dental`** (dental practices) and **`logistics`** (freight forwarders, customs brokers, hauliers).
 
 ```
 niches/
@@ -133,7 +133,7 @@ The unsubscribe line is added automatically; don't add your own.
 
 ## Worked example: a "hair salons" pack
 
-1. Copy a pack: `cp -r niches/restaurants niches/salons`
+1. Copy a pack: `cp -r niches/dental niches/salons`
 2. `niches/salons/search.json`:
    ```json
    { "label": "hair salons", "example": "hair salons in Leeds", "query": "hair salon",
