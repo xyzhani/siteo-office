@@ -55,7 +55,7 @@ function paySalary(key, usage, replayed) {
   const role = ROLE_OF[String(key || "").split("/")[1]] || "other";
   const usd = (usage.input * settings.llm.usdPerMTokIn + usage.output * settings.llm.usdPerMTokOut) / 1e6;
   const s = ((db.salary ||= {})[role] ||= { calls: 0, in: 0, out: 0, usd: 0, replayedCalls: 0, replayedUsd: 0 });
-  if (replayed) { s.replayedCalls++; s.replayedUsd = +(s.replayedUsd + usd).toFixed(5); }
+  if (replayed) { s.replayedCalls++; s.replayedUsd = +(s.replayedUsd + usd).toFixed(5); s.replayedIn = (s.replayedIn || 0) + usage.input; s.replayedOut = (s.replayedOut || 0) + usage.output; }
   else { s.calls++; s.in += usage.input; s.out += usage.output; s.usd = +(s.usd + usd).toFixed(5); }
   save();
 }

@@ -57,7 +57,7 @@ It comes from real use. Running this approach for Siteo's own studio: **650 busi
 
 - A live 3D office (three.js, fully procedural, no external assets) driven by the real pipeline state, mobile friendly.
 - The full pipeline: find → audit → concept → fact-check loop → SEO note → email + approval → reply → PayPal deposit → PayPal invoice → follow-ups.
-- A dashboard: concepts → approved → deposit paid → invoice sent → paid, sortable and filterable **Projects** and **Payments** tables (AG Grid) that update live as PayPal confirms payments, plus approvals, a test inbox and an activity feed.
+- A Siteo-style dashboard with a dark/light switch: Office, Overview, Approvals, Projects, Inbox, Money, **Salary** (AI cost per cat), Activity, Settings and Connections. The funnel goes concepts → approved → deposit paid → invoice sent → paid, sortable and filterable **Projects** and **Payments** tables (AG Grid) that update live as PayPal confirms payments, plus approvals, a test inbox and an activity feed.
 - A [Postman collection](postman/) for the API and the PayPal deposit / invoice / webhook flow.
 - **Make it yours:** rename and recolour the studio and the cats ([configuration](docs/configuration.md)), add your own niche ([niche packs](docs/niche-packs.md), dental and restaurants included), and edit each agent's instructions in plain text ([teaching your agents](docs/teaching-agents.md)).
 - **Swap providers:** LLM, business search, email and payments are small adapters ([providers](docs/providers.md)).
